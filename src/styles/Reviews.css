@@ -1,0 +1,24 @@
+.card-container {
+    width: 400px;
+    text-align: center;
+    /* padding: -100px; */
+    /* margin: auto; */
+}
+
+.toast-box{
+    height: 100px;
+    width: 500px;
+}
+
+.me-auto {
+    font-size: 20px;
+}
+
+.stars {
+    font-size: 20px;
+}
+.card-text {
+    /* margin-left: -50px;  */
+    /* border: 10px solid; */
+    /* width: 500px; */
+}

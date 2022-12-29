@@ -1,0 +1,37 @@
+.search {
+  width: 85%;
+  height: 50px;
+  margin: auto;
+  border: 2px solid #000;
+  border-radius: 2em;
+  overflow: hidden;
+  font-size: 1rem;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.search:focus-within {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.search__button,
+.search__input {
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+
+.search__input {
+  padding: 1em;
+  width: 85%;
+}
+
+.fa-magnifying-glass {
+  /* width: 15%; */
+  font-size: 1.2rem;
+  padding-left: 0.7em;
+  color: gray;
+  display: grid;
+  place-content: center;
+  color: white;
+}

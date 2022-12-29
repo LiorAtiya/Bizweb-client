@@ -1,0 +1,64 @@
+.NavbarItems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.0rem;
+    padding: 0 30px;
+    background-color: #222;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    width: 95%;
+    height: 55px;
+    border-radius: 13px;
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index:2;
+}
+
+.logo {
+    color: #fff;
+    justify-self: start;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.fa-briefcase {
+    margin-left: 0.7rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.fa-user {
+    color: white;
+    margin-top: 12px;
+}
+
+/* .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 10px;
+    list-style: none;
+    align-items: center;
+    text-align: center;
+    justify-content: end;
+    margin-top: 15px;
+} */
+
+/* .nav-links{
+    text-decoration: none;
+    color: white;
+    padding: 0.7rem 1rem;
+    white-space: nowrap;
+} */
+
+/* .nav-links i {
+    padding-right: 10px;
+} */
+
+/* .nav-links:hover {
+    background-color: rgb(80, 80, 238);
+    color: white;
+    border-radius: 13px;
+    transition: all 0.2s ease-in-out;
+} */
