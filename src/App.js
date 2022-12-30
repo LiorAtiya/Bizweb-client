@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavbarComp from './components/NavbarComp';
 
 import Home from './pages/Home'
@@ -10,9 +11,6 @@ import Category from './pages/Category';
 import SingleBusiness from './pages/SingleBusiness'
 import NewBusiness from './pages/NewBusiness';
 import MyAppointments from './pages/MyAppointments';
-// import Register from './pages/Register';
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { AuthContext } from './context/AuthContext';
 
 export default function App() {
@@ -30,9 +28,6 @@ export default function App() {
                         {/* {user ? <Redirect to='/' /> : <Login />} */}
                         <Login />
                     </Route>
-                    {/* <Route exact path="/register">
-                        <Register />
-                    </Route> */}
                     <Route exact path="/newbusiness">
                         <NewBusiness />
                     </Route>

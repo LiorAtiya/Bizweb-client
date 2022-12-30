@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import app from '../../database/firebase_config'
+import app from '../../context/firebase_config'
 import '../../styles/Calender.css'
-import * as Components from '../StyledForm'
+import * as Components from '../../styles/StyledForm'
 
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 

@@ -1,15 +1,8 @@
 import React, {useRef, useState } from "react";
-import app from '../database/firebase_config'
-import * as Components from '../components/StyledForm';
-import '../styles/Form.css'
-
-import { 
-  getAuth, 
-  RecaptchaVerifier, 
-  signInWithPhoneNumber 
-} from "firebase/auth";
+import app from '../context/firebase_config'
+import * as Components from '../styles/StyledForm';
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
 
 const auth = getAuth(app)
 
@@ -19,7 +12,7 @@ export default function Register() {
   const username = useRef();
   const email = useRef();
   const password = useRef();
-  // const history = useHistory();
+
 
   const otp = useRef();
   const [phone, setPhone] = useState("");

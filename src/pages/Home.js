@@ -3,8 +3,8 @@ import SearchBox from '../components/home/SearchBox';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import categories from '../database/categories';
-import Hero from '../components/Hero';
-import Banner from '../components/Banner'
+import Hero from '../components/general/Hero';
+import Banner from '../components/general/Banner'
 import Services from '../components/home/Services';
 import CategoryBusiness from '../components/home/CategoryBusiness'
 

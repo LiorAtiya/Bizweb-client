@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BusinessContext } from '../../context/BusinessContext'
-import Loading from "../Loading"
+import Loading from "./Loading"
 // import Title from '../Title';
 import CategoryCard from './CategoryCard';
 import '../../styles/Categories.css'

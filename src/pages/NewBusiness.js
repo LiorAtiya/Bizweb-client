@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
-import * as Components from '../components/StyledForm';
+import * as Components from '../styles/StyledForm';
 
 export default function NewBusiness() {
     const category = useRef("");

@@ -4,7 +4,7 @@ import Toast from 'react-bootstrap/Toast';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import '../../styles/Reviews.css'
-import * as Components from '../StyledForm'
+import * as Components from '../../styles/StyledForm'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

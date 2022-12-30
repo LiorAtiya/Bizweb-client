@@ -5,15 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 import { BusinessProvider } from "./context/BusinessContext"
-import { AuthContextProvider } from './context/AuthContext';
+// import { AuthContextProvider } from './context/AuthContext';
 
 ReactDOM.render(
 
-    <AuthContextProvider>
+    // <AuthContextProvider>
         <BusinessProvider>
             <App />
         </BusinessProvider>
-    </AuthContextProvider>
+    // </AuthContextProvider>
 
     , document.getElementById('root'));
 

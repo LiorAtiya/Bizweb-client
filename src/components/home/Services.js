@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Title from '../Title'
+import Title from '../general/Title'
 import { FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa"
 
 export default class Services extends Component {
@@ -19,6 +19,16 @@ export default class Services extends Component {
                 icon: <FaBeer />,
                 title: "free beer",
                 info: 'bla bla bla bla'
+            },
+            {
+                icon: <FaBeer />,
+                title: "free beer",
+                info: 'bla bla bla bla'
+            },
+            {
+                icon: <FaBeer />,
+                title: "free beer",
+                info: 'bla bla bla bla'
             }
         ]
     }
@@ -26,14 +36,14 @@ export default class Services extends Component {
         return (
             <div>
                 <section className='services'>
-                <Title title="Top 5 ⭐ " />
+                <Title title="Top 5 ⭐" />
                 <div className='services-center'>
                 {this.state.services.map((item, index) => {
                     return (
                         <article key={index} className="service">
+                            <h6>Category: {item.title}</h6>
+                            <p>{item.info} Stars</p>
                             <span>{item.icon}</span>
-                            <h6>{item.title}</h6>
-                            <p>{item.info}</p>
                         </article>
                     )
                 })}

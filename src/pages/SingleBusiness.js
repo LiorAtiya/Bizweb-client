@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
-// import defaultBcg from "../images/defaultImg.png"
-// import { Link } from 'react-router-dom'
-import Banner from '../components/Banner'
-import StyledHero from '../components/StyledHero'
+import Banner from '../components/general/Banner'
+import StyledHero from '../styles/StyledHero'
 import '../styles/SingleBusiness.css'
 
 //Gallery
