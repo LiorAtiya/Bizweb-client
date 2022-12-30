@@ -198,6 +198,10 @@ h6 {
 /* end of Title */
 
 /* services */
+
+.service {
+  padding: 10px;
+}
 .services {
   padding: 2rem 0;
 }

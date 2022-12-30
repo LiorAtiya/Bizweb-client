@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
-export const GalleryCard = ({ id, name }) => {
+export const Gallery = ({ id, name }) => {
 
   //data of all images
   const [data, setData] = useState([]);

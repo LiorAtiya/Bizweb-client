@@ -30,7 +30,7 @@ export default function Googlemap({ business }) {
   return (
     <>
       <div style={styles.container}>
-        <div style={{ height: '50vh', width: '50%' }}>
+        <div style={{width: '50%' }}>
           <Card style={{ textAlign: "center" }} body >
             <Card.Header>
               <b>City:</b> {business.city}<br />
@@ -69,8 +69,6 @@ export default function Googlemap({ business }) {
               }}
             />
           </Card>
-          <br></br>
-          <br></br>
         </div>
       </div>
     </>

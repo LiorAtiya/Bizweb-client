@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import categories from '../database/categories';
 import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
-import Services from '../components/home/Services';
+import Top5 from '../components/home/Top5';
 import CategoryBusiness from '../components/home/CategoryBusiness'
 
 class Home extends Component {
@@ -45,7 +45,7 @@ class Home extends Component {
                         </Banner>
                     </Hero>
                     <CategoryBusiness categories={filteredCategories} />
-                    <Services />
+                    <Top5 />
                 </>
             );
         }

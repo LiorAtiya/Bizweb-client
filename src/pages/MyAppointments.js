@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-// import Modal from 'react-bootstrap/Modal';
+import '../styles/Form.css'
 
 export default function MyAppointments() {
 

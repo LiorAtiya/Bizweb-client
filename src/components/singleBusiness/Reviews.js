@@ -205,8 +205,6 @@ export default function Reviews({ id }) {
                     })
                 }
             </div>
-            <br></br>
-            <br></br>
         </div>
     )
 }
