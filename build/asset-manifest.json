@@ -1,25 +1,22 @@
 {
   "files": {
-    "main.css": "/RoboFriends/static/css/main.f86bc083.chunk.css",
-    "main.js": "/RoboFriends/static/js/main.4e89df32.chunk.js",
-    "main.js.map": "/RoboFriends/static/js/main.4e89df32.chunk.js.map",
-    "runtime-main.js": "/RoboFriends/static/js/runtime-main.f85fd60c.js",
-    "runtime-main.js.map": "/RoboFriends/static/js/runtime-main.f85fd60c.js.map",
-    "static/css/2.eb45ad44.chunk.css": "/RoboFriends/static/css/2.eb45ad44.chunk.css",
-    "static/js/2.7181e3f3.chunk.js": "/RoboFriends/static/js/2.7181e3f3.chunk.js",
-    "static/js/2.7181e3f3.chunk.js.map": "/RoboFriends/static/js/2.7181e3f3.chunk.js.map",
-    "index.html": "/RoboFriends/index.html",
-    "precache-manifest.98e20abbee5c491db04f4621926167b8.js": "/RoboFriends/precache-manifest.98e20abbee5c491db04f4621926167b8.js",
-    "service-worker.js": "/RoboFriends/service-worker.js",
-    "static/css/2.eb45ad44.chunk.css.map": "/RoboFriends/static/css/2.eb45ad44.chunk.css.map",
-    "static/css/main.f86bc083.chunk.css.map": "/RoboFriends/static/css/main.f86bc083.chunk.css.map",
-    "static/media/App.css": "/RoboFriends/static/media/SEGA.12a3db8b.woff"
+    "main.css": "/static/css/main.fdf3a220.css",
+    "main.js": "/static/js/main.6585f164.js",
+    "static/media/barbershop.png": "/static/media/barbershop.5717be8da7b2ba04ba45.png",
+    "static/media/polish.jpeg": "/static/media/polish.ba13b5cde902a09f4aef.jpeg",
+    "static/media/googlemaps.png": "/static/media/googlemaps.393af096740521e465ab.png",
+    "static/media/loading-arrow.gif": "/static/media/loading-arrow.dd29210f39418b50813e.gif",
+    "static/media/restaurants.jpeg": "/static/media/restaurants.d1f400539e7f7764e1b1.jpeg",
+    "static/media/renovations.jpeg": "/static/media/renovations.c33dc3555f0ee6e9b43f.jpeg",
+    "static/media/defaultImg.png": "/static/media/defaultImg.121d1c79f0aaa19a07d9.png",
+    "static/media/moovit.webp": "/static/media/moovit.0b986d9b88b70ae47e92.webp",
+    "index.html": "/index.html",
+    "static/media/waze.svg": "/static/media/waze.06aad310036bb36542da2072da1bf6c8.svg",
+    "main.fdf3a220.css.map": "/static/css/main.fdf3a220.css.map",
+    "main.6585f164.js.map": "/static/js/main.6585f164.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.f85fd60c.js",
-    "static/css/2.eb45ad44.chunk.css",
-    "static/js/2.7181e3f3.chunk.js",
-    "static/css/main.f86bc083.chunk.css",
-    "static/js/main.4e89df32.chunk.js"
+    "static/css/main.fdf3a220.css",
+    "static/js/main.6585f164.js"
   ]
 }

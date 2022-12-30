@@ -1,6 +1,5 @@
 {
   "name": "robotfriends",
-  "homepage": "http://lior4007.github.io/Facework",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
