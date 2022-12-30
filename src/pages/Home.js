@@ -6,7 +6,10 @@ import categories from '../database/categories';
 import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
 import Top5 from '../components/home/Top5';
+import AboutUs from '../components/home/AboutUs';
+
 import CategoryBusiness from '../components/home/CategoryBusiness'
+import { fromUnixTime } from 'date-fns';
 
 class Home extends Component {
     constructor() {
@@ -46,6 +49,8 @@ class Home extends Component {
                     </Hero>
                     <CategoryBusiness categories={filteredCategories} />
                     <Top5 />
+                    <AboutUs />
+                    <br/>
                 </>
             );
         }

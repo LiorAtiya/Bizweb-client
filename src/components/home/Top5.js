@@ -52,7 +52,7 @@ export default function Top5() {
     return (
         <div>
             <section className='services'>
-                <Title title="Top 5 ⭐" />
+                <Title title="Top 5 ⭐" color="white"/>
                 <div className='services-center'>
                     {top5.map((item, index) => {
                         return (
