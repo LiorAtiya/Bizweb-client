@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
 import { BusinessProvider } from "./context/BusinessContext"
-// import { AuthContextProvider } from './context/AuthContext';
 
 ReactDOM.render(
 
-    // <AuthContextProvider>
-        <BusinessProvider>
-            <App />
-        </BusinessProvider>
-    // </AuthContextProvider>
+    <BusinessProvider>
+        <App />
+    </BusinessProvider>
 
     , document.getElementById('root'));
 

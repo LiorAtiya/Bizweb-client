@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-// import { AuthContext } from '../context/AuthContext';
 import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../styles/Navbar.css";
+// import { AuthContext } from '../context/AuthContext';
 
 export default function NavbarComp() {
 
@@ -24,32 +24,6 @@ export default function NavbarComp() {
     history.push('/');
     window.location.reload(false);
   }
-
-  // return (
-  //   <nav className='NavbarItems'>
-  //     <h1 className='logo'>Facework <i className='fa-solid fa-briefcase'></i></h1>
-  //     <ul className='nav-menu'>
-  //        <li>
-  //         <a href='index.html' className='nav-links'>
-  //           <i className='fa-solid fa-house-user'></i>
-  //           Home 
-  //         </a>
-  //        </li>
-  //        <li>
-  //         <a href='index.html' className='nav-links'>
-  //           <i className='fa-solid fa-house-user'></i>
-  //           Home 
-  //         </a>
-  //        </li>
-  //        <li>
-  //         <a href='index.html' className='nav-links'>
-  //           <i className='fa-solid fa-house-user'></i>
-  //           Home 
-  //         </a>
-  //        </li>
-  //     </ul>
-  //   </nav>
-  // )
 
   return (
     <div>
@@ -71,6 +45,9 @@ export default function NavbarComp() {
                     <>
                       <NavDropdown.Item as={Link} to={"/myappointments"}>
                         My appointments
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to={"/myappointments"}>
+                        Quick appointment search
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to={"/newbusiness"}>

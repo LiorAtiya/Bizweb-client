@@ -34,31 +34,6 @@
     margin-top: 12px;
 }
 
-/* .nav-menu {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 10px;
-    list-style: none;
-    align-items: center;
-    text-align: center;
-    justify-content: end;
-    margin-top: 15px;
-} */
-
-/* .nav-links{
-    text-decoration: none;
-    color: white;
-    padding: 0.7rem 1rem;
-    white-space: nowrap;
-} */
-
-/* .nav-links i {
-    padding-right: 10px;
-} */
-
-/* .nav-links:hover {
-    background-color: rgb(80, 80, 238);
-    color: white;
-    border-radius: 13px;
-    transition: all 0.2s ease-in-out;
-} */
+#collasible-nav-dropdown {
+    padding-right: 50px;
+}

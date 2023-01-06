@@ -115,7 +115,7 @@ const Calendar = ({ id, businessName }) => {
         });
     }
 
-    // =============================================
+    // ==================End of OTP Verify ======================
 
     const dateAppoimentsFiltered = () => {
         return events.dates.filter(event => event.date === value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear());
@@ -151,7 +151,8 @@ const Calendar = ({ id, businessName }) => {
     const handleClick = async (e) => {
         e.preventDefault();
 
-        if (verified) {
+        //********* RETURN THIS*************** */
+        // if (verified) {
 
             const appointment = {
                 businessName: businessName,
@@ -162,10 +163,18 @@ const Calendar = ({ id, businessName }) => {
                 name: name.current.value,
                 phone: phone,
                 comments: comments.current.value,
+                userID: ""
             }
+
+            //Add user ID to appointment
+            if (getUserData) {
+                appointment.userID = getUserData._id;
+            }
+
             await axios.post('http://localhost:5015/api/calender/create-event', appointment);
             console.log("Added new event to calender");
 
+            //if user connected => Update in the personal profile the appointment
             if (getUserData) {
                 await axios.put(`http://localhost:5015/api/users/${getUserData._id}/newappointment`, appointment)
                     .then((res) => {
@@ -178,10 +187,11 @@ const Calendar = ({ id, businessName }) => {
             }
 
             window.location.reload(false);
-
-        } else {
-            alert("Please Verify Mobile");
-        }
+        
+        //*************** RETURN THIS */
+        // } else {
+        //     alert("Please Verify Mobile");
+        // }
     }
 
     //for chosen times to add
@@ -214,11 +224,31 @@ const Calendar = ({ id, businessName }) => {
         window.location.reload(false);
     }
 
-    const deleteEvent = async (t, name, phone, date) => {
-
+    const deleteEvent = async (userID, t, name, phone, date) => {
+        const appointment = {
+            businessID: id, 
+            date: date, 
+            time: t, 
+            name: name, 
+            phone: phone,
+            userID: userID
+        }
+        //Delete from calender
         await axios.delete('http://localhost:5015/api/calender/delete-event',
-            { data: { businessID: id, date: date, time: t, name: name, phone: phone } });
-        window.location.reload(false);
+        { data: appointment })
+        .then((res) => {
+
+            if (res.status !== 500 && res.data.userID) {
+                //Delete from list of appointment of user
+                axios.delete(`http://localhost:5015/api/users/${res.data.userID}/delete-appointment`,
+                { data: appointment });
+
+                console.log("Removed appointment from list of user");
+                window.location.reload(false);
+            }else {
+                window.location.reload(false);
+            }
+        })
     }
 
 
@@ -378,7 +408,7 @@ const Calendar = ({ id, businessName }) => {
                                                                 <br />
                                                             </Card.Text>
                                                             <Button variant="btn btn-danger"
-                                                                onClick={() => deleteEvent(item.time, item.name, item.phone, value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear())}>Delete</Button>
+                                                                onClick={() => deleteEvent(item.userID, item.time, item.name, item.phone, value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear())}>Delete</Button>
                                                         </Card.Body>
                                                     </Card>
                                                     <br />

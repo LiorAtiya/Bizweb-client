@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBox from '../components/home/SearchBox';
-import '../App.css';
+import '../styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import categories from '../database/categories';
 import Hero from '../components/general/Hero';
@@ -9,7 +9,6 @@ import Top5 from '../components/home/Top5';
 import AboutUs from '../components/home/AboutUs';
 
 import CategoryBusiness from '../components/home/CategoryBusiness'
-import { fromUnixTime } from 'date-fns';
 
 class Home extends Component {
     constructor() {
@@ -22,9 +21,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.setState({ category: categories })
-        // fetch('https://jsonplaceholder.typicode.com/users') // פונקציה לבקש בקשה מהשרת
-        // .then(response => response.json())
-        // .then(users => this.setState({ robots: users }));
     }
 
     onSearchChange = (event) => {
@@ -43,7 +39,6 @@ class Home extends Component {
                 <>
                     <Hero>
                         <Banner title="Facework" subtitle="Sample Site for any business">
-                            {/* <Link to='/register' className='btn-primary'>Register</Link> */}
                             <SearchBox searchChange={this.onSearchChange} />
                         </Banner>
                     </Hero>

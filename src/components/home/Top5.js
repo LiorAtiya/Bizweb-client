@@ -3,8 +3,6 @@ import Title from '../general/Title'
 import axios from 'axios';
 import Business from '../category/Business'
 
-// import { FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa"
-
 export default function Top5() {
 
     const [top5, setTop5] = useState([]);
@@ -18,36 +16,6 @@ export default function Top5() {
         };
         getResult();
     }, []);
-
-    // state = {
-    //     services: [
-    //         {
-    //             icon: <FaShuttleVan />,
-    //             title: "free coktails",
-    //             info: 'bla bla bla bla'
-    //         },
-    //         {
-    //             icon: <FaHiking />,
-    //             title: "free Hiking",
-    //             info: 'bla bla bla bla'
-    //         },
-    //         {
-    //             icon: <FaBeer />,
-    //             title: "free beer",
-    //             info: 'bla bla bla bla'
-    //         },
-    //         {
-    //             icon: <FaBeer />,
-    //             title: "free beer",
-    //             info: 'bla bla bla bla'
-    //         },
-    //         {
-    //             icon: <FaBeer />,
-    //             title: "free beer",
-    //             info: 'bla bla bla bla'
-    //         }
-    //     ]
-    // }
 
     return (
         <div>

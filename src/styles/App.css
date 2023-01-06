@@ -118,7 +118,7 @@ h6 {
 }
 
 .roomsHero {
-  background-image: url("./images/defaultImg.png");
+  background-image: url("../images/defaultImg.png");
   min-height: 60vh;
 }
 
