@@ -11,6 +11,7 @@ import Category from './pages/Category';
 import SingleBusiness from './pages/SingleBusiness'
 import NewBusiness from './pages/NewBusiness';
 import MyAppointments from './pages/MyAppointments';
+import QuickAppointment from './pages/QuickAppointment';
 // import { AuthContext } from './context/AuthContext';
 
 export default function App() {
@@ -31,7 +32,10 @@ export default function App() {
                     <Route exact path="/newbusiness">
                         <NewBusiness />
                     </Route>
-                    <Route exact path="/myappointments">
+                    <Route exact path="/quickappointment">
+                        <QuickAppointment />
+                    </Route>
+                    <Route exact path="/myappointments/:userID">
                         <MyAppointments />
                     </Route>
                     <Route exact path="/category/:type">

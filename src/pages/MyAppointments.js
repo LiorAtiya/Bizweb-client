@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -6,8 +7,21 @@ import '../styles/Form.css'
 
 export default function MyAppointments() {
 
-    const getUserData = JSON.parse(localStorage.getItem('token'));
-    console.log(getUserData);
+    let { userID } = useParams();
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        const getResult = async () => {
+            // gets all events of business
+            await axios.get(`http://localhost:5015/api/users/${userID}`)
+                .then((res) => {
+                    localStorage.setItem("token", JSON.stringify(res.data));
+                    setUserData(JSON.parse(localStorage.getItem('token')));
+                })
+                .catch((err) => console.log(err));
+        };
+        getResult();
+    }, [userID]);
 
     const deleteEvent = async (id, t, name, phone, date) => {
 
@@ -17,7 +31,7 @@ export default function MyAppointments() {
             .then((res) => {
                 if (res.status === 200) {
                     //Delete from my appointments
-                    axios.delete(`http://localhost:5015/api/users/${getUserData._id}/delete-appointment`,
+                    axios.delete(`http://localhost:5015/api/users/${userData._id}/delete-appointment`,
                         { data: { businessID: id, date: date, time: t, name: name, phone: phone } })
                         .then((res) => {
                             if (res.status !== 500) {
@@ -31,20 +45,20 @@ export default function MyAppointments() {
             })
 
     }
-
+    console.log(userData)
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
                 <h2>My Appointments</h2>
                 <hr></hr>
                 {
-                    getUserData.myAppointments.map(item => {
+                    userData?
+                    userData.myAppointments.map(item => {
                         return (
                             <>
                                 <Card>
                                     <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
                                     <Card.Body>
-                                        {/* <Card.Title>Special title treatment</Card.Title> */}
                                         <Card.Text>
                                             <b>Date: </b>{item.date}
                                             <br />
@@ -60,6 +74,8 @@ export default function MyAppointments() {
                             </>
                         )
                     })
+                    :
+                    null
                 }
             </div>
         </div>

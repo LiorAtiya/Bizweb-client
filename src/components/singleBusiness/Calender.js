@@ -117,6 +117,7 @@ const Calendar = ({ id, businessName }) => {
 
     // ==================End of OTP Verify ======================
 
+    //Filter of selected date
     const dateAppoimentsFiltered = () => {
         return events.dates.filter(event => event.date === value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear());
     }
@@ -220,7 +221,7 @@ const Calendar = ({ id, businessName }) => {
 
             await axios.post('http://localhost:5015/api/calender/create-event', appointment)
         })
-        alert("Added more hours to calender")
+        // alert("Added more hours to calender")
         window.location.reload(false);
     }
 
@@ -267,10 +268,10 @@ const Calendar = ({ id, businessName }) => {
                     onChange={(newValue) => {
                         setValue(newValue)
 
-                        //========== Filter for select free hour to appiment ========
+                        //========== Filter for select free hour to appointment ========
                         const filtered = events.availableHours.filter(event => event.date === newValue.getDate() + "/" + (newValue.getMonth() + 1) + "/" + newValue.getFullYear());
 
-                        // sort by name
+                        // sort by hours
                         filtered.sort((a, b) => {
                             const nameA = a.time // ignore upper and lowercase
                             const nameB = b.time // ignore upper and lowercase
@@ -284,6 +285,7 @@ const Calendar = ({ id, businessName }) => {
                             return 0;
                         });
 
+                        //list of available hours
                         let selectFreeEvent = filtered.map((item, index) => {
                             return <option value={item.time} key={index}>{item.time}</option>
                         })

@@ -80,6 +80,24 @@ margin-bottom: 20px;
 padding-bottom: 20px;
 `;
 
+export const QuickAppointContainer = styled.form`
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+position: relative;
+overflow: hidden;
+width: 550px;
+max-width: 100%;
+margin: auto;
+margin-top: 8%;
+margin-bottom: 20px;
+padding-bottom: 20px;
+`;
+
+export const AvailableContainer = styled.div`
+width: 250px;
+margin: auto;
+`;
 export const Title = styled.h1`
 font-weight: bold;
 margin: 0;

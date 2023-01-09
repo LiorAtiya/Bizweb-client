@@ -24,7 +24,7 @@ class Home extends Component {
     }
 
     onSearchChange = (event) => {
-        this.setState({ searchfield: event.target.value }) // לקחת את הערך שנכתב בחיפוש
+        this.setState({ searchfield: event.target.value })
     }
 
     render() {

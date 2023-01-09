@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-// import Hero from '../components/Hero';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
@@ -77,8 +76,6 @@ export default function NewBusiness() {
         }
     }
 
-    // const [signIn, toggle] = useState(true);
-
     return (
         <Components.NewBusinessContainer>
 
@@ -140,100 +137,4 @@ export default function NewBusiness() {
 
         </Components.NewBusinessContainer>
     )
-
-    // return (
-    //     <Hero hero="roomsHero">
-    //         <div className="auth-wrapper">
-    //             <form onSubmit={handleClick} className="auth-inner">
-    //                 <h3>Open New Business</h3>
-
-    //                 <div className="mb-3">
-    //                     <label>
-    //                         Category of your business:<br></br>
-    //                         <select className="form-control" ref={category}>
-    //                             <option value="Barbershop">Barbershop</option>
-    //                             <option value="Nail Polish">Nail Polish</option>
-    //                             <option value="Restaurants">Restaurants</option>
-    //                             <option value="Renovations">Renovations</option>
-    //                         </select>
-    //                     </label>
-    //                 </div>
-
-    //                 <div className="mb-3">
-    //                     <label>Name Business</label>
-    //                     <input
-    //                         type="text"
-    //                         className="form-control"
-    //                         placeholder="Enter name business"
-    //                         required
-    //                         ref={name}
-    //                     />
-    //                 </div>
-
-    //                 <div className="mb-3">
-    //                     <label>Description</label>
-    //                     <textarea
-    //                         placeholder="Description of the business"
-    //                         className="form-control"
-    //                         id="message"
-    //                         name="message"
-    //                         ref={description}
-    //                     />
-    //                 </div>
-
-    //                 <div className="mb-3">
-    //                     <label>
-    //                         City:<br></br>
-    //                         <select className="form-control" ref={city}>
-    //                             {citiesMap}
-    //                         </select>
-    //                     </label>
-    //                 </div>
-
-
-    //                 <div className="mb-3">
-    //                     <label>Address</label>
-    //                     <input
-    //                         type="text"
-    //                         className="form-control"
-    //                         placeholder="Enter address of business"
-    //                         required
-    //                         ref={address}
-    //                     />
-    //                 </div>
-
-    //                 <div className="mb-3">
-    //                     <label>Phone number</label>
-    //                     <input
-    //                         type="number"
-    //                         className="form-control"
-    //                         placeholder="Enter location"
-    //                         required
-    //                         ref={phone}
-    //                     />
-    //                 </div>
-
-    //                 <div className="mb-3">
-    //                     <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
-    //                         Choose background image
-    //                     </div>
-    //                     {
-    //                         backgroundPicture !== "" ?
-    //                             <div className='images-preview'>
-    //                                 <img src={backgroundPicture} alt="backPic"/>
-    //                             </div>
-    //                             :
-    //                             null
-    //                     }
-    //                 </div>
-
-    //                 <div className="d-grid">
-    //                     <button type="submit" className="btn btn-primary">
-    //                         Submit
-    //                     </button>
-    //                 </div>
-    //             </form>
-    //         </div>
-    //     </Hero>
-    // )
 }

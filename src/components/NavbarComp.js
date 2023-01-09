@@ -29,7 +29,7 @@ export default function NavbarComp() {
     <div>
       <Navbar className='NavbarItems' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand className='logo' as={Link} to={"/"}>Facework
+          <Navbar.Brand className='logo' as={Link} to={"/"}><b>Facework</b>
           <i className='fa-solid fa-briefcase'></i>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -38,16 +38,14 @@ export default function NavbarComp() {
               {/* <Nav.Link as={Link} to={"/login"}>About us</Nav.Link> */}
             </Nav>
             <Nav className='nav-links'>
+              <Nav.Link className='QuichAppointment' as={Link} to={"/quickappointment"}><b>Quich Appointment</b></Nav.Link>
               <i className='fa-solid fa fa-user'></i>
               <NavDropdown title={getUserData ? `Hello ${getUserData.firstname}` : "Hello Guest"} id="collasible-nav-dropdown">
                 {
                   getUserData ? (
                     <>
-                      <NavDropdown.Item as={Link} to={"/myappointments"}>
+                      <NavDropdown.Item as={Link} to={`/myappointments/${getUserData._id}`}>
                         My appointments
-                      </NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to={"/myappointments"}>
-                        Quick appointment search
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to={"/newbusiness"}>
@@ -80,9 +78,7 @@ export default function NavbarComp() {
         <Modal.Header closeButton>
           <h5>Are you sure you want to log out?</h5>
         </Modal.Header>
-        {/* <Modal.Body>
 
-        </Modal.Body> */}
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             No

@@ -37,3 +37,10 @@
 #collasible-nav-dropdown {
     padding-right: 50px;
 }
+
+.QuichAppointment {
+    margin-right: 20px;
+    background-color: #ff416c;
+    border-radius: 5px;
+    color:#222;
+}

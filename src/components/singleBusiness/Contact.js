@@ -1,11 +1,20 @@
 import BingMapsReact from "bingmaps-react";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import waze from '../../images/waze.svg'
 import googlemaps from '../../images/googlemaps.png'
 import moovit from '../../images/moovit.webp'
 
 export default function Googlemap({ business }) {
+
+  const [flagMap, setFlagMap] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFlagMap(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const styles = {
     container: {
@@ -30,7 +39,7 @@ export default function Googlemap({ business }) {
   return (
     <>
       <div style={styles.container}>
-        <div style={{width: '50%' }}>
+        <div style={{ width: '50%' }}>
           <Card style={{ textAlign: "center" }} body >
             <Card.Header>
               <b>City:</b> {business.city}<br />
@@ -52,22 +61,27 @@ export default function Googlemap({ business }) {
                 }} />
             </Card.Header>
             <br />
-            <BingMapsReact
-              bingMapsKey="Am7ABZsl1hVs093AjZV82C3wxd-NCQ-KtBLpdtv4uB1UBvqIx7vcgN7Dw1A9RpQt"
-              height="300px"
-              mapOptions={{
-                navigationBarMode: "square",
-              }}
-              width="600px"
-              pushPins={pushPins}
-              viewOptions={{
-                center: {
-                  latitude: business.coordination.location.y,
-                  longitude: business.coordination.location.x
-                },
-                // mapTypeId: "grayscale",
-              }}
-            />
+            {
+              flagMap?
+              <BingMapsReact
+                bingMapsKey="Am7ABZsl1hVs093AjZV82C3wxd-NCQ-KtBLpdtv4uB1UBvqIx7vcgN7Dw1A9RpQt"
+                height="300px"
+                mapOptions={{
+                  navigationBarMode: "square",
+                }}
+                width="600px"
+                pushPins={pushPins}
+                viewOptions={{
+                  center: {
+                    latitude: business.coordination.location.y,
+                    longitude: business.coordination.location.x
+                  },
+                  // mapTypeId: "grayscale",
+                }}
+              />
+              :
+              null
+            }
           </Card>
         </div>
       </div>
