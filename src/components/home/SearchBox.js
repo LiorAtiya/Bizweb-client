@@ -3,7 +3,7 @@ import '../../styles/SearchBox.css'
 
 const SearchBox = ({ searchChange }) => {
     return (
-
+        <>
         <form className="search">
             <input
                 className="search__input"
@@ -14,6 +14,7 @@ const SearchBox = ({ searchChange }) => {
             />
             <i className="fa-solid fa-magnifying-glass"></i>
         </form>
+        </>
     )
 }
 
