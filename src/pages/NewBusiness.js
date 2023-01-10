@@ -49,7 +49,7 @@ export default function NewBusiness() {
         }
         try {
             //send request to server to add new business
-            await axios.post("http://localhost:5015/api/business/add", business)
+            await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
                 .then((res) => {
                     console.log(res);
                     if (res.status === 200) {
@@ -60,7 +60,7 @@ export default function NewBusiness() {
                             userID: getUserData._id,
                             business: businessID
                         }
-                        axios.put(`http://localhost:5015/api/users/${getUserData._id}/business`, business)
+                        axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/business`, business)
                             .then((res) => {
                                 window.localStorage.removeItem('token');
                                 window.localStorage.setItem("token", JSON.stringify(res.data));

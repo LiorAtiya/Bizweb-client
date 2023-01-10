@@ -87,7 +87,7 @@ export default function Register() {
 
     if(verified) {
       try {
-        await axios.post("http://localhost:5015/api/auth/register",user);
+        await axios.post("https://facework-server-production.up.railway.app/api/auth/register",user);
         // history.push('/login');
         window.location.reload(false);
       }catch(err){

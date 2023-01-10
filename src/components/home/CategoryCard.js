@@ -19,7 +19,7 @@ export default function CategoryCard({ id, name, route, image }) {
         category: name,
       }
       // Add to records the category entry
-      await axios.post(`http://localhost:5015/api/users/${getUserData._id}/categoryEntry`, record)
+      await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/categoryEntry`, record)
         .then((res) => {
           // console.log(res);
         })

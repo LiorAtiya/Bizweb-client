@@ -13,7 +13,7 @@ export default function MyAppointments() {
     useEffect(() => {
         const getResult = async () => {
             // gets all events of business
-            await axios.get(`http://localhost:5015/api/users/${userID}`)
+            await axios.get(`https://facework-server-production.up.railway.app/api/users/${userID}`)
                 .then((res) => {
                     localStorage.setItem("token", JSON.stringify(res.data));
                     setUserData(JSON.parse(localStorage.getItem('token')));
@@ -26,12 +26,12 @@ export default function MyAppointments() {
     const deleteEvent = async (id, t, name, phone, date) => {
 
         //Delete from calender
-        await axios.delete('http://localhost:5015/api/calender/delete-event',
+        await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',
             { data: { businessID: id, date: date, time: t, name: name, phone: phone } })
             .then((res) => {
                 if (res.status === 200) {
                     //Delete from my appointments
-                    axios.delete(`http://localhost:5015/api/users/${userData._id}/delete-appointment`,
+                    axios.delete(`https://facework-server-production.up.railway.app/api/users/${userData._id}/delete-appointment`,
                         { data: { businessID: id, date: date, time: t, name: name, phone: phone } })
                         .then((res) => {
                             if (res.status !== 500) {

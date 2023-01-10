@@ -13,7 +13,7 @@ export default function Login() {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    await axious.post("http://localhost:5015/api/auth/login",
+    await axious.post("https://facework-server-production.up.railway.app/api/auth/login",
       { email: email.current.value, password: password.current.value })
       .then((res) => {
         if (res.status !== 200) {

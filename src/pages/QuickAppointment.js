@@ -25,7 +25,7 @@ export default function QuickAppointment() {
         }
 
         //Get nearest availables appointments
-        await axios.post(`http://localhost:5015/api/business/home/quickappointment`, business)
+        await axios.post(`https://facework-server-production.up.railway.app/api/business/home/quickappointment`, business)
         .then((res) => {
             setAvailables(res.data);
             console.log(res.data);

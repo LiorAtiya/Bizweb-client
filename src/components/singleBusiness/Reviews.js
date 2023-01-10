@@ -66,7 +66,7 @@ export default function Reviews({ id }) {
     useEffect(() => {
         const getResult = async () => {
             //get all images of the business from mongodb
-            await axios.get(`http://localhost:5015/api/business/${id}/reviews`)
+            await axios.get(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`)
                 .then((res) => setReviewList(res.data))
                 .catch((err) => console.log(err));
         };
@@ -96,12 +96,12 @@ export default function Reviews({ id }) {
             },
             userID: id
         }
-        await axios.put(`http://localhost:5015/api/business/${id}/reviews`, newReview);
+        await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, newReview);
         window.location.reload(false);
     }
 
     const removeReview = async () => {
-        await axios.delete(`http://localhost:5015/api/business/${id}/reviews`,
+        await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`,
             { data: { id: reviewID } });
         window.location.reload(false);
     }

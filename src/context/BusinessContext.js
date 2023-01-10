@@ -28,7 +28,7 @@ export default class BusinessProvider extends Component {
     async componentDidMount() {
 
         //get all business
-        await axious.get("http://localhost:5015/api/business")
+        await axious.get("https://facework-server-production.up.railway.app/api/business")
             .then((res) => {
                 if (res.status === 200) {
                     this.setState({ business: res.data, sortedBusiness: res.data })

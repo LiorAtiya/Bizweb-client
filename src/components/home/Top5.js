@@ -10,7 +10,7 @@ export default function Top5() {
     useEffect(() => {
         const getResult = async () => {
             //gets all events of business
-            await axios.get('http://localhost:5015/api/business/home/top5')
+            await axios.get('https://facework-server-production.up.railway.app/api/business/home/top5')
                 .then((res) => setTop5(res.data))
                 .catch((err) => console.log(err));
         };

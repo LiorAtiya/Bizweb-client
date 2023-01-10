@@ -78,14 +78,14 @@ export const Gallery = ({ id, name }) => {
 
     //send request to server for upload new image
     if (newImage.length !== 0) {
-      await axios.put(`http://localhost:5015/api/business/${id}/gallery`, newImage)
+      await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
     }
 
     //update background image
     if (updatedBackgroundImage !== "") {
-      await axios.put(`http://localhost:5015/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
+      await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
     }
@@ -94,7 +94,7 @@ export const Gallery = ({ id, name }) => {
   }
 
   const handleRemoveImage = async () => {
-    await axios.delete(`http://localhost:5015/api/business/${id}/gallery`,
+    await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
       { data: { id: removeImage } })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));

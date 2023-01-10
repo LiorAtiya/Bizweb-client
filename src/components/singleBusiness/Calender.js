@@ -172,12 +172,12 @@ const Calendar = ({ id, businessName }) => {
                 appointment.userID = getUserData._id;
             }
 
-            await axios.post('http://localhost:5015/api/calender/create-event', appointment);
+            await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment);
             console.log("Added new event to calender");
 
             //if user connected => Update in the personal profile the appointment
             if (getUserData) {
-                await axios.put(`http://localhost:5015/api/users/${getUserData._id}/newappointment`, appointment)
+                await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
                     .then((res) => {
                         if (res.status !== 500) {
                             window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -219,7 +219,7 @@ const Calendar = ({ id, businessName }) => {
                 time: item.value
             }
 
-            await axios.post('http://localhost:5015/api/calender/create-event', appointment)
+            await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
         })
         // alert("Added more hours to calender")
         window.location.reload(false);
@@ -235,13 +235,13 @@ const Calendar = ({ id, businessName }) => {
             userID: userID
         }
         //Delete from calender
-        await axios.delete('http://localhost:5015/api/calender/delete-event',
+        await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',
         { data: appointment })
         .then((res) => {
 
             if (res.status !== 500 && res.data.userID) {
                 //Delete from list of appointment of user
-                axios.delete(`http://localhost:5015/api/users/${res.data.userID}/delete-appointment`,
+                axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,
                 { data: appointment });
 
                 console.log("Removed appointment from list of user");

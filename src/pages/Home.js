@@ -35,7 +35,7 @@ class Home extends Component {
             email: getUserData.email
         }
 
-        await axios.post(`http://localhost:5015/api/users/${getUserData._id}/prediction`, record)
+        await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/prediction`, record)
         .then((res) => {
             this.setState({prediction: res.data[0]})
         })
@@ -49,7 +49,7 @@ class Home extends Component {
     handleClick = async () => {
 
         // Train & Create new model in bigML
-        await axios.get(`http://localhost:5015/api/users/${this.state.user._id}/trainBigML`)
+        await axios.get(`https://facework-server-production.up.railway.app/api/users/${this.state.user._id}/trainBigML`)
             .then((res) => {
                 console.log(res);
             })
