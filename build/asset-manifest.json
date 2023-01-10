@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.fdf3a220.css",
-    "main.js": "/static/js/main.6585f164.js",
+    "main.css": "/static/css/main.f6b770ee.css",
+    "main.js": "/static/js/main.4ed244f4.js",
     "static/media/barbershop.png": "/static/media/barbershop.5717be8da7b2ba04ba45.png",
     "static/media/polish.jpeg": "/static/media/polish.ba13b5cde902a09f4aef.jpeg",
     "static/media/googlemaps.png": "/static/media/googlemaps.393af096740521e465ab.png",
+    "static/media/instagram.png": "/static/media/instagram.abced1a115ac65261348.png",
     "static/media/loading-arrow.gif": "/static/media/loading-arrow.dd29210f39418b50813e.gif",
     "static/media/restaurants.jpeg": "/static/media/restaurants.d1f400539e7f7764e1b1.jpeg",
+    "static/media/facebook.png": "/static/media/facebook.15e9e015043c0c28a351.png",
     "static/media/renovations.jpeg": "/static/media/renovations.c33dc3555f0ee6e9b43f.jpeg",
     "static/media/defaultImg.png": "/static/media/defaultImg.121d1c79f0aaa19a07d9.png",
     "static/media/moovit.webp": "/static/media/moovit.0b986d9b88b70ae47e92.webp",
     "index.html": "/index.html",
     "static/media/waze.svg": "/static/media/waze.06aad310036bb36542da2072da1bf6c8.svg",
-    "main.fdf3a220.css.map": "/static/css/main.fdf3a220.css.map",
-    "main.6585f164.js.map": "/static/js/main.6585f164.js.map"
+    "main.f6b770ee.css.map": "/static/css/main.f6b770ee.css.map",
+    "main.4ed244f4.js.map": "/static/js/main.4ed244f4.js.map"
   },
   "entrypoints": [
-    "static/css/main.fdf3a220.css",
-    "static/js/main.6585f164.js"
+    "static/css/main.f6b770ee.css",
+    "static/js/main.4ed244f4.js"
   ]
 }

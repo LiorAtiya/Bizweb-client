@@ -141,7 +141,7 @@ const Calendar = ({ id, businessName }) => {
     useEffect(() => {
         const getResult = async () => {
             //gets all events of business
-            await axios.post('http://localhost:5015/api/calender/get-events', { businessID: id })
+            await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
                 .then((res) => setEvents(res.data))
                 .catch((err) => console.log(err));
         };

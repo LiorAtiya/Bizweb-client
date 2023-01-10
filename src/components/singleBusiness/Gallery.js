@@ -15,7 +15,7 @@ export const Gallery = ({ id, name }) => {
   useEffect(() => {
     const getResult = async () => {
       //get all images of the business from mongodb
-      await axios.get(`http://localhost:5015/api/business/${id}/gallery`)
+      await axios.get(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`)
         .then((res) => setData(res.data))
         .catch((err) => console.log(err));
     };
