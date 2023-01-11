@@ -75,15 +75,15 @@ class Home extends Component {
                     <SearchBox searchChange={this.onSearchChange} />
                     {
                         this.state.user?
-                            // this.state.prediction?
+                            this.state.prediction?
                             <h6 className='predictBigml'>Maybe you are interested in
-                                {/* <Link to={`/category/${this.state.prediction.toLowerCase()}`} onClick={this.handleClick}> */}
-                                <button className='btnPredictBigml' onClick={this.handleClick}>click</button>
-                                {/* </Link> */}
+                                <Link to={`/category/${this.state.prediction.toLowerCase()}`} onClick={this.handleClick}>
+                                <button className='btnPredictBigml'>{this.state.prediction}</button>
+                                </Link>
                                 ?
                             </h6>
-                            // :
-                            // null
+                            :
+                            null
                             :
                             null
                     }
