@@ -134,7 +134,7 @@ export default function Reviews({ id }) {
 
                 <Card.Body>
                     <Card.Text className='card-text'>
-                        <form onSubmit={addReview}>
+                        <form>
 
                             <Components.Input type='text' placeholder='Your name'
                                 required ref={name}
@@ -144,7 +144,7 @@ export default function Reviews({ id }) {
                                 required ref={review}
                             />
 
-                            <Components.Button type="submit">Submit</Components.Button>
+                            <Components.Button type='button' onClick={addReview}>Submit</Components.Button>
                         </form>
                     </Card.Text>
                 </Card.Body>

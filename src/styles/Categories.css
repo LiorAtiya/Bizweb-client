@@ -20,13 +20,14 @@
 
   @media screen and (min-width: 992px) {
       .featured-rooms-center {
-          width: 95vw;
+          width: 80vw;
           max-width: 1170px;
       }
   }
 
   .card-category-container {
     position: relative;
+    text-align: center;
   }
 
   .card-category-container img {
@@ -47,16 +48,12 @@
   .card-category-container:hover img {
     opacity: 0.3;
   }
-/* 
-  .card-category-container:hover .room-link {
-    transform: translate(-50%, -50%) scale(1);
-  } */
 
   .text-on-image {
       position: absolute;
-      /* right: 30%; */
-      left: 25%;
-      bottom: 35%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: white;
       text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
   }

@@ -79,7 +79,7 @@ export default function NewBusiness() {
     return (
         <Components.NewBusinessContainer>
 
-            <Components.NewBusinessForm onSubmit={handleClick}>
+            <Components.NewBusinessForm>
                 <Components.Title>Open a new business</Components.Title>
                 <br />
                 <div className="mb-3">
@@ -89,7 +89,10 @@ export default function NewBusiness() {
                             <option value="Barbershop">Barbershop</option>
                             <option value="Nail Polish">Nail Polish</option>
                             <option value="Restaurants">Restaurants</option>
-                            <option value="Renovations">Renovations</option>
+                            <option value="Professionals">Professionals</option>
+                            <option value="Personal Trainers">Personal Trainers</option>
+                            <option value="Private Teachers">Private Teachers</option>
+
                         </Components.Select>
                     </label>
                 </div>
@@ -119,7 +122,7 @@ export default function NewBusiness() {
                 />
 
                 <div className="mb-3">
-                    <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
+                    <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={handleOpenWidget}>
                         Choose background image
                     </Components.ButtonPic>
                     {
@@ -132,7 +135,7 @@ export default function NewBusiness() {
                     }
                 </div>
 
-                <Components.Button type="submit">Create</Components.Button>
+                <Components.Button type="button" onClick={handleClick}>Create</Components.Button>
             </Components.NewBusinessForm>
 
         </Components.NewBusinessContainer>
