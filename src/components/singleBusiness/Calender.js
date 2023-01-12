@@ -152,8 +152,8 @@ const Calendar = ({ id, businessName }) => {
     const handleClick = async (e) => {
         e.preventDefault();
 
-        //********* RETURN THIS*************** */
-        // if (verified) {
+        
+        if (verified) {
 
             const appointment = {
                 businessName: businessName,
@@ -189,10 +189,10 @@ const Calendar = ({ id, businessName }) => {
 
             window.location.reload(false);
         
-        //*************** RETURN THIS */
-        // } else {
-        //     alert("Please Verify Mobile");
-        // }
+        
+        } else {
+            alert("Please Verify Mobile");
+        }
     }
 
     //for chosen times to add
@@ -431,7 +431,7 @@ const Calendar = ({ id, businessName }) => {
                         <Card.Subtitle className="mb-2 text-muted">{value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear()}</Card.Subtitle>
                         <Card.Text>
                             {filteredFreeEvents.length !== 0 ?
-                                <form onSubmit={handleClick}>
+                                <form>
                                     <div id="recaptcha-container"></div>
 
                                     <div className="mb-3">
@@ -487,7 +487,7 @@ const Calendar = ({ id, businessName }) => {
                                         required ref={comments}
                                     />
 
-                                    <Components.Button type="submit">Submit</Components.Button>
+                                    <Components.Button onClick={handleClick}>Submit</Components.Button>
 
                                 </form>
                                 :
