@@ -9,6 +9,7 @@ import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
 import Top5 from '../components/home/Top5';
 import AboutUs from '../components/home/AboutUs';
+import { prediction } from '../api/bigml'
 
 import CategoryBusiness from '../components/home/CategoryBusiness'
 

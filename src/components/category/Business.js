@@ -25,7 +25,7 @@ export default function Business({ business }) {
 
   return (
     <Link to={`/business/${name}`} className='business-name'>
-      <Card sx={{ height: 320 }}>
+      <Card sx={{ height: 320 ,textAlign: 'center'}}>
         <CardMedia
           sx={{ height: 140 }}
           image={backgroundPicture || defaultImg}
