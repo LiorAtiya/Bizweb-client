@@ -220,9 +220,8 @@ const Calendar = ({ id, businessName }) => {
             }
 
             await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+            window.location.reload(false);
         })
-        // alert("Added more hours to calender")
-        window.location.reload(false);
     }
 
     const deleteEvent = async (userID, t, name, phone, date) => {
