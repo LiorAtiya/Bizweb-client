@@ -9,7 +9,7 @@ import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
 import Top5 from '../components/home/Top5';
 import AboutUs from '../components/home/AboutUs';
-import { prediction } from '../api/bigml'
+// import { prediction } from '../api/bigml'
 
 import CategoryBusiness from '../components/home/CategoryBusiness'
 
@@ -27,20 +27,23 @@ class Home extends Component {
     async componentDidMount() {
         this.setState({ category: categories });
         const getUserData = JSON.parse(localStorage.getItem('token'));
-        this.setState({ user: getUserData });
+        if (getUserData) {
 
-        const record = {
-            firstname: getUserData.firstname,
-            lastname: getUserData.lastname,
-            username: getUserData.username,
-            email: getUserData.email
+            this.setState({ user: getUserData });
+
+            const record = {
+                firstname: getUserData.firstname,
+                lastname: getUserData.lastname,
+                username: getUserData.username,
+                email: getUserData.email
+            }
+
+            await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/prediction`, record)
+                .then((res) => {
+                    this.setState({ prediction: res.data[0] })
+                })
+                .catch((err) => console.log(err));
         }
-
-        await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/prediction`, record)
-        .then((res) => {
-            this.setState({prediction: res.data[0]})
-        })
-        .catch((err) => console.log(err));
     }
 
     onSearchChange = (event) => {
@@ -48,15 +51,15 @@ class Home extends Component {
     }
 
     handleClick = async () => {
-
+        alert("test")
         // Train & Create new model in bigML
         await axios.get(`https://facework-server-production.up.railway.app/api/users/${this.state.user._id}/trainBigML`)
             .then((res) => {
                 console.log(res);
             })
             .catch((err) => console.log(err));
-        
-        
+
+
     }
 
     render() {
@@ -74,18 +77,17 @@ class Home extends Component {
                         </Banner>
                     </Hero>
                     <SearchBox searchChange={this.onSearchChange} />
-                    <button className='btnPredictBigml'>Train model</button>
                     {
-                        this.state.user?
-                            this.state.prediction?
-                            <h6 className='predictBigml' onClick={this.handleClick}>Maybe you are interested in
-                                <Link to={`/category/${this.state.prediction.toLowerCase()}`} onClick={this.handleClick}>
-                                <button className='btnPredictBigml'>{this.state.prediction}</button>
-                                </Link>
-                                ?
-                            </h6>
-                            :
-                            null
+                        this.state.user ?
+                            this.state.prediction ?
+                                <h6 className='predictBigml'>Maybe you are interested in
+                                    <Link to={`/category/${this.state.prediction.toLowerCase()}`} onClick={this.handleClick}>
+                                        <button className='btnPredictBigml'>{this.state.prediction}</button>
+                                    </Link>
+                                    ?
+                                </h6>
+                                :
+                                null
                             :
                             null
                     }
