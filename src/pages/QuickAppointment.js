@@ -26,14 +26,13 @@ export default function QuickAppointment() {
 
         //Get nearest availables appointments
         await axios.post(`https://facework-server-production.up.railway.app/api/business/home/quickappointment`, business)
-        .then((res) => {
-            setAvailables(res.data);
-            console.log(res.data);
-        })
-        .catch((err) => console.log(err));
+            .then((res) => {
+                setAvailables(res.data);
+            })
+            .catch((err) => console.log(err));
 
         setAppointmentFlag(true);
-      }
+    }
 
     return (
         <Components.QuickAppointContainer>
@@ -48,7 +47,9 @@ export default function QuickAppointment() {
                             <option value="Barbershop">Barbershop</option>
                             <option value="Nail Polish">Nail Polish</option>
                             <option value="Restaurants">Restaurants</option>
-                            <option value="Renovations">Renovations</option>
+                            <option value="Professionals">Professionals</option>
+                            <option value="Personal Trainers">Personal Trainers</option>
+                            <option value="Private Teachers">Private Teachers</option>
                         </Components.Select>
                     </label>
                 </div>
@@ -63,23 +64,22 @@ export default function QuickAppointment() {
                 </div>
 
                 {
-                    appointmentFlag?
-                    <>
-                    {
-                        availables.length === 0?
-                        <h1>No appointment available in the near future</h1>
-                        :
+                    appointmentFlag ?
                         <>
-                        <h5>Nearest Available: Today, at {availables[1].time}</h5><br/>
-                        <Components.AvailableContainer>
-                        <Business key={availables[0]._id} business={availables[0]} /><br/>
-                        </Components.AvailableContainer>
-                        {/* {setAppointmentFlag(false)} */}
+                            {
+                                availables.length === 0 ?
+                                    <h1>No appointment available in the near future</h1>
+                                    :
+                                    <>
+                                        <h5>Nearest Available: Today, at {availables[1].time}</h5><br />
+                                        <Components.AvailableContainer>
+                                            <Business key={availables[0]._id} business={availables[0]} /><br />
+                                        </Components.AvailableContainer>
+                                    </>
+                            }
                         </>
-                    }
-                    </>
-                    :
-                    null
+                        :
+                        null
                 }
 
                 <Components.Button type="button" onClick={handleClick}>Find</Components.Button>

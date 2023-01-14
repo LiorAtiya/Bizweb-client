@@ -74,10 +74,11 @@ class Home extends Component {
                         </Banner>
                     </Hero>
                     <SearchBox searchChange={this.onSearchChange} />
+                    <button className='btnPredictBigml'>Train model</button>
                     {
                         this.state.user?
                             this.state.prediction?
-                            <h6 className='predictBigml'>Maybe you are interested in
+                            <h6 className='predictBigml' onClick={this.handleClick}>Maybe you are interested in
                                 <Link to={`/category/${this.state.prediction.toLowerCase()}`} onClick={this.handleClick}>
                                 <button className='btnPredictBigml'>{this.state.prediction}</button>
                                 </Link>

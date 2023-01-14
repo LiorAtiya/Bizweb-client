@@ -153,7 +153,7 @@ const Calendar = ({ id, businessName }) => {
         e.preventDefault();
 
         
-        if (verified) {
+        // if (verified) {
 
             const appointment = {
                 businessName: businessName,
@@ -190,9 +190,9 @@ const Calendar = ({ id, businessName }) => {
             window.location.reload(false);
         
         
-        } else {
-            alert("Please Verify Mobile");
-        }
+        // } else {
+        //     alert("Please Verify Mobile");
+        // }
     }
 
     //for chosen times to add
