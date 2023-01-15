@@ -27,6 +27,7 @@ class Home extends Component {
     async componentDidMount() {
         this.setState({ category: categories });
         const getUserData = JSON.parse(localStorage.getItem('token'));
+        
         if (getUserData) {
 
             this.setState({ user: getUserData });
@@ -51,7 +52,7 @@ class Home extends Component {
     }
 
     handleClick = async () => {
-        alert("test")
+
         // Train & Create new model in bigML
         await axios.get(`https://facework-server-production.up.railway.app/api/users/${this.state.user._id}/trainBigML`)
             .then((res) => {

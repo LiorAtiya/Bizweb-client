@@ -97,13 +97,19 @@ export default function Reviews({ id }) {
             userID: id
         }
         await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, newReview);
-        window.location.reload(false);
+        setReviewList(oldArray => [...oldArray,newReview.details]);
+        name.current.value = ""
+        review.current.value = ""
+        setCurrentValue(0)
     }
 
     const removeReview = async () => {
         await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`,
             { data: { id: reviewID } });
-        window.location.reload(false);
+        
+        const newArray = reviewList.filter(obj => obj.id !== reviewID);
+        setReviewList(newArray)
+        handleClose()
     }
 
     return (

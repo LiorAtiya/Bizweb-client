@@ -7,10 +7,15 @@ import * as Components from '../../styles/StyledForm'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 //Calender
-import TextField from '@mui/material/TextField';
+// import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import dayjs from 'dayjs';
+
 // import Badge from '@mui/material/Badge';
 // import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 // import CheckIcon from '@mui/icons-material/Check';
@@ -24,22 +29,46 @@ const auth = getAuth(app)
 
 const Calendar = ({ id, businessName }) => {
     // const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
+    // const [filteredAddHours, setFilteredAddHours] = useState([]);
+
+    // const hours = [
+    //     { value: "08:00", isChecked: false },
+    //     { value: "09:00", isChecked: false },
+    //     { value: "10:00", isChecked: false },
+    //     { value: "11:00", isChecked: false },
+    //     { value: "12:00", isChecked: false },
+    //     { value: "13:00", isChecked: false },
+    //     { value: "14:00", isChecked: false },
+    //     { value: "15:00", isChecked: false },
+    //     { value: "16:00", isChecked: false },
+    //     { value: "17:00", isChecked: false },
+    //     { value: "18:00", isChecked: false },
+    //     { value: "19:00", isChecked: false },
+    //     { value: "20:00", isChecked: false },
+    //     { value: "21:00", isChecked: false },
+    //     { value: "22:00", isChecked: false },
+    //     { value: "23:00", isChecked: false },
+    // ]
+
+
     const [value, setValue] = useState(new Date());
+    const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
     const [Flag, setFlag] = useState(false);
     const [events, setEvents] = useState([]);
     const [filteredFreeEvents, setFilteredFreeEvents] = useState([]);
-    const [filteredAddHours, setFilteredAddHours] = useState([]);
 
     //Details of client
-    const time = useRef("");
+    const [time, setTime] = useState("");
     const name = useRef("");
-    // const phone = useRef("");
     const comments = useRef("");
 
     //============ Admin Permissions ============
     //for add hours
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        window.location.reload(false);
+    }
     const handleShow = () => setShow(true);
     //for see appoiments
     const [show2, setShow2] = useState(false);
@@ -122,22 +151,6 @@ const Calendar = ({ id, businessName }) => {
         return events.dates.filter(event => event.date === value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear());
     }
 
-    const hours = [
-        { value: "08:00", isChecked: false },
-        { value: "09:00", isChecked: false },
-        { value: "10:00", isChecked: false },
-        { value: "11:00", isChecked: false },
-        { value: "12:00", isChecked: false },
-        { value: "13:00", isChecked: false },
-        { value: "14:00", isChecked: false },
-        { value: "15:00", isChecked: false },
-        { value: "16:00", isChecked: false },
-        { value: "17:00", isChecked: false },
-        { value: "18:00", isChecked: false },
-        { value: "19:00", isChecked: false },
-        { value: "20:00", isChecked: false },
-    ]
-
     useEffect(() => {
         const getResult = async () => {
             //gets all events of business
@@ -152,103 +165,120 @@ const Calendar = ({ id, businessName }) => {
     const handleClick = async (e) => {
         e.preventDefault();
 
-        
+
         // if (verified) {
 
-            const appointment = {
-                businessName: businessName,
-                businessID: id,
-                busy: true,
-                date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
-                time: time.current.value,
-                name: name.current.value,
-                phone: phone,
-                comments: comments.current.value,
-                userID: ""
-            }
+        const appointment = {
+            businessName: businessName,
+            businessID: id,
+            busy: true,
+            date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
+            time: time,
+            name: name.current.value,
+            phone: phone,
+            comments: comments.current.value,
+            userID: ""
+        }
 
-            //Add user ID to appointment
-            if (getUserData) {
-                appointment.userID = getUserData._id;
-            }
+        //Add user ID to appointment
+        if (getUserData) {
+            appointment.userID = getUserData._id;
+        }
 
-            await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment);
-            console.log("Added new event to calender");
+        await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment);
+        console.log("Added new event to calender");
 
-            //if user connected => Update in the personal profile the appointment
-            if (getUserData) {
-                await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
-                    .then((res) => {
-                        if (res.status !== 500) {
-                            window.localStorage.setItem("token", JSON.stringify(res.data));
-                            console.log("Added new appointment to list of user");
-                            window.location.reload(false);
-                        }
-                    })
-            }
+        //if user connected => Update in the personal profile the appointment
+        if (getUserData) {
+            await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
+                .then((res) => {
+                    if (res.status !== 500) {
+                        window.localStorage.setItem("token", JSON.stringify(res.data));
+                        console.log("Added new appointment to list of user");
+                        window.location.reload(false);
+                    }
+                })
+        }
 
-            window.location.reload(false);
-        
-        
+        window.location.reload(false);
+
+
         // } else {
         //     alert("Please Verify Mobile");
         // }
     }
 
-    //for chosen times to add
-    const handleChange = (event) => {
-        let isChecked = event.target.checked;
-        let item = event.target.value;
+    // //for chosen times to add
+    // const handleChange = (event) => {
+    //     let isChecked = event.target.checked;
+    //     let item = event.target.value;
 
-        hours.map(i => {
-            if (i.value === item) {
-                return i.isChecked = isChecked;
-            }
-            return null;
-        });
-    }
+    //     hours.map(i => {
+    //         if (i.value === item) {
+    //             return i.isChecked = isChecked;
+    //         }
+    //         return null;
+    //     });
+    // }
 
     const addHours = async () => {
-        const hourChecked = hours.filter(i => i.isChecked === true);
-        hourChecked.map(async (item) => {
+        // const hourChecked = hours.filter(i => i.isChecked === true);
+        // hourChecked.map(async (item) => {
 
-            const appointment = {
-                businessID: id,
-                busy: false,
-                date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
-                time: item.value
-            }
+        let min, hours, parseTime;
+        if ((valueTime.$d.getHours()) < 10) {
+            hours = '0' + (valueTime.$d.getHours())
+        } else {
+            hours = (valueTime.$d.getHours())
+        }
+        if (valueTime.$d.getMinutes() < 10) {
+            min = '0' + valueTime.$d.getMinutes()
+        } else {
+            min = valueTime.$d.getMinutes()
+        }
+        parseTime = hours + ":" + min;
 
-            await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
-            window.location.reload(false);
-        })
+        console.log(parseTime)
+
+        const appointment = {
+            businessID: id,
+            busy: false,
+            date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
+            time: parseTime
+        }
+
+        await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+            .then(res => alert('Added new hour to appointment'))
+        // window.location.reload(false);
+
+        // })
     }
 
     const deleteEvent = async (userID, t, name, phone, date) => {
         const appointment = {
-            businessID: id, 
-            date: date, 
-            time: t, 
-            name: name, 
+            businessID: id,
+            date: date,
+            time: t,
+            name: name,
             phone: phone,
             userID: userID
         }
         //Delete from calender
         await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',
-        { data: appointment })
-        .then((res) => {
+            { data: appointment })
+            .then((res) => {
 
-            if (res.status !== 500 && res.data.userID) {
-                //Delete from list of appointment of user
-                axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,
-                { data: appointment });
+                if (res.status !== 500 && res.data.userID) {
+                    //Delete from list of appointment of user
+                    axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,
+                        { data: appointment });
 
-                console.log("Removed appointment from list of user");
-                window.location.reload(false);
-            }else {
-                window.location.reload(false);
-            }
-        })
+                    console.log("Removed appointment from list of user");
+                    window.location.reload(false);
+                } else {
+                    window.location.reload(false);
+                }
+            })
     }
 
 
@@ -286,28 +316,29 @@ const Calendar = ({ id, businessName }) => {
 
                         //list of available hours
                         let selectFreeEvent = filtered.map((item, index) => {
-                            return <option value={item.time} key={index}>{item.time}</option>
+                            return <div className='btnHours' onClick={() => setTime(item.time)}>{item.time}</div>
                         })
                         setFilteredFreeEvents(selectFreeEvent);
 
                         //========== Filter for add hours for admin ========
 
-                        const newFiltered = Object.values(filtered).map(k => k.time);
-                        const dateFiltered = events.dates.map(obj => {
-                            if (obj.date === newValue.getDate() + "/" + (newValue.getMonth() + 1) + "/" + newValue.getFullYear()) {
-                                return obj.time;
-                            }
-                            return null;
-                        })
-                        const addHoursFiltered = hours.filter(hour => !newFiltered.includes(hour.value) && !dateFiltered.includes(hour.value));
+                        // const newFiltered = Object.values(filtered).map(k => k.time);
+                        // const dateFiltered = events.dates.map(obj => {
+                        //     if (obj.date === newValue.getDate() + "/" + (newValue.getMonth() + 1) + "/" + newValue.getFullYear()) {
+                        //         return obj.time;
+                        //     }
+                        //     return null;
+                        // })
+                        // const addHoursFiltered = hours.filter(hour => !newFiltered.includes(hour.value) && !dateFiltered.includes(hour.value));
 
-                        setFilteredAddHours(addHoursFiltered);
+                        // setFilteredAddHours(addHoursFiltered);
 
                         //==================================================
 
                         setFlag(true);
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+
+                // renderInput={(params) => <TextField {...params} />}
                 // renderDay={(day, _value, DayComponentProps) => {
                 //     const isSelected =
                 //         !DayComponentProps.outsideCurrentMonth &&
@@ -327,6 +358,7 @@ const Calendar = ({ id, businessName }) => {
             </LocalizationProvider>
             {/* ============== End Calender ================== */}
 
+            {/* ============== Form of window make appointment ================== */}
             {Flag ?
                 <Card style={{ width: '30rem', marginLeft: "30px", display: 'flex' }}>
                     <Card.Body>
@@ -335,13 +367,13 @@ const Calendar = ({ id, businessName }) => {
                                 isAdmin() ?
                                     <>
                                         <div className='admin-container'>
-                                        <Button className='btn-admin' variant="btn btn-warning" onClick={handleShow}>
-                                            <b>Add available hours</b>
-                                        </Button>
-                                        <br></br>
-                                        <Button variant="btn btn-warning" onClick={handleShow2}>
-                                            <b>List of appointments</b>
-                                        </Button>
+                                            <Button className='btn-admin' variant="btn btn-warning" onClick={handleShow}>
+                                                <b>Add available hours</b>
+                                            </Button>
+                                            <br></br>
+                                            <Button variant="btn btn-warning" onClick={handleShow2}>
+                                                <b>List of appointments</b>
+                                            </Button>
                                         </div>
                                         <hr></hr>
                                     </>
@@ -359,7 +391,19 @@ const Calendar = ({ id, businessName }) => {
                                     <h5>Select hours to make appointments</h5>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    {
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <StaticTimePicker
+                                            // ampm
+                                            orientation="landscape"
+                                            openTo="minutes"
+                                            value={valueTime}
+                                            onChange={(newValue) => {
+                                                setValueTime(newValue)
+                                            }}
+                                        // renderInput={(params) => <TextField {...params} />}
+                                        />
+                                    </LocalizationProvider>
+                                    {/* {
                                         filteredAddHours.map(item => (
                                             <>
                                                 <label>
@@ -371,7 +415,7 @@ const Calendar = ({ id, businessName }) => {
                                                 </label>
                                                 <br></br>
                                             </>
-                                        ))}
+                                        ))} */}
 
                                 </Modal.Body>
                                 <Modal.Footer>
@@ -381,7 +425,7 @@ const Calendar = ({ id, businessName }) => {
                                     <Button variant="btn btn-success" onClick={addHours}>Confirm</Button>
                                 </Modal.Footer>
                             </Modal>
-                            
+
                             <Modal
                                 show={show2}
                                 onHide={handleClose2}
@@ -436,12 +480,12 @@ const Calendar = ({ id, businessName }) => {
                                     <div className="mb-3">
                                         <label>
                                             <b>Choose an available time:</b><br />
-                                            <Components.SelectOfTime ref={time}>
-                                                {filteredFreeEvents
-                                                    // filteredFreeEvents :
-                                                    // <option value={0} key={0}>No available hours on this day</option>
-                                                }
-                                            </Components.SelectOfTime>
+                                            <div className='grid-container'>
+                                                {filteredFreeEvents}
+                                            </div>
+                                            {/* <Components.SelectOfTime ref={time}> */}
+                                            <h5>{time ? "Chosen: " + time : null}</h5>
+                                            {/* </Components.SelectOfTime> */}
                                         </label>
                                     </div>
 
@@ -496,6 +540,8 @@ const Calendar = ({ id, businessName }) => {
                     </Card.Body>
                 </Card>
                 : null}
+
+            {/* ============== End of form of window make appointment ================== */}
         </div >
     );
 };
