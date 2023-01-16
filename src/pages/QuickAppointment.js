@@ -71,7 +71,7 @@ export default function QuickAppointment() {
                                     <h1>No appointment available in the near future</h1>
                                     :
                                     <>
-                                        <h5>Nearest Available: Today, at {availables[1].time}</h5><br />
+                                        <h5>Nearest Available: {availables[1].date} , at {availables[1].time}</h5><br />
                                         <Components.AvailableContainer>
                                             <Business key={availables[0]._id} business={availables[0]} /><br />
                                         </Components.AvailableContainer>

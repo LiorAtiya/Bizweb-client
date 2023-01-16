@@ -50,6 +50,18 @@ const Calendar = ({ id, businessName }) => {
     //     { value: "23:00", isChecked: false },
     // ]
 
+    // //for chosen times to add
+    // const handleChange = (event) => {
+    //     let isChecked = event.target.checked;
+    //     let item = event.target.value;
+
+    //     hours.map(i => {
+    //         if (i.value === item) {
+    //             return i.isChecked = isChecked;
+    //         }
+    //         return null;
+    //     });
+    // }
 
     const [value, setValue] = useState(new Date());
     const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
@@ -144,7 +156,7 @@ const Calendar = ({ id, businessName }) => {
         });
     }
 
-    // ==================End of OTP Verify ======================
+    // ================== End of OTP Verify ======================
 
     //Filter of selected date
     const dateAppoimentsFiltered = () => {
@@ -208,19 +220,6 @@ const Calendar = ({ id, businessName }) => {
         // }
     }
 
-    // //for chosen times to add
-    // const handleChange = (event) => {
-    //     let isChecked = event.target.checked;
-    //     let item = event.target.value;
-
-    //     hours.map(i => {
-    //         if (i.value === item) {
-    //             return i.isChecked = isChecked;
-    //         }
-    //         return null;
-    //     });
-    // }
-
     const addHours = async () => {
         // const hourChecked = hours.filter(i => i.isChecked === true);
         // hourChecked.map(async (item) => {
@@ -273,14 +272,13 @@ const Calendar = ({ id, businessName }) => {
                     axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,
                         { data: appointment });
 
-                    console.log("Removed appointment from list of user");
+                    // console.log("Removed appointment from list of user");
                     window.location.reload(false);
                 } else {
                     window.location.reload(false);
                 }
             })
     }
-
 
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
