@@ -38,7 +38,7 @@ export default function NavbarComp() {
               {/* <Nav.Link as={Link} to={"/login"}>About us</Nav.Link> */}
             </Nav>
             <Nav className='nav-links'>
-              <Nav.Link className='QuichAppointment' as={Link} to={"/quickappointment"}><b>Quich Appointment</b></Nav.Link>
+              <Nav.Link className='QuichAppointment' as={Link} to={"/quickappointment"}><b>Quick Appointment</b></Nav.Link>
               <i className='fa-solid fa fa-user'></i>
               <NavDropdown title={getUserData ? `Hello ${getUserData.firstname}` : "Hello Guest"} id="collasible-nav-dropdown">
                 {
