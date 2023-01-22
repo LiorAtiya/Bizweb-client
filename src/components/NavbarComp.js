@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../styles/Navbar.css";
+// import { useHistory } from "react-router-dom";
 // import { AuthContext } from '../context/AuthContext';
 
 export default function NavbarComp() {
 
   // const {user} = useContext(AuthContext)
-  let history = useHistory();
+  // let history = useHistory();
 
   const getUserData = JSON.parse(localStorage.getItem('token'));
 
@@ -21,7 +21,7 @@ export default function NavbarComp() {
 
   const logOut = () => {
     localStorage.removeItem('token');
-    history.push('/');
+    // history.push('/');
     window.location.reload(false);
   }
 

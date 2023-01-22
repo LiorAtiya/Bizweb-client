@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Title from '../general/Title'
-import axios from 'axios';
+// import axios from 'axios';
 import Business from '../category/Business'
+import ApiClient from '../../api/ApiClient';
 
 export default function Top5() {
 
@@ -10,7 +11,8 @@ export default function Top5() {
     useEffect(() => {
         const getResult = async () => {
             //gets all events of business
-            await axios.get('https://facework-server-production.up.railway.app/api/business/home/top5')
+            ApiClient.getTop5()
+            // await axios.get('https://facework-server-production.up.railway.app/api/business/home/top5')
                 .then((res) => setTop5(res.data))
                 .catch((err) => console.log(err));
         };

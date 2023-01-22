@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 // import items from "../database/data"
 // import categories from '../database/categories';
-import axious from 'axios'
+// import axious from 'axios'
+import ApiClient from '../api/ApiClient';
 
 const BusinessContext = React.createContext();
 
@@ -28,12 +29,15 @@ export default class BusinessProvider extends Component {
     async componentDidMount() {
 
         //get all business
-        await axious.get("https://facework-server-production.up.railway.app/api/business")
+
+        // await axious.get("https://facework-server-production.up.railway.app/api/business")
+        ApiClient.getAllBusiness()
             .then((res) => {
                 if (res.status === 200) {
                     this.setState({ business: res.data, sortedBusiness: res.data })
                 }
             })
+            .catch((err) => console.log(err));
 
         // let typeBusiness = this.state.business.filter(busi => busi.category === true);
         // console.log("typeBusiness: "+ this.state.business[0].category);

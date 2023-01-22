@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { FaStar } from "react-icons/fa"
 import Toast from 'react-bootstrap/Toast';
-import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import '../../styles/Reviews.css'
 import * as Components from '../../styles/StyledForm'
+import ApiClient from '../../api/ApiClient';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -14,35 +14,13 @@ const colors = {
     grey: "#a9a9a9",
 }
 
-const styles = {
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    textarea: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 300,
-        margin: "20px 0",
-        minHeight: 100,
-        padding: 10
-    },
-    button: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 300,
-        padding: 10
-    }
-}
-
 export default function Reviews({ id }) {
 
     const stars = Array(5).fill(0);
     const [reviewList, setReviewList] = useState([])
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
-    const [reviewID,setReviewID] = useState("");
+    const [reviewID, setReviewID] = useState("");
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -65,8 +43,9 @@ export default function Reviews({ id }) {
 
     useEffect(() => {
         const getResult = async () => {
-            //get all images of the business from mongodb
-            await axios.get(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`)
+            //get all reviews of the business from mongodb
+            ApiClient.getAllReviews(id)
+                // await axios.get(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`)
                 .then((res) => setReviewList(res.data))
                 .catch((err) => console.log(err));
         };
@@ -87,38 +66,47 @@ export default function Reviews({ id }) {
     }
 
     const addReview = async () => {
-        const newReview = {
-            details: {
-                id: 'id' + (new Date()).getTime(),
-                name: name.current.value,
-                review: review.current.value,
-                stars: currentValue
-            },
-            userID: id
+        //Checks not empty
+        if (name.current.value !== "" && review.current.value !== "" && currentValue !== 0){
+            const newReview = {
+                details: {
+                    id: 'id' + (new Date()).getTime(),
+                    name: name.current.value,
+                    review: review.current.value,
+                    stars: currentValue
+                },
+                userID: id
+            }
+    
+            ApiClient.addNewReview(id, newReview)
+                .then((res) => console.log('Added new review'))
+                .catch((err) => console.log(err));
+            // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, newReview);
+            setReviewList(oldArray => [...oldArray, newReview.details]);
+            name.current.value = ""
+            review.current.value = ""
+            setCurrentValue(0)
         }
-        await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, newReview);
-        setReviewList(oldArray => [...oldArray,newReview.details]);
-        name.current.value = ""
-        review.current.value = ""
-        setCurrentValue(0)
     }
 
     const removeReview = async () => {
-        await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`,
-            { data: { id: reviewID } });
         
+        ApiClient.removeReview(id,reviewID)
+        // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, { data: { id: reviewID } })
+            .then((res) => console.log('Removed review'))
+            .catch((err) => console.log(err));
+
         const newArray = reviewList.filter(obj => obj.id !== reviewID);
         setReviewList(newArray)
         handleClose()
     }
 
     return (
-        <div style={styles.container}>
+        <div class="reviews-container">
             <Card className='card-container'>
                 <Card.Header><h2>Star Rating</h2></Card.Header>
                 <Card.Header>
-
-                    <div style={styles.stars}>
+                    <div>
                         {stars.map((_, index) => {
                             return (
                                 <FaStar
@@ -185,7 +173,7 @@ export default function Reviews({ id }) {
                                     isAdmin() ?
                                         <Toast className='toast-box' onClose={() => {
                                             handleShow(item.id);
-                                        } 
+                                        }
                                         }>
                                             <Toast.Header>
                                                 {/* <img src="holder.js/20x20?text=/%20" className="rounded me-2" alt="" /> */}

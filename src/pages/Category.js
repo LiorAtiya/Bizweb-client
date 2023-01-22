@@ -14,9 +14,6 @@ export default function Category() {
     <>
       <StyledHero img={result.image}>
         <Banner title={type}>
-          {/* <Link to="/" className="btn-primary">
-            return home
-          </Link> */}
         </Banner>
       </StyledHero>
       <BusinessContainer />

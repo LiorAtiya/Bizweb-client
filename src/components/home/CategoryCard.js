@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios';
+// import axios from 'axios';
 import defaultImg from "../../images/defaultImg.png"
 import '../../styles/Categories.css'
+import ApiClient from '../../api/ApiClient';
 
 export default function CategoryCard({ id, name, route, image }) {
 
@@ -19,9 +20,10 @@ export default function CategoryCard({ id, name, route, image }) {
         category: name,
       }
       // Add to records the category entry
-      await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/categoryEntry`, record)
+      ApiClient.addRecordEntry(getUserData._id, record)
+        // await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/categoryEntry`, record)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
         })
         .catch((err) => console.log(err));
     }

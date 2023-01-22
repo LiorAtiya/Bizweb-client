@@ -31,9 +31,6 @@ export default function SingleBusiness() {
         <>
           <StyledHero img={business.backgroundPicture}>
             <Banner title={`${business.name}`}>
-              {/* <Link to='/' className='btn-primary'>
-                Back to home
-              </Link> */}
             </Banner>
           </StyledHero>
           <section className="project" id="project">

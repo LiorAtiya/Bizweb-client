@@ -1,8 +1,8 @@
 import React from 'react'
-// import Hero from '../components/Hero'
-// import Banner from '../components/Banner'
 import { Link } from 'react-router-dom'
 import defaultImg from "../../images/defaultImg.png"
+// import Hero from '../components/Hero'
+// import Banner from '../components/Banner'
 // import PropTypes from "prop-types";
 
 import Card from '@mui/material/Card';
@@ -15,11 +15,11 @@ import Typography from '@mui/material/Typography';
 
 //Card of business from some category
 export default function Business({ business }) {
-  const {
-    // category, 
+  const { 
     name,
     backgroundPicture,
     description
+    // category,
     // location 
   } = business;
 
@@ -39,10 +39,6 @@ export default function Business({ business }) {
             {description}
           </Typography>
         </CardContent>
-        {/* <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
       </Card>
     </Link >
   );

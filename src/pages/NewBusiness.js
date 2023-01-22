@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
-import axios from "axios";
+// import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
+import ApiClient from '../api/ApiClient';
 
 export default function NewBusiness() {
     const category = useRef("");
@@ -47,33 +48,33 @@ export default function NewBusiness() {
             phone: phone.current.value,
             backgroundPicture: backgroundPicture,
         }
-        try {
-            //send request to server to add new business
-            await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
-                .then((res) => {
-                    console.log(res);
-                    if (res.status === 200) {
-                        //add id of business to list of business of user
-                        const businessID = res.data._id;
-                        const getUserData = JSON.parse(localStorage.getItem('token'));
-                        const business = {
-                            userID: getUserData._id,
-                            business: businessID
-                        }
-                        axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/business`, business)
-                            .then((res) => {
-                                window.localStorage.removeItem('token');
-                                window.localStorage.setItem("token", JSON.stringify(res.data));
 
-                                history.push('/');
-                                window.location.reload(false);
-                            });
-
+        //send request to server to add new business
+        ApiClient.addNewBusiness(business)
+            // await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
+            .then((res) => {
+                console.log(res);
+                if (res.status === 200) {
+                    //add id of business to list of business of user
+                    const businessID = res.data._id;
+                    const getUserData = JSON.parse(localStorage.getItem('token'));
+                    const business = {
+                        userID: getUserData._id,
+                        business: businessID
                     }
-                })
-        } catch (err) {
-            console.log(err);
-        }
+                    
+                    ApiClient.addBusinessToUser(getUserData._id,business)
+                    // axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/business`, business)
+                        .then((res) => {
+                            window.localStorage.removeItem('token');
+                            window.localStorage.setItem("token", JSON.stringify(res.data));
+
+                            history.push('/');
+                            window.location.reload(false);
+                        }).catch((err) => console.log(err));
+
+                }
+            }).catch((err) => console.log(err));
     }
 
     return (

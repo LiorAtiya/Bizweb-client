@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import ApiClient from '../../api/ApiClient';
 
 export const Gallery = ({ id, name }) => {
 
@@ -78,24 +79,33 @@ export const Gallery = ({ id, name }) => {
 
     //send request to server for upload new image
     if (newImage.length !== 0) {
-      await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
-        .then((res) => console.log(res.data))
+      ApiClient.addNewImage(id, newImage)
+      // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
+        .then((res) => {
+          console.log(res.data)
+          window.location.reload(false);
+        })
         .catch((err) => console.log(err));
     }
 
     //update background image
     if (updatedBackgroundImage !== "") {
-      await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
-        .then((res) => console.log(res.data))
+      ApiClient.updateBackgroundImage(id,updatedBackgroundImage)
+      // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
+        .then((res) => {
+          console.log(res.data)
+          window.location.reload(false);
+        })
         .catch((err) => console.log(err));
     }
 
-    window.location.reload(false);
   }
 
   const handleRemoveImage = async () => {
-    await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
-      { data: { id: removeImage } })
+
+    ApiClient.removeImageFromGallery(id,removeImage)
+    // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
+    //   { data: { id: removeImage } })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
@@ -170,7 +180,6 @@ export const Gallery = ({ id, name }) => {
             return (
               <Col size={12} sm={6} md={4}>
                 <div className="proj-imgbx">
-                  {/* <img src={`data:image/png;base64,${base64String}`} alt={i} width="450" height="250" /> */}
                   <img src={singleData.url} alt={i} width="450" height="250" />
                   {
                     isAdmin() ?

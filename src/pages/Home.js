@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
+// import axios from "axios";
 import { Link } from 'react-router-dom'
 import SearchBox from '../components/home/SearchBox';
 import '../styles/App.css';
@@ -9,7 +9,7 @@ import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
 import Top5 from '../components/home/Top5';
 import AboutUs from '../components/home/AboutUs';
-// import { prediction } from '../api/bigml'
+import ApiClient from '../api/ApiClient';
 
 import CategoryBusiness from '../components/home/CategoryBusiness'
 
@@ -27,7 +27,7 @@ class Home extends Component {
     async componentDidMount() {
         this.setState({ category: categories });
         const getUserData = JSON.parse(localStorage.getItem('token'));
-        
+
         if (getUserData) {
 
             this.setState({ user: getUserData });
@@ -39,11 +39,15 @@ class Home extends Component {
                 email: getUserData.email
             }
 
-            await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/prediction`, record)
-                .then((res) => {
-                    this.setState({ prediction: res.data[0] })
-                })
-                .catch((err) => console.log(err));
+            ApiClient.prediction(getUserData._id, record)
+                .then(predict => this.setState({ prediction: predict[0] }))
+                .catch(error => console.error(error));
+
+            // await axios.post(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/prediction`, record)
+            //     .then((res) => {
+            //         this.setState({ prediction: res.data[0] })
+            //     })
+            //     .catch((err) => console.log(err));
         }
     }
 
@@ -54,13 +58,15 @@ class Home extends Component {
     handleClick = async () => {
 
         // Train & Create new model in bigML
-        await axios.get(`https://facework-server-production.up.railway.app/api/users/${this.state.user._id}/trainBigML`)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => console.log(err));
+        ApiClient.trainModel(this.state.user._id)
+            .then(res => console.log(res))
+            .catch(error => console.error(error));
 
-
+        // await axios.get(`https://facework-server-production.up.railway.app/api/users/${this.state.user._id}/trainBigML`)
+        //     .then((res) => {
+        //         console.log(res);
+        //     })
+        //     .catch((err) => console.log(err));
     }
 
     render() {
@@ -78,6 +84,9 @@ class Home extends Component {
                         </Banner>
                     </Hero>
                     <SearchBox searchChange={this.onSearchChange} />
+                    {/* <Link to={`/`} onClick={this.handleClick}>
+                        <button className='btnPredictBigml'>Click train</button>
+                    </Link> */}
                     {
                         this.state.user ?
                             this.state.prediction ?

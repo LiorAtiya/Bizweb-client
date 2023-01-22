@@ -14,6 +14,7 @@ import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import dayjs from 'dayjs';
 import '../../styles/Calender.css'
 import * as Components from '../../styles/StyledForm'
+import ApiClient from '../../api/ApiClient';
 
 // import Badge from '@mui/material/Badge';
 // import { PickersDay } from '@mui/x-date-pickers/PickersDay';
@@ -165,17 +166,17 @@ const Calendar = ({ id, businessName }) => {
     useEffect(() => {
         const getResult = async () => {
             //gets all events of business
-            await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
+            // await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
+            ApiClient.getAllCalenders(id)
                 .then((res) => setEvents(res.data))
                 .catch((err) => console.log(err));
         };
         getResult();
     }, [id]);
 
-    //Add new event to calender
+    //Add new event to calender (A client has made an appointment)
     const handleClick = async (e) => {
         e.preventDefault();
-
 
         // if (verified) {
 
@@ -196,12 +197,15 @@ const Calendar = ({ id, businessName }) => {
             appointment.userID = getUserData._id;
         }
 
-        await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment);
-        console.log("Added new event to calender");
+        ApiClient.addNewEvent(appointment)
+            // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+            .then(res => console.log("Added new event to calender"))
+            .catch((err) => console.log(err));
 
         //if user connected => Update in the personal profile the appointment
         if (getUserData) {
-            await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
+            ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
+                // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
                 .then((res) => {
                     if (res.status !== 500) {
                         window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -209,10 +213,10 @@ const Calendar = ({ id, businessName }) => {
                         window.location.reload(false);
                     }
                 })
+                .catch((err) => console.log(err));
         }
 
-        window.location.reload(false);
-
+        // window.location.reload(false);
 
         // } else {
         //     alert("Please Verify Mobile");
@@ -236,7 +240,6 @@ const Calendar = ({ id, businessName }) => {
         }
         parseTime = hours + ":" + min;
 
-        console.log(parseTime)
 
         const appointment = {
             businessID: id,
@@ -245,14 +248,16 @@ const Calendar = ({ id, businessName }) => {
             time: parseTime
         }
 
-        await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+        ApiClient.addAvailableHour(appointment)
+        // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
             .then(res => alert('Added new hour to appointment'))
-        // window.location.reload(false);
+            .catch((err) => console.log(err));
 
         // })
     }
 
     const deleteEvent = async (userID, t, name, phone, date) => {
+
         const appointment = {
             businessID: id,
             date: date,
@@ -261,22 +266,21 @@ const Calendar = ({ id, businessName }) => {
             phone: phone,
             userID: userID
         }
+
         //Delete from calender
-        await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',
-            { data: appointment })
+        ApiClient.deleteEventFromCalender(appointment)
+            // await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',{ data: appointment })
             .then((res) => {
-
-                if (res.status !== 500 && res.data.userID) {
-                    //Delete from list of appointment of user
-                    axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,
-                        { data: appointment });
-
-                    // console.log("Removed appointment from list of user");
-                    window.location.reload(false);
-                } else {
-                    window.location.reload(false);
-                }
+                //Delete from list of appointment of user
+                // axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,{ data: appointment });
+                ApiClient.deleteEventFromMyAppointments(appointment)
+                    .then((res) => {
+                        console.log("Delete appointment from list of user")
+                        window.location.reload(false);
+                    })
+                    .catch((err) => console.log(err));
             })
+            .catch((err) => console.log(err));
     }
 
     return (

@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react";
 import * as Components from '../styles/StyledForm';
 import Register from "./Register";
 import { useHistory } from "react-router-dom";
-import axious from 'axios'
+// import axious from 'axios'
+import ApiClient from "../api/ApiClient";
 
 export default function Login() {
   const email = useRef();
@@ -13,8 +14,7 @@ export default function Login() {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    await axious.post("https://facework-server-production.up.railway.app/api/auth/login",
-      { email: email.current.value, password: password.current.value })
+    ApiClient.login(email.current.value, password.current.value)
       .then((res) => {
         if (res.status !== 200) {
           window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -24,6 +24,19 @@ export default function Login() {
           alert("Wrong email or password");
         }
       })
+      .catch(error => console.error(error));
+
+    // await axious.post("https://facework-server-production.up.railway.app/api/auth/login",
+    //   { email: email.current.value, password: password.current.value })
+    //   .then((res) => {
+    //     if (res.status !== 200) {
+    //       window.localStorage.setItem("token", JSON.stringify(res.data));
+    //       history.push("/")
+    //       window.location.reload(false);
+    //     } else {
+    //       alert("Wrong email or password");
+    //     }
+    //   })
   }
 
   const [signIn, toggle] = useState(true);

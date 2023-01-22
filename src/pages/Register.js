@@ -2,7 +2,8 @@ import React, {useRef, useState } from "react";
 import app from '../context/firebase_config'
 import * as Components from '../styles/StyledForm';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import axios from "axios";
+// import axios from "axios";
+import ApiClient from "../api/ApiClient";
 
 const auth = getAuth(app)
 
@@ -86,13 +87,21 @@ export default function Register() {
     };
 
     if(verified) {
-      try {
-        await axios.post("https://facework-server-production.up.railway.app/api/auth/register",user);
-        // history.push('/login');
+
+      ApiClient.register(user)
+      .then(res => {
+        console.log(res)
         window.location.reload(false);
-      }catch(err){
-        console.log(err);
-      }
+      })
+      .catch(error => console.error(error))
+
+      // try {
+      //   await axios.post("https://facework-server-production.up.railway.app/api/auth/register",user)
+      //   window.location.reload(false);
+      // }catch(err){
+      //   console.log(err);
+      // }
+      
     } else {
       alert("Please Verify Mobile");
     }
