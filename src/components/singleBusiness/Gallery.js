@@ -80,18 +80,19 @@ export const Gallery = ({ id, name }) => {
     //send request to server for upload new image
     if (newImage.length !== 0) {
       ApiClient.addNewImage(id, newImage)
-      // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
+        // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
         .then((res) => {
           console.log(res.data)
-          window.location.reload(false);
+          setData(oldArray => [...oldArray, newImage]);
+          handleClose()
         })
         .catch((err) => console.log(err));
     }
 
     //update background image
     if (updatedBackgroundImage !== "") {
-      ApiClient.updateBackgroundImage(id,updatedBackgroundImage)
-      // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
+      ApiClient.updateBackgroundImage(id, updatedBackgroundImage)
+        // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
         .then((res) => {
           console.log(res.data)
           window.location.reload(false);
@@ -103,13 +104,15 @@ export const Gallery = ({ id, name }) => {
 
   const handleRemoveImage = async () => {
 
-    ApiClient.removeImageFromGallery(id,removeImage)
-    // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
-    //   { data: { id: removeImage } })
-      .then((res) => console.log(res.data))
+    ApiClient.removeImageFromGallery(id, removeImage)
+      // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
+      //   { data: { id: removeImage } })
+      .then((res) => {
+        const newArray = data.filter(obj => obj.id !== removeImage);
+        setData(newArray)
+        handleClose2()
+      })
       .catch((err) => console.log(err));
-
-    window.location.reload(false);
   }
 
   return (

@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
-import app from '../../context/firebase_config'
-
+import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+// import axios from 'axios';
 
 //Calender
 // import TextField from '@mui/material/TextField';
@@ -79,7 +78,7 @@ const Calendar = ({ id, businessName }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false);
-        window.location.reload(false);
+        // window.location.reload(false);
     }
     const handleShow = () => setShow(true);
     //for see appoiments
@@ -209,14 +208,14 @@ const Calendar = ({ id, businessName }) => {
                 .then((res) => {
                     if (res.status !== 500) {
                         window.localStorage.setItem("token", JSON.stringify(res.data));
-                        console.log("Added new appointment to list of user");
-                        window.location.reload(false);
+                        // console.log("Added new appointment to list of user");
                     }
                 })
                 .catch((err) => console.log(err));
         }
 
-        // window.location.reload(false);
+        alert('A new appointment is scheduled, you will be notified about the appointment details');
+        window.location.reload(false);
 
         // } else {
         //     alert("Please Verify Mobile");
@@ -249,8 +248,15 @@ const Calendar = ({ id, businessName }) => {
         }
 
         ApiClient.addAvailableHour(appointment)
-        // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
-            .then(res => alert('Added new hour to appointment'))
+            // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+            .then(res => {
+                alert('Added new hour to appointment')
+                let FreeEvent = [appointment].map((item) => {
+                    return <div className='btnHours' onClick={() => setTime(item.time)}>{item.time}</div>
+                })
+                setFilteredFreeEvents(oldArray => [...oldArray, FreeEvent])
+                console.log(filteredFreeEvents);
+            })
             .catch((err) => console.log(err));
 
         // })

@@ -1,5 +1,5 @@
 import React, {useRef, useState } from "react";
-import app from '../context/firebase_config'
+import app from '../api/firebase_config'
 import * as Components from '../styles/StyledForm';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 // import axios from "axios";
