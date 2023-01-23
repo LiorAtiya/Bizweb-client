@@ -164,6 +164,11 @@ const Calendar = ({ id, businessName }) => {
 
     useEffect(() => {
         const getResult = async () => {
+            //Remove expired event
+            ApiClient.removeExpiredEvents(id)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+
             //gets all events of business
             // await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
             ApiClient.getAllCalenders(id)
@@ -179,16 +184,28 @@ const Calendar = ({ id, businessName }) => {
 
         // if (verified) {
 
+        const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
+        const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
+            return second + first;
+        }, ""));
+
+        //Parse time to int
+        const expiredTime = time.split(':').reduce(function (seconds, v) {
+            return + v + seconds * 60;
+        }, 0) / 60;
+
         const appointment = {
             businessName: businessName,
             businessID: id,
             busy: true,
-            date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
+            date: date,
             time: time,
             name: name.current.value,
             phone: phone,
             comments: comments.current.value,
-            userID: ""
+            userID: "",
+            expiredTime: expiredTime,
+            expiredDate: expiredDate
         }
 
         //Add user ID to appointment
@@ -239,12 +256,23 @@ const Calendar = ({ id, businessName }) => {
         }
         parseTime = hours + ":" + min;
 
+        const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
+        //Parse date to int
+        const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
+            return second + first;
+        }, ""));
+
+        //Parse time to int
+        const expiredTime = parseTime.split(':').reduce(function (seconds, v) {
+            return + v + seconds * 60;
+        }, 0) / 60;
 
         const appointment = {
             businessID: id,
-            busy: false,
-            date: value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear(),
-            time: parseTime
+            date: date,
+            time: parseTime,
+            expiredTime: expiredTime,
+            expiredDate: expiredDate
         }
 
         ApiClient.addAvailableHour(appointment)

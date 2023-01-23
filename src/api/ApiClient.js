@@ -67,6 +67,12 @@ class ApiClient {
     }
 
     //Calender Page
+    async removeExpiredEvents(id) {
+        return await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-expired-events',
+        { data: { businessID: id } })
+        .then(response => response);
+    }
+
     async getAllCalenders(id) {
         return await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
             .then(response => response);
