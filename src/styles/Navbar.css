@@ -13,7 +13,16 @@
     top: 12px;
     left: 50%;
     transform: translate(-50%);
-    z-index:2;
+    z-index: 2;
+}
+
+@media (max-width: 390px) {
+    .nav-links {
+        background-color: #222;
+        border-radius: 13px;
+        padding: 10px;
+        display: flex;
+    }
 }
 
 .logo {
@@ -42,5 +51,5 @@
     margin-right: 20px;
     background-color: #ff416c;
     border-radius: 5px;
-    color:#222;
+    color: #222;
 }

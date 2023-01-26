@@ -48,6 +48,9 @@ export default function NavbarComp() {
                         My appointments
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
+                      <NavDropdown.Item as={Link} to={`/mybusiness/${getUserData._id}`}>
+                        My business
+                      </NavDropdown.Item>
                       <NavDropdown.Item as={Link} to={"/newbusiness"}>
                         Open a new bussiness
                       </NavDropdown.Item>

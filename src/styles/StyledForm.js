@@ -132,6 +132,7 @@ border: none;
 padding: 12px 15px;
 margin: 8px 0;
 width: 100%;
+height: 150px;
 `;
 
 
@@ -154,7 +155,7 @@ export const Button = styled.button`
    }
 `;
 
-export const ButtonPic = styled.button`
+export const ButtonPic = styled.div`
    border-radius: 25px;
    margin-bottom: 20px;
    background-color: #ff2b2b;

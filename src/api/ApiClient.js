@@ -38,6 +38,19 @@ class ApiClient {
             .then(response => response);
     }
 
+    //My Business Page
+    async deleteBusiness(userID, businessID) {
+        return await axios.delete(`https://facework-server-production.up.railway.app/api/business/delete`,
+            { data: { businessID: businessID, userID: userID } })
+            .then(response => response);
+    }
+
+    //Edit Business Page
+    async updateDetailsOfBusiness(id, updatedDetails) {
+        return await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}`, updatedDetails)
+        .then(response => response);
+    }
+
     // New Business Page
     async addNewBusiness(business) {
         return await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
@@ -69,8 +82,8 @@ class ApiClient {
     //Calender Page
     async removeExpiredEvents(id) {
         return await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-expired-events',
-        { data: { businessID: id } })
-        .then(response => response);
+            { data: { businessID: id } })
+            .then(response => response);
     }
 
     async getAllCalenders(id) {

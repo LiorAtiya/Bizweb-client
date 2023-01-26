@@ -73,6 +73,18 @@ export default class BusinessProvider extends Component {
         return business;
     }
 
+    getAllBusinessOfUser = (idBusiness) => {
+        let tempBusiness = [...this.state.business];
+        let allBusiness = []
+        idBusiness.forEach(id => {
+            const business = tempBusiness.find(busi => busi._id === id);
+            if(business !== undefined) {
+                allBusiness.push(business)
+            }
+        });
+        return allBusiness;
+    }
+
     handleChange = event => {
         const target = event.target;
         const value = target.city === 'checkbox' ?
@@ -152,6 +164,7 @@ export default class BusinessProvider extends Component {
                 value={{
                     ...this.state,
                     getBusiness: this.getBusiness,
+                    getAllBusinessOfUser: this.getAllBusinessOfUser,
                     handleChange: this.handleChange,
                 }}>
                 {this.props.children}
