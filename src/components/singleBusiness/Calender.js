@@ -1,4 +1,3 @@
-import '../../styles/Calender.css'
 import React, { useState, useRef, useEffect } from 'react';
 import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -23,6 +22,8 @@ import ApiClient from '../../api/ApiClient';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+
+import '../../styles/Calender.css'
 
 const auth = getAuth(app)
 
