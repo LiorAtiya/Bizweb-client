@@ -18,13 +18,13 @@ export default function Business({ business }) {
   const { 
     name,
     backgroundPicture,
-    description
-    // category,
+    description,
+    category,
     // location 
   } = business;
 
   return (
-    <Link to={`/business/${name}`} className='business-name'>
+    <Link to={`/category/${category}/${name}`} className='business-name'>
       <Card sx={{ height: 320 ,textAlign: 'center'}}>
         <CardMedia
           sx={{ height: 140 }}

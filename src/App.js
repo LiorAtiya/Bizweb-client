@@ -49,7 +49,7 @@ export default function App() {
                     <Route exact path="/category/:type">
                         <Category />
                     </Route>
-                    <Route path="/business/:name">
+                    <Route path="/category/:category/:name">
                         <SingleBusiness />
                     </Route>
                     <Route path="*">
