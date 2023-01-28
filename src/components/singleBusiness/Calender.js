@@ -1,3 +1,4 @@
+import '../../styles/Calender.css'
 import React, { useState, useRef, useEffect } from 'react';
 import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
@@ -11,7 +12,6 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import dayjs from 'dayjs';
-import '../../styles/Calender.css'
 import * as Components from '../../styles/StyledForm'
 import ApiClient from '../../api/ApiClient';
 
