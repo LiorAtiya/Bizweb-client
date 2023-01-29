@@ -1,13 +1,12 @@
 /* Calender picker */
 
 /* Header of calender */
-.css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root {
-    background: #ff416c !important;
+/* .css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root {
     background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background: linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background-repeat: no-repeat !important;
     color: #f4f4f4;
-}
+} */
 
 .css-u0soqy-MuiPickerStaticWrapper-root {
     box-shadow: 3px 2px 10px 5px #888888 !important;

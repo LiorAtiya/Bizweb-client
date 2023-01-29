@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-// import axios from 'axios';
 
 //Calender
-// import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
@@ -14,6 +12,7 @@ import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
 import ApiClient from '../../api/ApiClient';
 
+// import TextField from '@mui/material/TextField';
 // import Badge from '@mui/material/Badge';
 // import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 // import CheckIcon from '@mui/icons-material/Check';
@@ -23,45 +22,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-import '../../styles/Calender.css'
+// import '../../styles/Calender.css'
 
 const auth = getAuth(app)
 
 const Calendar = ({ id, businessName }) => {
-    // const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
-    // const [filteredAddHours, setFilteredAddHours] = useState([]);
-
-    // const hours = [
-    //     { value: "08:00", isChecked: false },
-    //     { value: "09:00", isChecked: false },
-    //     { value: "10:00", isChecked: false },
-    //     { value: "11:00", isChecked: false },
-    //     { value: "12:00", isChecked: false },
-    //     { value: "13:00", isChecked: false },
-    //     { value: "14:00", isChecked: false },
-    //     { value: "15:00", isChecked: false },
-    //     { value: "16:00", isChecked: false },
-    //     { value: "17:00", isChecked: false },
-    //     { value: "18:00", isChecked: false },
-    //     { value: "19:00", isChecked: false },
-    //     { value: "20:00", isChecked: false },
-    //     { value: "21:00", isChecked: false },
-    //     { value: "22:00", isChecked: false },
-    //     { value: "23:00", isChecked: false },
-    // ]
-
-    // //for chosen times to add
-    // const handleChange = (event) => {
-    //     let isChecked = event.target.checked;
-    //     let item = event.target.value;
-
-    //     hours.map(i => {
-    //         if (i.value === item) {
-    //             return i.isChecked = isChecked;
-    //         }
-    //         return null;
-    //     });
-    // }
+    const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
 
     const [value, setValue] = useState(new Date());
     const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
@@ -147,7 +113,7 @@ const Calendar = ({ id, businessName }) => {
         window.confirmationResult.confirm(otp.current.value).then((result) => {
             // User signed in successfully.
             const user = result.user;
-            console.log(user);
+            // console.log(user);
             alert("Verification Done")
             setVerified(true);
             setVerifyOtp(false);
@@ -167,7 +133,7 @@ const Calendar = ({ id, businessName }) => {
         const getResult = async () => {
             //Remove expired event
             ApiClient.removeExpiredEvents(id)
-                .then((res) => console.log(res))
+                .then()
                 .catch((err) => console.log(err))
 
             //gets all events of business
@@ -284,7 +250,7 @@ const Calendar = ({ id, businessName }) => {
                     return <div className='btnHours' onClick={() => setTime(item.time)}>{item.time}</div>
                 })
                 setFilteredFreeEvents(oldArray => [...oldArray, FreeEvent])
-                console.log(filteredFreeEvents);
+                // console.log(filteredFreeEvents);
             })
             .catch((err) => console.log(err));
 
@@ -325,6 +291,14 @@ const Calendar = ({ id, businessName }) => {
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker
+                    sx={{
+                        // width: 500,
+                        color: 'white',
+                        background: 'linear-gradient(to right, #ff4b2b, #ff416c)',
+                        '& .MuiDialogActions-root': {
+                            display: 'none',
+                        },
+                    }}
                     // mask='____/__/__'
                     variant='static'
                     orientation='portrait'
@@ -356,35 +330,22 @@ const Calendar = ({ id, businessName }) => {
                         })
                         setFilteredFreeEvents(selectFreeEvent);
 
-                        //========== Filter for add hours for admin ========
-
-                        // const newFiltered = Object.values(filtered).map(k => k.time);
-                        // const dateFiltered = events.dates.map(obj => {
-                        //     if (obj.date === newValue.getDate() + "/" + (newValue.getMonth() + 1) + "/" + newValue.getFullYear()) {
-                        //         return obj.time;
-                        //     }
-                        //     return null;
-                        // })
-                        // const addHoursFiltered = hours.filter(hour => !newFiltered.includes(hour.value) && !dateFiltered.includes(hour.value));
-
-                        // setFilteredAddHours(addHoursFiltered);
-
-                        //==================================================
-
                         setFlag(true);
                     }}
 
                 // renderInput={(params) => <TextField {...params} />}
+
                 // renderDay={(day, _value, DayComponentProps) => {
-                //     const isSelected =
+                //     const isSelected = 
                 //         !DayComponentProps.outsideCurrentMonth &&
                 //         highlightedDays.indexOf(day.getDate()) >= 0;
 
+                //         // console.log(DayComponentProps)
                 //     return (
                 //         <Badge
                 //             key={day.toString()}
                 //             overlap='circular'
-                //             badgeContent={isSelected ? <CheckIcon color='red' /> : undefined}
+                //             badgeContent={isSelected ? '🟢' : '🔴'}
                 //         >
                 //             <PickersDay {...DayComponentProps} />
                 //         </Badge>
