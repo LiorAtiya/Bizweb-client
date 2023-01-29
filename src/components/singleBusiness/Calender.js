@@ -22,7 +22,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-// import '../../styles/Calender.css'
+import '../../styles/Calender.css'
 
 const auth = getAuth(app)
 
@@ -292,10 +292,12 @@ const Calendar = ({ id, businessName }) => {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker
                     sx={{
-                        // width: 500,
                         color: 'white',
                         background: 'linear-gradient(to right, #ff4b2b, #ff416c)',
-                        '& .MuiDialogActions-root': {
+                        '& .MuiPickersToolbar-penIconButton': {
+                            display: 'none',
+                        },
+                        '& .css-1hbyad5-MuiTypography-root': {
                             display: 'none',
                         },
                     }}
