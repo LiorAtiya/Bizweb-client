@@ -303,12 +303,12 @@ const Calendar = ({ id, businessName }) => {
     const classes = useStyles();
 
     return (
-        <div style={{ display: "flex", alignItems: "center" }} className={classes.root}>
+        <div style={{ display: "flex", alignItems: "center" }}>
 
             {/* ============== Start Calender ================== */}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <StaticDatePicker
+                <StaticDatePicker className={classes.root}
                     // sx={{
                     //     color: 'white',
                     //     background: 'linear-gradient(to right, #ff4b2b, #ff416c)',
