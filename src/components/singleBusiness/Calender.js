@@ -300,8 +300,6 @@ const Calendar = ({ id, businessName }) => {
             .catch((err) => console.log(err));
     }
 
-    // const classes = useStyles();
-
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
 
