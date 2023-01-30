@@ -38,7 +38,7 @@ const useStyles = makeStyles({
         },
         '& .css-hlj6pa-MuiDialogActions-root': {
             display: 'none',
-        },
+        }
     },
 });
 
