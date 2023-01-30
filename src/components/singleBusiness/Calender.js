@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import ApiClient from '../../api/ApiClient';
 
 //Calender
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -10,7 +11,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
-import ApiClient from '../../api/ApiClient';
+import { makeStyles } from '@material-ui/core/styles';
 
 // import TextField from '@mui/material/TextField';
 // import Badge from '@mui/material/Badge';
@@ -25,6 +26,21 @@ import Modal from 'react-bootstrap/Modal';
 import '../../styles/Calender.css'
 
 const auth = getAuth(app)
+
+const useStyles = makeStyles({
+    root: {
+        // backgroundColor: 'red',
+        '& .MuiPickersToolbar-penIconButton': {
+            display: 'none',
+        },
+        '& .css-1hbyad5-MuiTypography-root': {
+            display: 'none',
+        },
+        '& .css-hlj6pa-MuiDialogActions-root': {
+            display: 'none',
+        },
+    },
+});
 
 const Calendar = ({ id, businessName }) => {
     const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
@@ -284,23 +300,25 @@ const Calendar = ({ id, businessName }) => {
             .catch((err) => console.log(err));
     }
 
+    const classes = useStyles();
+
     return (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }} className={classes.root}>
 
             {/* ============== Start Calender ================== */}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker
-                    sx={{
-                        color: 'white',
-                        background: 'linear-gradient(to right, #ff4b2b, #ff416c)',
-                        '& .MuiPickersToolbar-penIconButton': {
-                            display: 'none',
-                        },
-                        '& .css-1hbyad5-MuiTypography-root': {
-                            display: 'none',
-                        },
-                    }}
+                    // sx={{
+                    //     color: 'white',
+                    //     background: 'linear-gradient(to right, #ff4b2b, #ff416c)',
+                    //     '& .MuiPickersToolbar-penIconButton': {
+                    //         display: 'none',
+                    //     },
+                    //     '& .css-1hbyad5-MuiTypography-root': {
+                    //         display: 'none',
+                    //     },
+                    // }}
                     // mask='____/__/__'
                     variant='static'
                     orientation='portrait'
