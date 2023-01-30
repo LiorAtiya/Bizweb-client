@@ -43,7 +43,7 @@ const auth = getAuth(app)
 // });
 
 const Calendar = ({ id, businessName }) => {
-    const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
+    // const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
 
     const [value, setValue] = useState(new Date());
     const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
@@ -128,7 +128,7 @@ const Calendar = ({ id, businessName }) => {
     const verifyCode = () => {
         window.confirmationResult.confirm(otp.current.value).then((result) => {
             // User signed in successfully.
-            const user = result.user;
+            // const user = result.user;
             // console.log(user);
             alert("Verification Done")
             setVerified(true);
@@ -300,7 +300,7 @@ const Calendar = ({ id, businessName }) => {
             .catch((err) => console.log(err));
     }
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
