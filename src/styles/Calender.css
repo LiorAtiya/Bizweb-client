@@ -2,21 +2,21 @@
 
 /* Header of calender */
 
-/* .css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root {
+.css-1eurbeq-MuiPickersToolbar-root-MuiDatePickerToolbar-root {
     background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background: linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background-repeat: no-repeat !important;
     color: #f4f4f4;
-} */
-
-/* .css-u0soqy-MuiPickerStaticWrapper-root {
+}
+/* 
+.css-u0soqy-MuiPickerStaticWrapper-root {
     box-shadow: 3px 2px 10px 5px #888888 !important;
 } */
 
 /* Button of cencel & ok */
-/* .css-hlj6pa-MuiDialogActions-root {
+.css-hlj6pa-MuiDialogActions-root {
     display: none !important;
-} */
+}
 
 /* .css-j88s13-MuiPickersToolbar-root-MuiDatePickerToolbar-root .MuiPickersToolbar-penIconButton {
     display: none !important;
@@ -39,26 +39,25 @@
 } */
 
 /* color of pick day */
-/* .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-    background: #ff416c !important;
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
     background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background: linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background-repeat: no-repeat !important;
-} */
+}
 
 /* color of current day */
-/* .css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
     background: #ff416c !important;
     background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background: linear-gradient(to right, #ff4b2b, #ff416c) !important;
     background-repeat: no-repeat !important;
     color: white !important;
-} */
+}
 
-/* .css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
     border-color: transparent !important;
     color: red;
-} */
+}
 
 /* .css-144dnr3-MuiBadge-badge {
     color: green;
@@ -72,13 +71,13 @@
 /* End of Calender picker */
 
 /* Time picker */
-/* .css-u0soqy-MuiPickerStaticWrapper-root {
+.css-u0soqy-MuiPickerStaticWrapper-root {
     box-shadow: none !important;
-} */
+}
 
-/* .css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton {
+.css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton {
     display: none !important;
-} */
+}
 /* End of Time picker */
 
 

@@ -301,7 +301,7 @@ const Calendar = ({ id, businessName }) => {
                             display: 'none',
                         },
                         '& .css-hlj6pa-MuiDialogActions-root': {
-                            display: 'none',
+                            display: 'none !important;',
                         },
                     }}
                     // mask='____/__/__'
@@ -393,8 +393,19 @@ const Calendar = ({ id, businessName }) => {
                                     <h5>Select hours to make appointments</h5>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}
+                                        sx={{
+                                            '& .css-hlj6pa-MuiDialogActions-root': {
+                                                display: 'none !important',
+                                            },
+                                        }}
+                                    >
                                         <StaticTimePicker
+                                            sx={{
+                                                '& .css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton': {
+                                                    display: 'none',
+                                                },
+                                            }}
                                             // ampm
                                             orientation="landscape"
                                             openTo="minutes"
