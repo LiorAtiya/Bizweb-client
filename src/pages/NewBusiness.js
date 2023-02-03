@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
-import ApiClient from '../api/ApiClient';
+import ApiClient from '../api/ApiRoutes';
 
 export default function NewBusiness() {
     const category = useRef("");

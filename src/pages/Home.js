@@ -9,7 +9,7 @@ import Hero from '../components/general/Hero';
 import Banner from '../components/general/Banner'
 import Top5 from '../components/home/Top5';
 import AboutUs from '../components/home/AboutUs';
-import ApiClient from '../api/ApiClient';
+import ApiClient from '../api/ApiRoutes';
 
 import CategoryBusiness from '../components/home/CategoryBusiness'
 
@@ -80,7 +80,7 @@ class Home extends Component {
             return (
                 <>
                     <Hero>
-                        <Banner title="Facework" subtitle="Sample Site for any business">
+                        <Banner title="Facework" subtitle="All business in one place">
                         </Banner>
                     </Hero>
                     <SearchBox searchChange={this.onSearchChange} />

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // import axios from 'axios';
 import defaultImg from "../../images/defaultImg.png"
 import '../../styles/Categories.css'
-import ApiClient from '../../api/ApiClient';
+import ApiClient from '../../api/ApiRoutes';
 
 export default function CategoryCard({ id, name, route, image }) {
 

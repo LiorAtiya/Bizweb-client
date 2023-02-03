@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
-import ApiClient from '../../api/ApiClient';
+import ApiClient from '../../api/ApiRoutes';
 
 export const Gallery = ({ id, name }) => {
 
@@ -16,8 +15,8 @@ export const Gallery = ({ id, name }) => {
   useEffect(() => {
     const getResult = async () => {
       //get all images of the business from mongodb
-      await axios.get(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`)
-        .then((res) => setData(res.data))
+      ApiClient.getGallery(id)
+        .then((res) => setData(res))
         .catch((err) => console.log(err));
     };
     getResult();

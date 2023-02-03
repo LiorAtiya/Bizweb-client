@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import app from '../../api/firebase_config'
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import ApiClient from '../../api/ApiClient';
+import ApiClient from '../../api/ApiRoutes';
 
 //Calender
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -12,10 +12,11 @@ import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
 
+//Day marked
 // import TextField from '@mui/material/TextField';
+// import CheckIcon from '@mui/icons-material/Check';
 // import Badge from '@mui/material/Badge';
 // import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-// import CheckIcon from '@mui/icons-material/Check';
 
 //Window of client appointment
 import Card from 'react-bootstrap/Card';
@@ -27,7 +28,7 @@ import '../../styles/Calender.css'
 const auth = getAuth(app)
 
 const Calendar = ({ id, businessName }) => {
-    // const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
+    // const [highlightedDays, setHighlightedDays] = useState([]);
 
     const [value, setValue] = useState(new Date());
     const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
@@ -39,6 +40,25 @@ const Calendar = ({ id, businessName }) => {
     const [time, setTime] = useState("");
     const name = useRef("");
     const comments = useRef("");
+
+    useEffect(() => {
+        const getResult = async () => {
+
+            //Remove expired event
+            ApiClient.removeExpiredEvents(id)
+                .then()
+                .catch((err) => console.log(err))
+
+            //gets all events of business
+            ApiClient.getAllEventsOfCalender(id)
+                .then((res) => {
+                    setEvents(res.data)
+
+                })
+                .catch((err) => console.log(err));
+        };
+        getResult();
+    }, [id]);
 
     //============ Admin Permissions ============
     //for add hours
@@ -61,7 +81,7 @@ const Calendar = ({ id, businessName }) => {
         return false;
     }
 
-    // ========== OTP Verify ==================
+    // ================== OTP Verify ======================
 
     const otp = useRef();
     const [phone, setPhone] = useState("");
@@ -129,86 +149,79 @@ const Calendar = ({ id, businessName }) => {
         return events.dates.filter(event => event.date === value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear());
     }
 
-    useEffect(() => {
-        const getResult = async () => {
-            //Remove expired event
-            ApiClient.removeExpiredEvents(id)
-                .then()
-                .catch((err) => console.log(err))
-
-            //gets all events of business
-            // await axios.post('https://facework-server-production.up.railway.app/api/calender/get-events', { businessID: id })
-            ApiClient.getAllCalenders(id)
-                .then((res) => setEvents(res.data))
-                .catch((err) => console.log(err));
-        };
-        getResult();
-    }, [id]);
-
     //Add new event to calender (A client has made an appointment)
     const handleClick = async (e) => {
         e.preventDefault();
 
-        if (verified) {
+        // if (verified) {
 
-            const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
-            const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
-                return second + first;
-            }, ""));
+        const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
+        const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
+            return second + first;
+        }, ""));
 
-            //Parse time to int
-            const expiredTime = time.split(':').reduce(function (seconds, v) {
-                return + v + seconds * 60;
-            }, 0) / 60;
+        //Parse time to int
+        const expiredTime = time.split(':').reduce(function (seconds, v) {
+            return + v + seconds * 60;
+        }, 0) / 60;
 
-            const appointment = {
-                businessName: businessName,
-                businessID: id,
-                busy: true,
-                date: date,
-                time: time,
-                name: name.current.value,
-                phone: phone,
-                comments: comments.current.value,
-                userID: "",
-                expiredTime: expiredTime,
-                expiredDate: expiredDate
-            }
-
-            //Add user ID to appointment
-            if (getUserData) {
-                appointment.userID = getUserData._id;
-            }
-
-            ApiClient.addNewEvent(appointment)
-                // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
-                .then(res => console.log("Added new event to calender"))
-                .catch((err) => console.log(err));
-
-            //if user connected => Update in the personal profile the appointment
-            if (getUserData) {
-                ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
-                    // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
-                    .then((res) => {
-                        if (res.status !== 500) {
-                            window.localStorage.setItem("token", JSON.stringify(res.data));
-                            // console.log("Added new appointment to list of user");
-                        }
-                    })
-                    .catch((err) => console.log(err));
-            }
-
-            alert('A new appointment is scheduled, you will be notified about the appointment details');
-            window.location.reload(false);
-
-        } else {
-            alert("Please Verify Mobile");
+        const appointment = {
+            businessName: businessName,
+            businessID: id,
+            busy: true,
+            date: date,
+            time: time,
+            name: name.current.value,
+            phone: phone,
+            comments: comments.current.value,
+            userID: "",
+            expiredTime: expiredTime,
+            expiredDate: expiredDate
         }
+
+        //Add user ID to appointment
+        if (getUserData) {
+            appointment.userID = getUserData._id;
+        }
+
+        ApiClient.addNewEvent(appointment)
+            // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+            .then(res => console.log("Added new event to calender"))
+            .catch((err) => console.log(err));
+
+        //if user connected => Update in the personal profile the appointment
+        if (getUserData) {
+            ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
+                // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
+                .then((res) => {
+                    if (res.status !== 500) {
+                        window.localStorage.setItem("token", JSON.stringify(res.data));
+                        // console.log("Added new appointment to list of user");
+                    }
+                })
+                .catch((err) => console.log(err));
+        }
+
+        alert('A new appointment is scheduled, you will be notified about the appointment details');
+        
+        //Reset value after make an appointment
+        const removeFreeEvent = filteredFreeEvents.filter(item => {
+            return item.props.children !== time
+        })
+        setFilteredFreeEvents(removeFreeEvent);
+        name.current.value = ""
+        comments.current.value = ""
+        setTime("")
+        setPhone("")
+
+        // window.location.reload(false);
+
+        // } else {
+        //     alert("Please Verify Mobile");
+        // }
     }
 
     const addHours = async () => {
-        // const hourChecked = hours.filter(i => i.isChecked === true);
-        // hourChecked.map(async (item) => {
 
         let min, hours, parseTime;
         if ((valueTime.$d.getHours()) < 10) {
@@ -340,17 +353,17 @@ const Calendar = ({ id, businessName }) => {
 
                 // renderInput={(params) => <TextField {...params} />}
 
-                // renderDay={(day, _value, DayComponentProps) => {
+                // renderDay={(day, highlightedDays, DayComponentProps) => {
                 //     const isSelected = 
                 //         !DayComponentProps.outsideCurrentMonth &&
-                //         highlightedDays.indexOf(day.getDate()) >= 0;
+                //         highlightedDays.find((d) => d.getDate() === day.getDate());
 
-                //         // console.log(DayComponentProps)
+                //         console.log(isSelected)
                 //     return (
                 //         <Badge
                 //             key={day.toString()}
                 //             overlap='circular'
-                //             badgeContent={isSelected ? '🟢' : '🔴'}
+                //             badgeContent={isSelected ? '🟢' : null}
                 //         >
                 //             <PickersDay {...DayComponentProps} />
                 //         </Badge>
@@ -362,7 +375,7 @@ const Calendar = ({ id, businessName }) => {
 
             {/* ============== Form of window make appointment ================== */}
             {Flag ?
-                <Card style={{ width: '30rem', marginLeft: "30px", display: 'flex' }}>
+                <Card style={{ width: '29rem', marginLeft: "30px", display: 'flex' }}>
                     <Card.Body>
                         <div className="d-grid">
                             {
@@ -393,13 +406,7 @@ const Calendar = ({ id, businessName }) => {
                                     <h5>Select hours to make appointments</h5>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}
-                                        sx={{
-                                            '& .css-hlj6pa-MuiDialogActions-root': {
-                                                display: 'none !important',
-                                            },
-                                        }}
-                                    >
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <StaticTimePicker
                                             sx={{
                                                 '& .css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton': {
@@ -416,20 +423,6 @@ const Calendar = ({ id, businessName }) => {
                                         // renderInput={(params) => <TextField {...params} />}
                                         />
                                     </LocalizationProvider>
-                                    {/* {
-                                        filteredAddHours.map(item => (
-                                            <>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={item.value}
-                                                        onChange={handleChange}
-                                                    /> {item.value}
-                                                </label>
-                                                <br></br>
-                                            </>
-                                        ))} */}
-
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button variant="secondary" onClick={handleClose}>
@@ -483,33 +476,34 @@ const Calendar = ({ id, businessName }) => {
                             </Modal>
 
                         </div>
-                        <h1 className='header-appointment'><b>Make appointment</b></h1>
-                        <Card.Subtitle className="mb-2 text-muted">{value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear()}</Card.Subtitle>
                         <Card.Text>
                             {filteredFreeEvents.length !== 0 ?
                                 <form>
                                     <div id="recaptcha-container"></div>
-
-                                    <div className="mb-3">
+                                    <h1 className='header-appointment' style={{ width: '400px', marginLeft: '-80px' }}><b>Make appointment</b></h1>
+                                    <div style={{ width: '350px', marginLeft: '-57px' }}>
+                                        <Card.Subtitle className="mb-2 text-muted">{value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear()}</Card.Subtitle>
                                         <label>
                                             <b>Choose an available time:</b><br />
                                             <div className='grid-container'>
                                                 {filteredFreeEvents}
                                             </div>
                                             {/* <Components.SelectOfTime ref={time}> */}
-                                            <h5>{time ? "Chosen: " + time : null}</h5>
+                                            <h6>{time ? "Chosen: " + time : null}</h6>
                                             {/* </Components.SelectOfTime> */}
                                         </label>
                                     </div>
 
                                     <Components.Input type='text' placeholder='Client name'
                                         required ref={name}
+                                        style={{ width: '350px', marginLeft: '-57px' }}
                                     />
 
                                     <div>
                                         <Components.Input type='number' placeholder='Phone'
                                             required
                                             onChange={(e) => changeMobile(e)}
+                                            style={{ width: '350px', marginLeft: '-57px' }}
                                         />
                                         {verifyButton ?
                                             <Components.Button
@@ -527,6 +521,7 @@ const Calendar = ({ id, businessName }) => {
                                                 type="number"
                                                 placeholder="Enter OTP"
                                                 ref={otp}
+                                                style={{ width: '350px', marginLeft: '-57px' }}
                                             />
                                             <Components.Button
                                                 type="button"
@@ -541,6 +536,7 @@ const Calendar = ({ id, businessName }) => {
 
                                     <Components.TextArea type='textarea' placeholder='Additional Comments'
                                         required ref={comments}
+                                        style={{ width: '350px', marginLeft: '-57px' }}
                                     />
 
                                     <Components.Button onClick={handleClick}>Submit</Components.Button>

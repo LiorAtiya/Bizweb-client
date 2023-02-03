@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { BusinessContext } from '../context/BusinessContext'
 import * as Components from '../styles/StyledForm';
 import cities from '../database/cities'
-import ApiClient from '../api/ApiClient';
+import ApiClient from '../api/ApiRoutes';
 import { useHistory } from "react-router-dom";
 
 export default function EditBusiness() {

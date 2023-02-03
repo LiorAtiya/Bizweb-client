@@ -3,7 +3,7 @@ import app from '../api/firebase_config'
 import * as Components from '../styles/StyledForm';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 // import axios from "axios";
-import ApiClient from "../api/ApiClient";
+import ApiClient from "../api/ApiRoutes";
 
 const auth = getAuth(app)
 
