@@ -153,72 +153,70 @@ const Calendar = ({ id, businessName }) => {
     const handleClick = async (e) => {
         e.preventDefault();
 
-        // if (verified) {
+        if (verified) {
 
-        const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
-        const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
-            return second + first;
-        }, ""));
+            const date = value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear();
+            const expiredDate = parseInt(date.split('/').reduce(function (first, second) {
+                return second + first;
+            }, ""));
 
-        //Parse time to int
-        const expiredTime = time.split(':').reduce(function (seconds, v) {
-            return + v + seconds * 60;
-        }, 0) / 60;
+            //Parse time to int
+            const expiredTime = time.split(':').reduce(function (seconds, v) {
+                return + v + seconds * 60;
+            }, 0) / 60;
 
-        const appointment = {
-            businessName: businessName,
-            businessID: id,
-            busy: true,
-            date: date,
-            time: time,
-            name: name.current.value,
-            phone: phone,
-            comments: comments.current.value,
-            userID: "",
-            expiredTime: expiredTime,
-            expiredDate: expiredDate
-        }
+            const appointment = {
+                businessName: businessName,
+                businessID: id,
+                busy: true,
+                date: date,
+                time: time,
+                name: name.current.value,
+                phone: phone,
+                comments: comments.current.value,
+                userID: "",
+                expiredTime: expiredTime,
+                expiredDate: expiredDate
+            }
 
-        //Add user ID to appointment
-        if (getUserData) {
-            appointment.userID = getUserData._id;
-        }
+            //Add user ID to appointment
+            if (getUserData) {
+                appointment.userID = getUserData._id;
+            }
 
-        ApiClient.addNewEvent(appointment)
-            // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
-            .then(res => console.log("Added new event to calender"))
-            .catch((err) => console.log(err));
-
-        //if user connected => Update in the personal profile the appointment
-        if (getUserData) {
-            ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
-                // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
-                .then((res) => {
-                    if (res.status !== 500) {
-                        window.localStorage.setItem("token", JSON.stringify(res.data));
-                        // console.log("Added new appointment to list of user");
-                    }
-                })
+            ApiClient.addNewEvent(appointment)
+                // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
+                .then(res => console.log("Added new event to calender"))
                 .catch((err) => console.log(err));
+
+            //if user connected => Update in the personal profile the appointment
+            if (getUserData) {
+                ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
+                    // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
+                    .then((res) => {
+                        if (res.status !== 500) {
+                            window.localStorage.setItem("token", JSON.stringify(res.data));
+                            // console.log("Added new appointment to list of user");
+                        }
+                    })
+                    .catch((err) => console.log(err));
+            }
+
+            // //Reset value after make an appointment
+            // const removeFreeEvent = filteredFreeEvents.filter(item => {
+            //     return item.props.children !== time
+            // })
+            // setFilteredFreeEvents(removeFreeEvent);
+            // name.current.value = ""
+            // comments.current.value = ""
+            // setTime("")
+            // setPhone("")
+            alert('A new appointment is scheduled, you will be notified about the appointment details');
+            window.location.reload(false);
+
+        } else {
+            alert("Please Verify Mobile");
         }
-
-        alert('A new appointment is scheduled, you will be notified about the appointment details');
-        
-        //Reset value after make an appointment
-        const removeFreeEvent = filteredFreeEvents.filter(item => {
-            return item.props.children !== time
-        })
-        setFilteredFreeEvents(removeFreeEvent);
-        name.current.value = ""
-        comments.current.value = ""
-        setTime("")
-        setPhone("")
-
-        // window.location.reload(false);
-
-        // } else {
-        //     alert("Please Verify Mobile");
-        // }
     }
 
     const addHours = async () => {
