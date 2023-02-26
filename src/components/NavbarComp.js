@@ -29,7 +29,7 @@ export default function NavbarComp() {
     <div>
       <Navbar className='NavbarItems' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand className='logo' as={Link} to={"/"}><b>Facework</b>
+          <Navbar.Brand className='logo' as={Link} to={"/"}><b>Bizweb</b>
           <i className='fa-solid fa-briefcase'></i>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

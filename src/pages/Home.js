@@ -80,7 +80,7 @@ class Home extends Component {
             return (
                 <>
                     <Hero>
-                        <Banner title="Facework" subtitle="All business in one place">
+                        <Banner title="Bizweb" subtitle="All business in one place">
                         </Banner>
                     </Hero>
                     <SearchBox searchChange={this.onSearchChange} />
