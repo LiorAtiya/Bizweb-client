@@ -16,13 +16,8 @@
     z-index: 2;
 }
 
-@media (max-width: 390px) {
-    .nav-links {
-        background-color: #222;
-        border-radius: 13px;
-        padding: 10px;
-        display: flex;
-    }
+.hello-user {
+    display: flex;
 }
 
 .logo {
@@ -52,4 +47,18 @@
     background-color: #ff416c;
     border-radius: 5px;
     color: #222;
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    .nav-links {
+        background-color: #222;
+        border-radius: 13px;
+        padding: 10px;
+        display: flex;
+    }
+
+    .fa-user {
+        padding-right: 3%;
+    }
 }

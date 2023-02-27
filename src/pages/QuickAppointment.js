@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
-import axios from "axios";
 import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
 import Business from '../components/category/Business';
+import ApiRoutes from '../api/ApiRoutes';
 
 export default function QuickAppointment() {
     const category = useRef("");
@@ -25,7 +25,7 @@ export default function QuickAppointment() {
         }
 
         //Get nearest availables appointments
-        await axios.post(`https://facework-server-production.up.railway.app/api/business/home/quickappointment`, business)
+        ApiRoutes.findQuickAppointment(business)
             .then((res) => {
                 setAvailables(res.data);
             })

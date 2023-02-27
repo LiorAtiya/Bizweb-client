@@ -46,6 +46,12 @@ class ApiRoutes extends Component {
             .then(response => response);
     }
 
+    //Quick appointment Page
+    async findQuickAppointment(business) {
+        return await axios.post(`${this.state.route}/api/business/home/quickappointment`, business)
+            .then(response => response);
+    }
+
     //My Business Page
     async deleteBusiness(userID, businessID) {
         return await axios.delete(`${this.state.route}/api/business/delete`,
@@ -56,7 +62,7 @@ class ApiRoutes extends Component {
     //Edit Business Page
     async updateDetailsOfBusiness(id, updatedDetails) {
         return await axios.put(`${this.state.route}/api/business/${id}`, updatedDetails)
-        .then(response => response);
+            .then(response => response);
     }
 
     // New Business Page

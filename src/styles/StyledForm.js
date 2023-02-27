@@ -70,12 +70,17 @@ box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
 overflow: hidden;
 width: 550px;
-max-width: 100%;
+max-width: 80%;
 min-height: 650px;
 margin: auto;
 margin-top: 6.5%;
 margin-bottom: 20px;
 padding-bottom: 20px;
+
+@media (max-width: 600px) {
+    margin-top: 20%;
+}
+
 `;
 
 export const QuickAppointContainer = styled.form`
@@ -85,11 +90,16 @@ box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
 overflow: hidden;
 width: 550px;
-max-width: 100%;
+max-width: 80%;
 margin: auto;
 margin-top: 8%;
 margin-bottom: 20px;
 padding-bottom: 20px;
+
+@media (max-width: 600px) {
+    margin-top: 20%;
+}
+
 `;
 
 export const AvailableContainer = styled.div`
@@ -99,22 +109,30 @@ margin: auto;
 export const Title = styled.h1`
 font-weight: bold;
 margin: 0;
+
+@media (max-width: 600px) {
+    font-size: 1.5rem;
+}
+
 `;
 
 export const Input = styled.input`
 background-color: #eee;
 border: none;
+border-radius: 10px;
 padding: 12px 15px;
 margin: 8px 0;
-width: 100%;
+width: 280px;
+
 `;
 
 export const Select = styled.select`
 background-color: #eee;
-border: none;
+border-radius: 10px;
+width: 550px;
+max-width: 50%;
 padding: 12px 15px;
 margin: 8px 0;
-width: 450px;
 `;
 
 export const SelectOfTime = styled.select`
@@ -127,9 +145,10 @@ width: 100%;
 export const TextArea = styled.textarea`
 background-color: #eee;
 border: none;
+border-radius: 10px;
 padding: 12px 15px;
 margin: 8px 0;
-width: 100%;
+width: 280px;
 height: 150px;
 `;
 
@@ -155,6 +174,7 @@ export const Button = styled.button`
 
 export const ButtonPic = styled.div`
    border-radius: 25px;
+   margin-top: 15px;
    margin-bottom: 20px;
    background-color: #ff2b2b;
    border: white;
@@ -162,7 +182,6 @@ export const ButtonPic = styled.div`
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;
-   padding: 12px 45px;
    letter-spacing: 1px;
    text-transform: uppercase;
    transition: transform 80ms ease-in;
@@ -172,6 +191,10 @@ export const ButtonPic = styled.div`
    &:focus {
        outline: none;
    }
+
+   @media (max-width: 600px) {
+    font-size: 0.6rem;
+    }
 `;
 
 export const Pic = styled.div`
