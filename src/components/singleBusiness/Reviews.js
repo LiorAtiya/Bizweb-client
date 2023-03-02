@@ -126,7 +126,7 @@ export default function Reviews({ id }) {
                     </div>
                 </Card.Header>
 
-                <Card.Body>
+                {/* <Card.Body> */}
                     <Card.Text className='card-text'>
                         <form>
                             <Components.NewBusinessInput type='text' placeholder='Your name'
@@ -140,7 +140,7 @@ export default function Reviews({ id }) {
                             <Components.Button type='button' onClick={addReview}>Submit</Components.Button>
                         </form>
                     </Card.Text>
-                </Card.Body>
+                {/* </Card.Body> */}
             </Card>
 
             <Modal
