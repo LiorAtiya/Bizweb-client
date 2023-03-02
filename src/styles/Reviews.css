@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-.toast-box{
+.toast-box {
     height: 100px;
     width: 500px;
 }
@@ -20,4 +20,15 @@
 
 .stars {
     font-size: 20px;
+}
+
+@media (max-width: 540px) {
+    .card-container {
+        width: 90%;
+        margin: auto;
+    }
+
+    .toast-box {
+        width: 80vw;
+    }
 }

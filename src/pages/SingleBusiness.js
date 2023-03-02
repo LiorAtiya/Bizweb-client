@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Banner from '../components/general/Banner'
-import StyledHero from '../styles/StyledHero'
+// import StyledHero from '../styles/StyledHero'
+import * as Components from '../styles/StyledHero';
 import '../styles/SingleBusiness.css'
 
 //Gallery
@@ -22,17 +23,18 @@ export default function SingleBusiness() {
   //get data of business
   const { getBusiness } = context;
   const business = getBusiness(name);
-  
+
   return (
     <>
       {business === undefined ?
         <h1>Loading...</h1>
         :
         <>
-          <StyledHero img={business.backgroundPicture}>
-            <Banner title={`${business.name}`}>
-            </Banner>
-          </StyledHero>
+          <Components.StyledHero img={business.backgroundPicture}>
+            <Components.StyledBanner>
+              <Components.StyledTitle><b>{business.name}</b></Components.StyledTitle>
+            </Components.StyledBanner>
+          </Components.StyledHero>
           <section className="project" id="project">
             <Container>
               <Row>
@@ -40,8 +42,10 @@ export default function SingleBusiness() {
                   <TrackVisibility>
                     {({ isVisible }) =>
                       <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                        <h1 className='single-business-container'>Description</h1>
-                        <p>{business.description}</p>
+                        <div className='single-business-container'>
+                          {/* <h1>Description</h1> */}
+                          <p>{business.description}</p>
+                        </div>
                         <Tab.Container id="projects-tabs" defaultActiveKey="first">
                           <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                             <Nav.Item>
@@ -59,10 +63,10 @@ export default function SingleBusiness() {
                           </Nav>
                           <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
                             <Tab.Pane eventKey="first">
-                              <Gallery id={business._id} name={name}/>
+                              <Gallery id={business._id} name={name} />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second" className='calender-tab'>
-                              <Calender id={business._id} businessName={name}/>
+                              <Calender id={business._id} businessName={name} />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                               <Reviews id={business._id} />

@@ -129,8 +129,7 @@ export default function Reviews({ id }) {
                 <Card.Body>
                     <Card.Text className='card-text'>
                         <form>
-
-                            <Components.Input type='text' placeholder='Your name'
+                            <Components.NewBusinessInput type='text' placeholder='Your name'
                                 required ref={name}
                             />
 

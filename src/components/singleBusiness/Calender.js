@@ -301,7 +301,7 @@ const Calendar = ({ id, businessName }) => {
             {/* ============== Calender component ================== */}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <StaticDatePicker
+                <StaticDatePicker 
                     sx={{
                         color: 'white',
                         background: 'linear-gradient(to right, #ff4b2b, #ff416c)',

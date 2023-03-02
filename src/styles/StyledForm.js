@@ -7,10 +7,15 @@ box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
 overflow: hidden;
 width: 678px;
-max-width: 100%;
+max-width: 90%;
 min-height: 650px;
 margin: auto;
 margin-top: 6.5%;
+
+@media (max-width: 600px) {
+    margin-top: 20%;
+}
+
 `;
 
 export const SignUpContainer = styled.div`
@@ -117,6 +122,19 @@ margin: 0;
 `;
 
 export const Input = styled.input`
+background-color: #eee;
+border: none;
+border-radius: 10px;
+padding: 12px 15px;
+margin: 8px 0;
+width: 280px;
+
+@media (max-width: 650px) {
+    width: 35vw;
+}
+`;
+
+export const NewBusinessInput = styled.input`
 background-color: #eee;
 border: none;
 border-radius: 10px;

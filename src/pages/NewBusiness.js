@@ -98,7 +98,7 @@ export default function NewBusiness() {
                     </label>
                 </div>
 
-                <Components.Input type='text' placeholder='Business Name'
+                <Components.NewBusinessInput type='text' placeholder='Business Name'
                     required ref={name}
                 />
                 <Components.TextArea type='textarea' placeholder='Description'
@@ -114,11 +114,11 @@ export default function NewBusiness() {
                     </label>
                 </div>
 
-                <Components.Input type='text' placeholder='Address'
+                <Components.NewBusinessInput type='text' placeholder='Address'
                     required ref={address}
                 />
 
-                <Components.Input type='number' placeholder='Phone'
+                <Components.NewBusinessInput type='number' placeholder='Phone'
                     required ref={phone}
                 />
 
