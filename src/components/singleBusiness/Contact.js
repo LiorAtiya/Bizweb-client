@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import waze from '../../images/waze.svg'
 import googlemaps from '../../images/googlemaps.png'
 import moovit from '../../images/moovit.webp'
+import '../../styles/Contact.css'
 
 export default function Googlemap({ business }) {
 
@@ -38,38 +39,37 @@ export default function Googlemap({ business }) {
 
   return (
     <>
-      <div style={styles.container}>
-        <div style={{ width: '50%' }}>
-          <Card style={{ textAlign: "center" }} body >
-            <Card.Header>
-              <b>City:</b> {business.city}<br />
-              <b>Address:</b> {business.address}<br />
-              <b>Phone:</b> {'0' + business.phone}<br />
-            </Card.Header>
-            <Card.Header>
-              <img src={waze} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "30px" }}
-                onClick={() => {
-                  window.open(`https://waze.com/ul?ll=${business.coordination.location.y},${business.coordination.location.x}&navigate=yes`, '_blank');
-                }} />
-              <img src={googlemaps} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "20px" }}
-                onClick={() => {
-                  window.open(`https://maps.google.com?q=${business.coordination.location.y},${business.coordination.location.x}`, '_blank');
-                }} />
-              <img src={moovit} alt="Logo" style={{ height: '80px', width: '80px' }}
-                onClick={() => {
-                  window.open(`https://moovitapp.com/israel-1/poi/${business.city} ${business.address}/t/en?tll=${business.coordination.location.y}_${business.coordination.location.x}`, '_blank');
-                }} />
-            </Card.Header>
-            <br />
-            {
-              flagMap?
+      <div className="contact-container">
+        <Card body className="contact-card">
+          <Card.Header>
+            <b>City:</b> {business.city}<br />
+            <b>Address:</b> {business.address}<br />
+            <b>Phone:</b> {'0' + business.phone}<br />
+          </Card.Header>
+          <Card.Header>
+            <img src={waze} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "30px" }}
+              onClick={() => {
+                window.open(`https://waze.com/ul?ll=${business.coordination.location.y},${business.coordination.location.x}&navigate=yes`, '_blank');
+              }} />
+            <img src={googlemaps} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "20px" }}
+              onClick={() => {
+                window.open(`https://maps.google.com?q=${business.coordination.location.y},${business.coordination.location.x}`, '_blank');
+              }} />
+            <img src={moovit} alt="Logo" style={{ height: '80px', width: '80px' }}
+              onClick={() => {
+                window.open(`https://moovitapp.com/israel-1/poi/${business.city} ${business.address}/t/en?tll=${business.coordination.location.y}_${business.coordination.location.x}`, '_blank');
+              }} />
+          </Card.Header>
+          <br />
+          {
+            flagMap ?
               <BingMapsReact
                 bingMapsKey="Am7ABZsl1hVs093AjZV82C3wxd-NCQ-KtBLpdtv4uB1UBvqIx7vcgN7Dw1A9RpQt"
                 height="300px"
                 mapOptions={{
                   navigationBarMode: "square",
                 }}
-                width="600px"
+                width="100%"
                 pushPins={pushPins}
                 viewOptions={{
                   center: {
@@ -81,9 +81,8 @@ export default function Googlemap({ business }) {
               />
               :
               null
-            }
-          </Card>
-        </div>
+          }
+        </Card>
       </div>
     </>
   );

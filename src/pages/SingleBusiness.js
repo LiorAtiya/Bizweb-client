@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import Banner from '../components/general/Banner'
+// import Banner from '../components/general/Banner'
 // import StyledHero from '../styles/StyledHero'
 import * as Components from '../styles/StyledHero';
 import '../styles/SingleBusiness.css'
 
 //Gallery
 import { Gallery } from '../components/singleBusiness/Gallery'
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { Container, Row, Tab, Nav } from "react-bootstrap";
 import TrackVisibility from 'react-on-screen';
 
 import Calender from '../components/singleBusiness/Calender'
@@ -38,15 +38,18 @@ export default function SingleBusiness() {
           <section className="project" id="project">
             <Container>
               <Row>
-                <Col size={12}>
-                  <TrackVisibility>
-                    {({ isVisible }) =>
-                      <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                        <div className='single-business-container'>
+                {/* <Col size={12}> */}
+                <TrackVisibility>
+                  {({ isVisible }) =>
+                    {
+                      return <div className='single-business-container'>
+                        {/* Description of business */}
+                        <div>
                           {/* <h1>Description</h1> */}
                           <p>{business.description}</p>
                         </div>
                         <Tab.Container id="projects-tabs" defaultActiveKey="first">
+                          {/* Navbar of tabs */}
                           <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                             <Nav.Item>
                               <Nav.Link eventKey="first">Gallery</Nav.Link>
@@ -61,6 +64,8 @@ export default function SingleBusiness() {
                               <Nav.Link eventKey="four">Contact</Nav.Link>
                             </Nav.Item>
                           </Nav>
+                          {/* End of navbar of tabs */}
+                          {/* Contents of the tabs */}
                           <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
                             <Tab.Pane eventKey="first">
                               <Gallery id={business._id} name={name} />
@@ -75,10 +80,12 @@ export default function SingleBusiness() {
                               <Contact business={business} />
                             </Tab.Pane>
                           </Tab.Content>
+                          {/* End of contents of the tabs */}
                         </Tab.Container>
-                      </div>}
-                  </TrackVisibility>
-                </Col>
+                      </div>;
+                    }}
+                </TrackVisibility>
+                {/* </Col> */}
               </Row>
             </Container>
           </section>

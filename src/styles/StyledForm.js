@@ -140,8 +140,7 @@ border: none;
 border-radius: 10px;
 padding: 12px 15px;
 margin: 8px 0;
-width: 280px;
-
+width: 255px;
 `;
 
 export const Select = styled.select`
@@ -166,7 +165,7 @@ border: none;
 border-radius: 10px;
 padding: 12px 15px;
 margin: 8px 0;
-width: 280px;
+width: 255px;
 height: 150px;
 `;
 

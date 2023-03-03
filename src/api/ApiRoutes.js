@@ -5,8 +5,8 @@ class ApiRoutes extends Component {
     constructor() {
         super()
         this.state = {
-            // route: 'http://localhost:3015' //localhost
-            route: 'https://bizweb-israel.up.railway.app' //server
+            route: 'http://localhost:3015' //localhost
+            // route: 'https://bizweb-israel.up.railway.app' //server
         }
     }
 

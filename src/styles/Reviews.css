@@ -7,7 +7,7 @@
 .card-container {
     width: 400px;
     text-align: center;
-    padding-bottom: 3%;
+    padding-bottom: 2.5%;
 }
 
 .toast-box {
@@ -31,10 +31,5 @@
 
     .toast-box {
         width: 80vw;
-    }
-
-    .card-text {
-        padding-bottom: 5%;
-        text-align: center;
     }
 }
