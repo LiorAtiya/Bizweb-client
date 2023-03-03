@@ -70,7 +70,7 @@ export default function SingleBusiness() {
                             <Tab.Pane eventKey="first">
                               <Gallery id={business._id} name={name} />
                             </Tab.Pane>
-                            <Tab.Pane eventKey="second" className='calender-tab'>
+                            <Tab.Pane eventKey="second">
                               <Calender id={business._id} businessName={name} />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">

@@ -296,10 +296,8 @@ const Calendar = ({ id, businessName }) => {
     }
 
     return (
-        <div style={{ display: "flex", alignItems: "center" }}>
-
+        <div className='calender-container'>
             {/* ============== Calender component ================== */}
-
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker 
                     sx={{
@@ -373,7 +371,7 @@ const Calendar = ({ id, businessName }) => {
 
             {/* ============== Form of window make appointment ================== */}
             {Flag ?
-                <Card style={{ width: '29rem', marginLeft: "30px", display: 'flex' }}>
+                <Card className='calender-card'>
                     <Card.Body>
                         <div className="d-grid">
                             {
