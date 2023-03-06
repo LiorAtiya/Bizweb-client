@@ -7,7 +7,7 @@ export const StyledHero = styled.header`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     @media (max-width: 600px) {
         min-height: 30vh;
     }

@@ -134,6 +134,15 @@ width: 280px;
 }
 `;
 
+export const AppointmentInput = styled.input`
+background-color: #eee;
+border: none;
+border-radius: 10px;
+padding: 12px 15px;
+margin: 8px 0;
+width: 100%;
+`;
+
 export const NewBusinessInput = styled.input`
 background-color: #eee;
 border: none;
@@ -167,6 +176,16 @@ padding: 12px 15px;
 margin: 8px 0;
 width: 255px;
 height: 150px;
+`;
+
+export const AppointmentTextArea = styled.textarea`
+background-color: #eee;
+border: none;
+border-radius: 10px;
+padding: 12px 15px;
+margin: 8px 0;
+width: 100%;
+height: 130px;
 `;
 
 

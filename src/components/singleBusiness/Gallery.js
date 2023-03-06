@@ -176,26 +176,27 @@ export const Gallery = ({ id, name }) => {
         </Modal.Footer>
       </Modal>
 
-      <Row>
-        {
-          data.map((singleData, i) => {
-            return (
-              <Col size={12} sm={6} md={4}>
-                <div className="proj-imgbx">
-                  <img src={singleData.url} alt={i} width="450" height="250" />
-                  {
-                    isAdmin() ?
-                      <button class="btn btn-danger btn-delete" onClick={() => handleShow2(singleData.id)}>Delete</button>
-                      :
-                      null
-                  }
-                </div>
-              </Col>
-            )
-          })
-        }
-      </Row>
-
+      <div className='gallery-container'>
+        <Row>
+          {
+            data.map((singleData, i) => {
+              return (
+                <Col size={12} sm={6} md={4}>
+                  <div className="proj-imgbx">
+                    <img src={singleData.url} alt={i} width="450" height="250" />
+                    {
+                      isAdmin() ?
+                        <button class="btn btn-danger btn-delete" onClick={() => handleShow2(singleData.id)}>X</button>
+                        :
+                        null
+                    }
+                  </div>
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </div>
     </>
   )
 }
