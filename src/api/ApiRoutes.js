@@ -5,7 +5,7 @@ class ApiRoutes extends Component {
     constructor() {
         super()
         this.state = {
-            // route: 'http://localhost:3015' //localhost
+            // route: 'http://localhost:3010' //localhost
             route: 'https://bizweb-israel.up.railway.app' //server
         }
     }
@@ -23,8 +23,13 @@ class ApiRoutes extends Component {
             .then(response => response);
     }
 
-    //MyApointment & Calender Page
+    //MyApointment & MyShoppingCart & Calender Page
     async getMyAppointments(userID) {
+        return await axios.get(`${this.state.route}/api/users/${userID}`)
+            .then(response => response);
+    }
+
+    async getUserDetails(userID) {
         return await axios.get(`${this.state.route}/api/users/${userID}`)
             .then(response => response);
     }
@@ -163,6 +168,38 @@ class ApiRoutes extends Component {
     async removeReview(id, reviewID) {
         return await axios.delete(`${this.state.route}/api/business/${id}/reviews`,
             { data: { id: reviewID } });
+    }
+
+    //Shop & MyShoppingCart Page
+    async addNewProduct(id, newProduct) {
+        return await axios.put(`${this.state.route}/api/business/${id}/shop`, newProduct)
+            .then(response => response.data);
+    }
+
+    async getAllProducts(id) {
+        return await axios.get(`${this.state.route}/api/business/${id}/shop`)
+            .then(response => response);
+    }
+
+    async increaseQuantity(userID, product){
+        return await axios.put(`${this.state.route}/api/users/${userID}/increase-quantity`, product)
+            .then(response => response.data);
+    }
+
+    async decreaseQuantity(userID, product){
+        return await axios.put(`${this.state.route}/api/users/${userID}/decrease-quantity`, product)
+            .then(response => response.data);
+    }
+
+    async clearCart(userID){
+        return await axios.delete(`${this.state.route}/api/users/${userID}/clear-cart`)
+        .then(response => response.data);
+    }
+
+    async RemoveProductFromCart(userID, productID) {
+        return await axios.delete(`${this.state.route}/api/users/${userID}/remove-product-from-cart`,
+        { data: { productID: productID } })
+        .then(response => response.data);
     }
 
 }

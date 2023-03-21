@@ -38,7 +38,7 @@ export default function NavbarComp() {
             </Nav>
             <Nav className='nav-links'>
               <Nav.Link className='QuichAppointment' as={Link} to={"/quickappointment"}><b>Quick Appointment</b></Nav.Link>
-              <div class='hello-user'>
+              <div className='hello-user'>
                 <i className='fa-solid fa fa-user'></i>
                 <NavDropdown title={getUserData ? `Hello ${getUserData.firstname}` : "Hello Guest"} id="collasible-nav-dropdown">
                   {
@@ -46,6 +46,9 @@ export default function NavbarComp() {
                       <>
                         <NavDropdown.Item as={Link} to={`/myappointments/${getUserData._id}`}>
                           My appointments
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to={`/myshoppingcart/${getUserData._id}`}>
+                          My shopping cart
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item as={Link} to={`/mybusiness/${getUserData._id}`}>

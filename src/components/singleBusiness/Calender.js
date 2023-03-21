@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
 
@@ -185,14 +186,12 @@ const Calendar = ({ id, businessName }) => {
             }
 
             ApiClient.addNewEvent(appointment)
-                // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
                 .then(res => console.log("Added new event to calender"))
                 .catch((err) => console.log(err));
 
             //if user connected => Update in the personal profile the appointment
             if (getUserData) {
                 ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
-                    // await axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/newappointment`, appointment)
                     .then((res) => {
                         if (res.status !== 500) {
                             window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -254,7 +253,6 @@ const Calendar = ({ id, businessName }) => {
         }
 
         ApiClient.addAvailableHour(appointment)
-            // await axios.post('https://facework-server-production.up.railway.app/api/calender/create-event', appointment)
             .then(res => {
                 alert('Added new hour to appointment')
                 let FreeEvent = [appointment].map((item) => {
@@ -281,10 +279,8 @@ const Calendar = ({ id, businessName }) => {
 
         //Delete from calender
         ApiClient.deleteEventFromCalender(appointment)
-            // await axios.delete('https://facework-server-production.up.railway.app/api/calender/delete-event',{ data: appointment })
             .then((res) => {
                 //Delete from list of appointment of user
-                // axios.delete(`https://facework-server-production.up.railway.app/api/users/${res.data.userID}/delete-appointment`,{ data: appointment });
                 ApiClient.deleteEventFromMyAppointments(appointment)
                     .then((res) => {
                         console.log("Delete appointment from list of user")
@@ -348,7 +344,7 @@ const Calendar = ({ id, businessName }) => {
                             setFlag(true);
                         }}
 
-                    // renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField {...params} />}
 
                     // renderDay={(day, highlightedDays, DayComponentProps) => {
                     //     const isSelected = 
@@ -417,7 +413,7 @@ const Calendar = ({ id, businessName }) => {
                                                 onChange={(newValue) => {
                                                     setValueTime(newValue)
                                                 }}
-                                            // renderInput={(params) => <TextField {...params} />}
+                                                renderInput={(params) => <TextField {...params} />}
                                             />
                                         </LocalizationProvider>
                                     </Modal.Body>
@@ -493,14 +489,14 @@ const Calendar = ({ id, businessName }) => {
 
                                         <Components.AppointmentInput type='text' placeholder='Client name'
                                             required ref={name}
-                                            
+
                                         />
 
                                         <div>
                                             <Components.AppointmentInput type='number' placeholder='Phone'
                                                 required
                                                 onChange={(e) => changeMobile(e)}
-                                                // style={{ width: '350px', marginLeft: '-57px' }}
+                                            // style={{ width: '350px', marginLeft: '-57px' }}
                                             />
                                             {verifyButton ?
                                                 <Components.Button

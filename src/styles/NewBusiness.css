@@ -1,0 +1,14 @@
+.tabs-container {
+    display: flex;
+}
+
+@media (max-width: 500px) {
+    .tabs-container {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+    }
+  }
+
+.checkbox-tab {
+    margin: 10px;
+}

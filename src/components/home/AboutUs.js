@@ -24,7 +24,7 @@ export default function AboutUs() {
                         }} />
                 </div>
                 <br/>
-                <h8>Created By Lior Atiya Ⓒ</h8>
+                <h6>Created By Lior Atiya Ⓒ</h6>
             </section>
         </div>
     )

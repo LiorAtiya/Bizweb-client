@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ApiClient from '../../api/ApiRoutes';
+import "../../styles/Gallery.css"
 
 export const Gallery = ({ id, name }) => {
 
@@ -53,7 +54,6 @@ export const Gallery = ({ id, name }) => {
       }
     }
     )
-
     //open widget
     myWidget.open();
   }
@@ -79,7 +79,6 @@ export const Gallery = ({ id, name }) => {
     //send request to server for upload new image
     if (newImage.length !== 0) {
       ApiClient.addNewImage(id, newImage)
-        // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`, newImage)
         .then((res) => {
           console.log(res.data)
           setData(oldArray => [...oldArray, newImage]);
@@ -91,7 +90,6 @@ export const Gallery = ({ id, name }) => {
     //update background image
     if (updatedBackgroundImage !== "") {
       ApiClient.updateBackgroundImage(id, updatedBackgroundImage)
-        // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/background`, { backgroundPicture: updatedBackgroundImage })
         .then((res) => {
           console.log(res.data)
           window.location.reload(false);
@@ -181,12 +179,12 @@ export const Gallery = ({ id, name }) => {
           {
             data.map((singleData, i) => {
               return (
-                <Col size={12} sm={6} md={4}>
+                <Col size={12} sm={6} md={4} key={i}>
                   <div className="proj-imgbx">
                     <img src={singleData.url} alt={i} width="450" height="250" />
                     {
                       isAdmin() ?
-                        <button class="btn btn-danger btn-delete" onClick={() => handleShow2(singleData.id)}>X</button>
+                        <button className="btn btn-danger btn-delete" onClick={() => handleShow2(singleData.id)}>X</button>
                         :
                         null
                     }

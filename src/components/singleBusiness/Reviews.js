@@ -81,7 +81,6 @@ export default function Reviews({ id }) {
             ApiClient.addNewReview(id, newReview)
                 .then((res) => console.log('Added new review'))
                 .catch((err) => console.log(err));
-            // await axios.put(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, newReview);
             setReviewList(oldArray => [...oldArray, newReview.details]);
             name.current.value = ""
             review.current.value = ""
@@ -92,7 +91,6 @@ export default function Reviews({ id }) {
     const removeReview = async () => {
         
         ApiClient.removeReview(id,reviewID)
-        // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/reviews`, { data: { id: reviewID } })
             .then((res) => console.log('Removed review'))
             .catch((err) => console.log(err));
 
@@ -102,7 +100,7 @@ export default function Reviews({ id }) {
     }
 
     return (
-        <div class="reviews-container">
+        <div className="reviews-container">
             <Card className='card-container'>
                 <Card.Header><h2>Star Rating</h2></Card.Header>
                 <Card.Header>
@@ -126,9 +124,9 @@ export default function Reviews({ id }) {
                     </div>
                 </Card.Header>
 
-                {/* <Card.Body> */}
+                
                     <Card.Text>
-                        <form>
+                        
                             <Components.NewBusinessInput type='text' placeholder='Your name'
                                 required ref={name}
                             />
@@ -138,9 +136,9 @@ export default function Reviews({ id }) {
                             />
 
                             <Components.Button type='button' onClick={addReview}>Submit</Components.Button>
-                        </form>
+                        
                     </Card.Text>
-                {/* </Card.Body> */}
+                
             </Card>
 
             <Modal
@@ -167,7 +165,7 @@ export default function Reviews({ id }) {
                 {
                     reviewList.map((item, i) => {
                         return (
-                            <>
+                            <div key={i}>
                                 {
                                     isAdmin() ?
                                         <Toast className='toast-box' onClose={() => {
@@ -193,7 +191,7 @@ export default function Reviews({ id }) {
                                         </Toast>
                                 }
                                 <br></br>
-                            </>
+                            </div>
                         )
                     })
                 }

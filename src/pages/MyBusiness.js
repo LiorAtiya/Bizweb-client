@@ -39,9 +39,9 @@ export default function MyBusiness() {
                     <h2>My Business</h2>
                     <hr></hr>
                     {
-                        allBusiness.map(item => {
+                        allBusiness.map((item,i) => {
                             return (
-                                <>
+                                <div key={i}>
                                     <Card>
                                         <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
                                         <Card.Body>
@@ -53,7 +53,7 @@ export default function MyBusiness() {
                                         </Card.Body>
                                     </Card>
                                     <br />
-                                </>
+                                </div>
                             )
                         })
                     }

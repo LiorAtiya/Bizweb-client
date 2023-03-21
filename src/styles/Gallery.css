@@ -1,0 +1,26 @@
+.gallery-container {
+    width: 90%;
+    margin: auto;
+    background: #222;
+  }
+
+  /* pictures of gallery */
+  .proj-imgbx {
+    position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  
+  /* delete button of picture from gallery */
+  .proj-imgbx .btn-delete {
+    position: absolute;
+    top: 12%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }

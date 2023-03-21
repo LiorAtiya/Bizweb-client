@@ -1,143 +1,142 @@
-.single-business-container{
-    text-align: center;
-    padding-top: 1%;
+.project {
+  background-color: #222;
 }
 
-.project {
-    margin-top: -20px;
-    position: relative;
-    background-color: #222;
-  }
-  
-  /* .project h2 {
-    font-size: 45px;
-    font-weight: 700;
-    text-align: center;
-  } */
-  
+.single-business-container {
+  text-align: center;
+  padding-top: 1%;
+}
+
+/* Description */
+.project p {
+  color: #B8B8B8;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  margin: 14px auto 30px auto;
+  text-align: center;
+  width: 80%;
+}
+
+/* Wide of toolbar of tabs */
+.project .nav.nav-pills {
+  width: 72%;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-color: rgb(255 255 255 / 10%);
+  overflow: hidden;
+  margin-bottom: 5%;
+}
+
+/* Division by number tabs */
+.project .num-tab-1 .nav.nav-pills .nav-item{
+  width: 100%;
+}
+.project .num-tab-2 .nav.nav-pills .nav-item{
+  width: 50%;
+}
+.project .num-tab-3 .nav.nav-pills .nav-item{
+  width: 33.3333333%;
+}
+.project .num-tab-4 .nav.nav-pills .nav-item{
+  width: 25%;
+}
+.project .num-tab-5 .nav.nav-pills .nav-item{
+  width: 20%;
+}
+
+
+.project .nav.nav-pills .nav-link {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 17px 0;
+  color: #fff;
+  width: 100%;
+  font-size: 17px;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  z-index: 0;
+}
+
+.project .nav.nav-pills .nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background: #ff416c;
+  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+}
+
+.project .nav.nav-pills .nav-link.active::before {
+  width: 100% !important;
+}
+
+.project .nav.nav-pills .nav-link.active {
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.nav-link#projects-tabs-tab-tab-first {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 55px 0px 0px 55px;
+}
+
+.nav-link#projects-tabs-tab-tab-Calender {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-link#projects-tabs-tab-tab-Shop {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-link#projects-tabs-tab-tab-Reviews {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-link#projects-tabs-tab-tab-last {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0 55px 55px 0;
+}
+
+@media (max-width: 540px) {
   .project p {
-    color: #B8B8B8;
-    font-size: 18px;
-    letter-spacing: 0.8px;
-    line-height: 1.5em;
-    margin: 14px auto 30px auto;
-    text-align: center;
-    width: 80%;
+    font-size: 15px;
   }
-  
-  /* wide of toolbar of tabs */
+
   .project .nav.nav-pills {
-    width: 72%;
-    margin: 0 auto;
-    border-radius: 50px;
-    background-color: rgb(255 255 255 / 10%);
-    overflow: hidden;
-  }
-  
-  .project .nav.nav-pills .nav-item {
-    width: 25%;
-  }
-  
-  .project .nav.nav-pills .nav-link {
-    background-color: transparent;
-    border-radius: 0;
-    padding: 17px 0;
-    color: #fff;
-    width: 100%;
-    font-size: 17px;
-    letter-spacing: 0.8px;
-    font-weight: 500;
-    position: relative;
-    transition: 0.3s ease-in-out;
-    text-align: center;
-    z-index: 0;
-  }
-  
-  .project .nav.nav-pills .nav-link::before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 100%;
-    background: #ff416c;
-    background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: 0.3s ease-in-out;
-  }
-  
-  .project .nav.nav-pills .nav-link.active::before {
-    width: 100% !important;
-  }
-  
-  .project .nav.nav-pills .nav-link.active {
-    border: 1px solid rgba(255, 255, 255, 1);
-  }
-  
-  .nav-link#projects-tabs-tab-first {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 55px 0px 0px 55px;
-  }
-  
-  .nav-link#projects-tabs-tab-second {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  }
-  
-  .nav-link#projects-tabs-tab-third {
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  }
-  
-  .nav-link#projects-tabs-tab-four {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 0 55px 55px 0;
+    width: 85%;
   }
 
-  @media (max-width: 540px) {
-    .project p {
-      font-size: 15px;
-    }
-
-    #projects-tabs-tab-first {
-      font-size: 0.75rem;
-    }
-    
-    #projects-tabs-tab-second {
-      font-size: 0.75rem;
-    }
-    #projects-tabs-tab-third {
-      font-size: 0.75rem;
-    }
-    #projects-tabs-tab-four {
-      font-size: 0.75rem;
-    }
+  #projects-tabs-tab-tab-first {
+    font-size: 0.75rem;
   }
 
-  .gallery-container {
-    width: 90%;
-    margin: auto;
+  #projects-tabs-tab-tab-Calender {
+    font-size: 0.75rem;
   }
 
-  /* pictures of gallery */
-  .proj-imgbx {
-    position: relative;
-    border-radius: 50px;
-    overflow: hidden;
-    margin-bottom: 24px;
+  #projects-tabs-tab-tab-Shop {
+    font-size: 0.75rem;
   }
-  
-  /* delete button of picture from gallery */
-  .proj-imgbx .btn-delete {
-    position: absolute;
-    top: 12%;
-    left: 10%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+
+  #projects-tabs-tab-tab-Reviews {
+    font-size: 0.75rem;
   }
+
+  #projects-tabs-tab-tab-last {
+    font-size: 0.75rem;
+  }
+}

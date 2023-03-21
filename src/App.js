@@ -14,6 +14,7 @@ import MyAppointments from './pages/MyAppointments';
 import QuickAppointment from './pages/QuickAppointment';
 import MyBusiness from './pages/MyBusiness';
 import EditBusiness from './pages/EditBusiness';
+import MyShoppingCart from './pages/MyShoppingCart';
 // import { AuthContext } from './context/AuthContext';
 
 export default function App() {
@@ -39,6 +40,9 @@ export default function App() {
                     </Route>
                     <Route exact path="/myappointments/:userID">
                         <MyAppointments />
+                    </Route>
+                    <Route exact path="/myshoppingcart/:userID">
+                        <MyShoppingCart />
                     </Route>
                     <Route exact path="/mybusiness/:userID">
                         <MyBusiness />

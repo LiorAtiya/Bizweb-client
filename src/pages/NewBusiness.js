@@ -3,23 +3,34 @@ import React, { useRef, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
+import '../styles/NewBusiness.css'
 import ApiClient from '../api/ApiRoutes';
 
 export default function NewBusiness() {
     const category = useRef("");
-    const name = useRef();
-    const description = useRef();
-    const city = useRef();
-    const address = useRef();
-    const phone = useRef();
+    const name = useRef("");
+    const description = useRef("");
+    const city = useRef("");
+    const address = useRef("");
+    const phone = useRef("");
     const history = useHistory();
 
     const [backgroundPicture, setBackgroundPicture] = useState("");
+
+    const [contactChecked, setContactChecked] = useState(false);
+
+    let tabs = {};
+    tabs.Gallery = false;
+    tabs.Calender = false;
+    tabs.Shop = false;
+    tabs.Reviews = false;
+    tabs.Contact = false;
 
     const citiesMap = cities.map((item, index) => {
         return <option value={item.name} key={index}>{item.name}</option>
     })
 
+    //Update background image in cloundinary
     const handleOpenWidget = () => {
         var myWidget = window.cloudinary.createUploadWidget({
             cloudName: 'dk5mqzgcv',
@@ -39,6 +50,10 @@ export default function NewBusiness() {
     const handleClick = async (e) => {
         e.preventDefault();
 
+        const filterTabs = Object.keys(tabs).filter(key => {
+            return tabs[key] === true;
+        })
+
         const business = {
             category: category.current.value,
             name: name.current.value,
@@ -47,13 +62,12 @@ export default function NewBusiness() {
             address: address.current.value,
             phone: phone.current.value,
             backgroundPicture: backgroundPicture,
+            tabs: filterTabs
         }
 
         //send request to server to add new business
         ApiClient.addNewBusiness(business)
-            // await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
             .then((res) => {
-                console.log(res);
                 if (res.status === 200) {
                     //add id of business to list of business of user
                     const businessID = res.data._id;
@@ -62,9 +76,8 @@ export default function NewBusiness() {
                         userID: getUserData._id,
                         business: businessID
                     }
-                    
-                    ApiClient.addBusinessToUser(getUserData._id,business)
-                    // axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/business`, business)
+
+                    ApiClient.addBusinessToUser(getUserData._id, business)
                         .then((res) => {
                             window.localStorage.removeItem('token');
                             window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -75,6 +88,16 @@ export default function NewBusiness() {
 
                 }
             }).catch((err) => console.log(err));
+    }
+
+    const handleGallery = (e) => { tabs.Gallery = e.target.checked; }
+    const handleShop = (e) => { tabs.Shop = e.target.checked; }
+    const handleCalender = (e) => { tabs.Calender = e.target.checked; }
+    const handleReviews = (e) => { tabs.Reviews = e.target.checked; }
+    const handleContact = (e) => {
+        const checkedValue = e.target.checked;
+        setContactChecked(checkedValue);
+        tabs.Contact = checkedValue;
     }
 
     return (
@@ -93,7 +116,6 @@ export default function NewBusiness() {
                             <option value="Professionals">Professionals</option>
                             <option value="Personal Trainers">Personal Trainers</option>
                             <option value="Private Teachers">Private Teachers</option>
-
                         </Components.Select>
                     </label>
                 </div>
@@ -105,22 +127,47 @@ export default function NewBusiness() {
                     required ref={description}
                 />
 
-                <div className="mb-3">
-                    <label>
-                        <b>City:</b><br></br>
-                        <Components.Select ref={city}>
-                            {citiesMap}
-                        </Components.Select>
-                    </label>
+                <b>Choose what you want in your business:</b>
+                <div className="mb-3 tabs-container">
+                    <div className='checkbox-tab'>
+                        <input type="checkbox" value='gallery' onChange={handleGallery} /> Gallery
+                    </div>
+                    <div className='checkbox-tab'>
+                        <input type="checkbox" value='shop' onChange={handleShop} /> Shop
+                    </div>
+                    <div className='checkbox-tab'>
+                        <input type="checkbox" value='calender' onChange={handleCalender} /> Callender
+                    </div>
+                    <div className='checkbox-tab'>
+                        <input type="checkbox" value='reviews' onChange={handleReviews} /> Reviews
+                    </div>
+                    <div className='checkbox-tab'>
+                        <input type="checkbox" value='contact' onChange={handleContact} /> Contact
+                    </div>
                 </div>
 
-                <Components.NewBusinessInput type='text' placeholder='Address'
-                    required ref={address}
-                />
+                {
+                    contactChecked ?
+                        <>
+                            <div className="mb-3">
+                                <label>
+                                    <b>City:</b><br></br>
+                                    <Components.Select ref={city}>
+                                        {citiesMap}
+                                    </Components.Select>
+                                </label>
+                            </div>
 
-                <Components.NewBusinessInput type='number' placeholder='Phone'
-                    required ref={phone}
-                />
+                            <Components.NewBusinessInput type='text' placeholder='Address'
+                                required ref={address}
+                            />
+
+                            <Components.NewBusinessInput type='number' placeholder='Phone'
+                                required ref={phone}
+                            />
+                        </>
+                        : null
+                }
 
                 <div className="mb-3">
                     <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={handleOpenWidget}>
@@ -139,6 +186,6 @@ export default function NewBusiness() {
                 <Components.Button type="button" onClick={handleClick}>Create</Components.Button>
             </Components.NewBusinessForm>
 
-        </Components.NewBusinessContainer>
+        </Components.NewBusinessContainer >
     )
 }
