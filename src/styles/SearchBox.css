@@ -1,4 +1,5 @@
-.search {
+/* SearchBox */
+.input-container {
   width: 60%;
   height: 50px;
   margin: auto;
@@ -11,29 +12,29 @@
   margin-top: 30px;
 }
 
-.search:focus-within {
+.input-container:focus-within {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.search__button,
-.search__input {
+.search-input {
+  border-radius: 50px;
   background-color: #fff;
-  border: none;
-  outline: none;
-}
-
-.search__input {
   padding: 1em;
-  width: 85%;
+  width: 95%;
+  border: none;
 }
 
-.fa-magnifying-glass {
-  font-size: 1.2rem;
-  color: black;
-  display: grid;
-  place-content: center;
-  margin-left: 15%;
+.search-input:focus {
+  outline: none !important;
 }
+
+.search-btn {
+  padding: 12px;
+  border-radius: 50%;
+  width: 5%;
+} 
+
+/* End of searchbox */
 
 .predictBigml {
   margin-top: 10px;

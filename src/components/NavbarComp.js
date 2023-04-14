@@ -27,7 +27,7 @@ export default function NavbarComp() {
   return (
     <div>
       <Navbar className='NavbarItems' collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container>
+        <Container className='container-navbar'>
           <Navbar.Brand className='logo' as={Link} to={"/"}><b>Bizweb</b>
             <i className='fa-solid fa-briefcase'></i>
           </Navbar.Brand>
@@ -71,6 +71,7 @@ export default function NavbarComp() {
                   }
                 </NavDropdown>
               </div>
+              <Nav.Link className='' as={Link} to={"/quickappointment"}><b>עברית</b></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

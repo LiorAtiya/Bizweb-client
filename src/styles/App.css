@@ -29,59 +29,6 @@ body {
   line-height: 1.4;
 }
 
-/* h1 {
-  font-size: 3em;
-  line-height: 1;
-  margin-bottom: 0.5em;
-}
-
-h2 {
-  font-size: 2em;
-  margin-bottom: 0.75em;
-}
-
-h3 {
-  font-size: 1.5em;
-  line-height: 1;
-  margin-bottom: 1em;
-}
-
-h4 {
-  font-size: 1.2em;
-  line-height: 1.25;
-  margin-bottom: 1.25em;
-}
-
-h5 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 1.5em;
-}
-
-h6 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 1.5em;
-} */
-
-/* .btn-primary {
-  display: inline-block;
-  text-decoration: none;
-  letter-spacing: var(--mainSpacing);
-  color: var(--mainBlack);
-  background: var(--primaryColor);
-  padding: 0.4rem 0.9rem;
-  border: 3px solid var(--primaryColor);
-  transition: var(--mainTransition);
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background: transparent;
-  color: var(--primaryColor);
-} */
-
 .loading {
   text-transform: capitalize;
   text-align: center;
@@ -121,13 +68,67 @@ h6 {
   min-height: 60vh;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 700px) {
   .defaultHero {
     padding: 2rem;
     min-height: calc(40vh - 50px);
   }
 }
 /* End of Hero (Background of banner) */
+
+/* Logo home */
+.container-logo{
+  display: flex;
+  border: #222 solid 5px;
+  /* padding: 20px 100px 20px 100px; */
+  border-radius: 13px;
+  font-size: 100px;
+  width: 50%;
+}
+
+.left-logo {
+  background-color: #222;
+  border-radius: 13px 0 0 13px;
+  color:white;
+  margin: 10px 0 10px 10px;
+  width: 45%;
+  text-align: right;
+}
+
+.right-logo {
+  background-color: white;
+  border-radius: 0 13px 13px 0;
+  color:#222;
+  font-weight: bold;
+  margin: 10px 10px 10px 0;
+  width: 55%;
+}
+
+@media (max-width: 1050px) {
+  .container-logo{
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 850px) {
+  .container-logo{
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 680px) {
+  .container-logo{
+    font-size: 45px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container-logo{
+    font-size: 30px;
+  }
+}
+
+/* End of logo home */
 
 /* Banner */
 .banner {
@@ -140,17 +141,6 @@ h6 {
   letter-spacing: var(--mainSpacing);
   border-radius: 13px;
 }
-
-/* .banner h1 {
-  font-size: 2.5rem;
-} */
-
-/* .banner div {
-  width: 10rem;
-  height: 5px;
-  background: var(--primaryColor);
-  margin: 1.7rem auto;
-} */
 
 .banner p {
   font-size: 1.2rem;

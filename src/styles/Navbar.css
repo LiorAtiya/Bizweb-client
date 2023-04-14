@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #222;
     font-size: 1.0rem;
     padding: 0 30px;
-    background-color: #222;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
     width: 95%;
     height: 55px;
@@ -14,10 +14,6 @@
     left: 50%;
     transform: translate(-50%);
     z-index: 2;
-}
-
-.hello-user {
-    display: flex;
 }
 
 .logo {
@@ -33,21 +29,25 @@
     color: white;
 }
 
-.fa-user {
-    color: white;
-    margin-top: 12px;
-}
-
-#collasible-nav-dropdown {
-    padding-right: 50px;
-}
-
 .QuichAppointment {
     margin-right: 20px;
     background-color: #ff416c;
     border-radius: 5px;
     color: #222;
     text-align: center;
+}
+
+.hello-user {
+    display: flex;
+}
+
+.fa-user {
+    color: white;
+    margin-top: 12px;
+}
+
+#collasible-nav-dropdown {
+    margin-right: 10px;
 }
 
 @media (max-width: 991px) {

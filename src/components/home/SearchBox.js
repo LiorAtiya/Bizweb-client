@@ -4,16 +4,18 @@ import '../../styles/SearchBox.css'
 const SearchBox = ({ searchChange }) => {
     return (
         <>
-        <form className="search">
-            <input
-                className="search__input"
-                type="text"
-                id="search"
-                placeholder='Quick search'
-                onChange={searchChange}
-            />
-            <i className="fa-solid fa-magnifying-glass"></i>
-        </form>
+            <div className="input-container">
+                <input
+                    className="search-input"
+                    type="text"
+                    id="search"
+                    placeholder='Quick search'
+                    onChange={searchChange}
+                />
+                <div className='search-btn'>
+                    <i className="search-icon fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
         </>
     )
 }
