@@ -122,10 +122,10 @@ export default function NewBusiness() {
                 </div>
 
                 <Components.NewBusinessInput type='text' placeholder='Business Name'
-                    required ref={name}
+                    required ref={name} maxLength='15'
                 />
                 <Components.TextArea type='textarea' placeholder='Description'
-                    required ref={description}
+                    required ref={description} maxLength='400'
                 />
 
                 <b>Choose what you want in your business:</b>

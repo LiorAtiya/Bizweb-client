@@ -91,19 +91,3 @@
 }
 
 /* end of rooms filter */
-
-
-/* business card */
-
-.business-name {
-    text-decoration: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.business-name:hover {
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 0.8rem;
-}
-
-/* end of business card */

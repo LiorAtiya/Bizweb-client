@@ -1,0 +1,18 @@
+/* business card */
+
+.business-card-container {
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.business-card-container:hover {
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.8rem;
+}
+
+.business-card-content {
+    padding: 50px;
+}
+
+/* end of business card */

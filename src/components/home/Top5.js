@@ -27,8 +27,8 @@ export default function Top5() {
                     {top5.map((item, index) => {
                         return (
                             <article key={index} className="service">
-                                <h6>Category: {item.category}</h6>
-                                <p>{item.totalStars} Total Stars</p>
+                                <h6>{item.category}</h6>
+                                <p>{item.totalStars} ⭐</p>
                                 <Business key={item._id} business={item} />
                             </article>
                         )
