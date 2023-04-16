@@ -84,8 +84,8 @@
     height: 70px;
 }
 
-  /* delete button of picture from gallery */
-  .product .btn-delete {
+/* delete button of picture from gallery */
+.product .btn-delete {
     position: absolute;
     width: 35px;
     margin-top: -15px;
@@ -98,4 +98,4 @@
     font-size: 16px;
     border: none;
     cursor: pointer; */
-  }
+}

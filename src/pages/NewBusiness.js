@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, {useRef, useState } from 'react'
 // import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
@@ -16,17 +16,11 @@ export default function NewBusiness() {
     const history = useHistory();
 
     const [backgroundPicture, setBackgroundPicture] = useState("");
+    // const [contactChecked, setContactChecked] = useState(false);
 
-    const [contactChecked, setContactChecked] = useState(false);
+    const [tabs, setTabs] = useState({Gallery: false,Calender: false,Shop:false, Reviews: false, Contact:false });
 
-    let tabs = {};
-    tabs.Gallery = false;
-    tabs.Calender = false;
-    tabs.Shop = false;
-    tabs.Reviews = false;
-    tabs.Contact = false;
-
-    const citiesMap = cities.map((item, index) => {
+    const citiesMap = cities?.map((item, index) => {
         return <option value={item.name} key={index}>{item.name}</option>
     })
 
@@ -58,11 +52,22 @@ export default function NewBusiness() {
             category: category.current.value,
             name: name.current.value,
             description: description.current.value,
-            city: city.current.value,
-            address: address.current.value,
-            phone: phone.current.value,
+            city: city.current? city.current.value : '',
+            address: address.current? address.current.value : '',
+            phone: phone.current? phone.current.value : '',
             backgroundPicture: backgroundPicture,
             tabs: filterTabs
+        }
+
+        //No tab is selected
+        if (filterTabs.length === 0) {
+            alert('Select at least one category');
+            return
+        } 
+        else if (business.name === '' | business.description === '' |
+            (tabs.Contact & business.address === '' & business.phone === '')) {
+            alert('Fill in all the details');
+            return
         }
 
         //send request to server to add new business
@@ -82,6 +87,7 @@ export default function NewBusiness() {
                             window.localStorage.removeItem('token');
                             window.localStorage.setItem("token", JSON.stringify(res.data));
 
+                            alert('New business created')
                             history.push('/');
                             window.location.reload(false);
                         }).catch((err) => console.log(err));
@@ -90,15 +96,11 @@ export default function NewBusiness() {
             }).catch((err) => console.log(err));
     }
 
-    const handleGallery = (e) => { tabs.Gallery = e.target.checked; }
-    const handleShop = (e) => { tabs.Shop = e.target.checked; }
-    const handleCalender = (e) => { tabs.Calender = e.target.checked; }
-    const handleReviews = (e) => { tabs.Reviews = e.target.checked; }
-    const handleContact = (e) => {
-        const checkedValue = e.target.checked;
-        setContactChecked(checkedValue);
-        tabs.Contact = checkedValue;
-    }
+    const handleGallery = (e) => { setTabs({ ...tabs, Gallery: e.target.checked })}
+    const handleShop = (e) => { setTabs({ ...tabs, Shop: e.target.checked }) }
+    const handleCalender = (e) => { setTabs({ ...tabs, Calender: e.target.checked }) }
+    const handleReviews = (e) => { setTabs({ ...tabs, Reviews: e.target.checked }) }
+    const handleContact = (e) => { setTabs({ ...tabs, Contact: e.target.checked }) }
 
     return (
         <Components.NewBusinessContainer>
@@ -147,7 +149,7 @@ export default function NewBusiness() {
                 </div>
 
                 {
-                    contactChecked ?
+                    tabs.Contact ?
                         <>
                             <div className="mb-3">
                                 <label>
@@ -166,7 +168,7 @@ export default function NewBusiness() {
                                 required ref={phone}
                             />
                         </>
-                        : null
+                        : <></>
                 }
 
                 <div className="mb-3">
