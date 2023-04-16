@@ -87,7 +87,10 @@ export default function Shop({ id, businessName }) {
 
   const handleRemoveProduct = async () => {
     ApiClient.removeProductFromShop(id, removeProduct)
-      .then((res) => console.log('removed product'))
+      .then((res) => {
+        console.log('removed product')
+        handleClose2();
+      })
       .catch((err) => console.log(err));
   }
 

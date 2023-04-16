@@ -177,7 +177,8 @@ class ApiRoutes extends Component {
     }
 
     async removeProductFromShop(id, productID) {
-        return await axios.delete(`${this.state.route}/api/business/${id}/shop`, productID)
+        return await axios.delete(`${this.state.route}/api/business/${id}/shop`,
+            { data: { productID: productID } })
             .then(response => response.data);
     }
 
