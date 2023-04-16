@@ -176,30 +176,35 @@ class ApiRoutes extends Component {
             .then(response => response.data);
     }
 
+    async removeProductFromShop(id, productID) {
+        return await axios.delete(`${this.state.route}/api/business/${id}/shop`, productID)
+            .then(response => response.data);
+    }
+
     async getAllProducts(id) {
         return await axios.get(`${this.state.route}/api/business/${id}/shop`)
             .then(response => response);
     }
 
-    async increaseQuantity(userID, product){
+    async increaseQuantity(userID, product) {
         return await axios.put(`${this.state.route}/api/users/${userID}/increase-quantity`, product)
             .then(response => response.data);
     }
 
-    async decreaseQuantity(userID, product){
+    async decreaseQuantity(userID, product) {
         return await axios.put(`${this.state.route}/api/users/${userID}/decrease-quantity`, product)
             .then(response => response.data);
     }
 
-    async clearCart(userID){
+    async clearCart(userID) {
         return await axios.delete(`${this.state.route}/api/users/${userID}/clear-cart`)
-        .then(response => response.data);
+            .then(response => response.data);
     }
 
     async RemoveProductFromCart(userID, productID) {
         return await axios.delete(`${this.state.route}/api/users/${userID}/remove-product-from-cart`,
-        { data: { productID: productID } })
-        .then(response => response.data);
+            { data: { productID: productID } })
+            .then(response => response.data);
     }
 
 }

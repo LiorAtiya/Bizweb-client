@@ -1,4 +1,4 @@
-import React, {useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 // import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
@@ -16,9 +16,8 @@ export default function NewBusiness() {
     const history = useHistory();
 
     const [backgroundPicture, setBackgroundPicture] = useState("");
-    // const [contactChecked, setContactChecked] = useState(false);
 
-    const [tabs, setTabs] = useState({Gallery: false,Calender: false,Shop:false, Reviews: false, Contact:false });
+    const [tabs, setTabs] = useState({ Gallery: false, Calender: false, Shop: false, Reviews: false, Contact: false });
 
     const citiesMap = cities?.map((item, index) => {
         return <option value={item.name} key={index}>{item.name}</option>
@@ -52,9 +51,9 @@ export default function NewBusiness() {
             category: category.current.value,
             name: name.current.value,
             description: description.current.value,
-            city: city.current? city.current.value : '',
-            address: address.current? address.current.value : '',
-            phone: phone.current? phone.current.value : '',
+            city: city.current ? city.current.value : '',
+            address: address.current ? address.current.value : '',
+            phone: phone.current ? phone.current.value : '',
             backgroundPicture: backgroundPicture,
             tabs: filterTabs
         }
@@ -63,7 +62,7 @@ export default function NewBusiness() {
         if (filterTabs.length === 0) {
             alert('Select at least one category');
             return
-        } 
+        }
         else if (business.name === '' | business.description === '' |
             (tabs.Contact & business.address === '' & business.phone === '')) {
             alert('Fill in all the details');
@@ -96,7 +95,7 @@ export default function NewBusiness() {
             }).catch((err) => console.log(err));
     }
 
-    const handleGallery = (e) => { setTabs({ ...tabs, Gallery: e.target.checked })}
+    const handleGallery = (e) => { setTabs({ ...tabs, Gallery: e.target.checked }) }
     const handleShop = (e) => { setTabs({ ...tabs, Shop: e.target.checked }) }
     const handleCalender = (e) => { setTabs({ ...tabs, Calender: e.target.checked }) }
     const handleReviews = (e) => { setTabs({ ...tabs, Reviews: e.target.checked }) }

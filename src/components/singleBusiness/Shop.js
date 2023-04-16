@@ -3,21 +3,12 @@ import '../../styles/Shop.css'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ApiClient from '../../api/ApiRoutes';
+import defaultImg from '../../images/defaultImg.png'
+
 // import { toast } from "react-toastify";
 
 export default function Shop({ id, businessName }) {
 
-  //Admin Permissions
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => {
-    // setRemoveImage(id);
-    setShow2(true);
-  }
   const [productsList, setProductsList] = useState([]);
 
   const getUserData = JSON.parse(localStorage.getItem('token'));
@@ -43,6 +34,19 @@ export default function Shop({ id, businessName }) {
   const description = useRef("");
   const price = useRef(0);
   const [image, setImage] = useState([]);
+  const [removeProduct, setRemoveProduct] = useState("")
+
+  //Admin Permissions
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = (id) => {
+    setRemoveProduct(id);
+    setShow2(true);
+  }
 
   const handleOpenWidget = async () => {
     var myWidget = window.cloudinary.createUploadWidget({
@@ -82,7 +86,9 @@ export default function Shop({ id, businessName }) {
   }
 
   const handleRemoveProduct = async () => {
-    handleShow2()
+    ApiClient.removeProductFromShop(id, removeProduct)
+      .then((res) => console.log('removed product'))
+      .catch((err) => console.log(err));
   }
 
   const handleAddToCart = async (product) => {
@@ -130,15 +136,15 @@ export default function Shop({ id, businessName }) {
         <Modal.Body>
           <div className='body-admin-container'>
             <input className='input-style' type='text' placeholder='Product Name'
-              required ref={name}
+              required ref={name} maxLength='14'
             />
             <br></br>
             <textarea className='textarea-style' type='textarea' placeholder='Description'
-              required ref={description}
+              required ref={description} maxLength='45'
             />
             <br></br>
             <input className='input-style' type='number' placeholder='Price'
-              required ref={price}
+              required ref={price} min='1' max='6'
             />
             {/* <h6>Select photo to product</h6> */}
             <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
@@ -170,13 +176,13 @@ export default function Shop({ id, businessName }) {
           <Button variant="btn btn-danger" onClick={handleRemoveProduct}>Remove</Button>
         </Modal.Footer>
       </Modal>
-      
+
       <div className="products">
-      
+
         {productsList?.map((product, index) =>
           <div key={index} className="product">
             <h3>{product.name}</h3>
-            <img src={product.image.url} alt={product.name} />
+            <img src={product.image.length !== 0 ? product.image.url : defaultImg} alt={product.name} />
             <div className="details">
               <span>{product.description}</span>
               <span className="price">₪{product.price}</span>
@@ -184,7 +190,7 @@ export default function Shop({ id, businessName }) {
             <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
             {
               isAdmin() ?
-                <button className="btn btn-danger btn-delete" onClick={() => handleRemoveProduct(product)}>X</button>
+                <button className="btn btn-danger btn-delete" onClick={() => handleShow2(product.id)}>X</button>
                 :
                 null
             }
