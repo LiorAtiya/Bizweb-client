@@ -88,7 +88,9 @@ export default function Shop({ id, businessName }) {
   const handleRemoveProduct = async () => {
     ApiClient.removeProductFromShop(id, removeProduct)
       .then((res) => {
-        console.log('removed product')
+        const newArray = productsList.filter(obj => obj.id !== removeProduct);
+        setProductsList(newArray)
+
         handleClose2();
       })
       .catch((err) => console.log(err));
