@@ -16,8 +16,8 @@ import * as Components from '../../styles/StyledForm'
 //Day marked
 // import TextField from '@mui/material/TextField';
 // import CheckIcon from '@mui/icons-material/Check';
-// import Badge from '@mui/material/Badge';
-// import { PickersDay } from '@mui/x-date-pickers/PickersDay';
+import Badge from '@mui/material/Badge';
+import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 
 //Window of client appointment
 import Card from 'react-bootstrap/Card';
@@ -29,7 +29,7 @@ import '../../styles/Calender.css'
 const auth = getAuth(app)
 
 const Calendar = ({ id, businessName }) => {
-    // const [highlightedDays, setHighlightedDays] = useState([]);
+    const [highlightedDays, setHighlightedDays] = useState([]);
 
     const [value, setValue] = useState(new Date());
     const [valueTime, setValueTime] = useState(dayjs('2022-04-07'));
@@ -54,7 +54,8 @@ const Calendar = ({ id, businessName }) => {
             ApiClient.getAllEventsOfCalender(id)
                 .then((res) => {
                     setEvents(res.data)
-
+                    const dateMaped = res.data.availableHours.map(obj => obj.date)
+                    setHighlightedDays(dateMaped)
                 })
                 .catch((err) => console.log(err));
         };
@@ -346,22 +347,25 @@ const Calendar = ({ id, businessName }) => {
 
                         renderInput={(params) => <TextField {...params} />}
 
-                    // renderDay={(day, highlightedDays, DayComponentProps) => {
-                    //     const isSelected = 
-                    //         !DayComponentProps.outsideCurrentMonth &&
-                    //         highlightedDays.find((d) => d.getDate() === day.getDate());
+                        renderDay={
 
-                    //         console.log(isSelected)
-                    //     return (
-                    //         <Badge
-                    //             key={day.toString()}
-                    //             overlap='circular'
-                    //             badgeContent={isSelected ? '🟢' : null}
-                    //         >
-                    //             <PickersDay {...DayComponentProps} />
-                    //         </Badge>
-                    //     );
-                    // }}
+                            (day, _value, DayComponentProps) => {
+                                const isSelected =
+                                    !DayComponentProps.outsideCurrentMonth &&
+                                    highlightedDays.includes(day.getDate()+'/'+(day.getMonth()+1)+"/"+day.getFullYear());
+                                    console.log(isSelected)
+                                    console.log(day.getDate()+'/'+(day.getMonth()-1)+"/"+day.getFullYear())
+                                return (
+                                    <Badge
+                                        key={day.toString()}
+                                        overlap='circular'
+                                        badgeContent={isSelected ? '🟢' : undefined}
+                                    >
+                                        <PickersDay {...DayComponentProps} />
+                                    </Badge>
+                                );
+                            }
+                        }
                     />
                 </LocalizationProvider>
                 {/* ============== End Calender ================== */}
