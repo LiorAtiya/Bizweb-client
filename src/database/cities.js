@@ -1,5 +1,5 @@
 
-export default [
+const cities = [
     {
         "semel_yeshuv": "472",
         "name": "אבו גוש",
@@ -13674,3 +13674,5 @@ export default [
         "shem_moaatza": "מטה יהודה"
     }
 ]
+
+export default cities

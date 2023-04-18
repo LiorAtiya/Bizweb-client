@@ -17,6 +17,11 @@ class ApiRoutes extends Component {
             .then(response => response);
     }
 
+    async fastLogin(user) {
+        return await axios.post(`${this.state.route}/api/auth/fast-login`,user)
+            .then(response => response);
+    }
+
     // Register Page
     async register(user) {
         return await axios.post(`${this.state.route}/api/auth/register`, user)

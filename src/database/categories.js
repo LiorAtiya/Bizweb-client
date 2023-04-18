@@ -5,7 +5,7 @@ import renovationsImg from '../images/renovations.jpeg'
 import personalTrainersImg from '../images/personal-trainer.jpeg'
 import privateTeachersImg from'../images/private-teachers.jpeg'
 
-export default [
+const categories = [
     {
         "id": 1,
         "name": "Barbershop",
@@ -43,3 +43,5 @@ export default [
         "image": privateTeachersImg
     },
 ]
+
+export default categories;

@@ -1,5 +1,5 @@
 import React from 'react'
-import Banner from '../components/general/Banner'
+// import Banner from '../components/general/Banner'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import BusinessContainer from '../components/category/BusinessContainer'
 import categories from '../database/categories'

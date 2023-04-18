@@ -4,6 +4,10 @@ import Register from "./Register";
 import { useHistory } from "react-router-dom";
 // import axious from 'axios'
 import ApiClient from "../api/ApiRoutes";
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 export default function Login() {
   const email = useRef();
@@ -25,18 +29,40 @@ export default function Login() {
         }
       })
       .catch(error => console.error(error));
+  }
 
-    // await axious.post("https://facework-server-production.up.railway.app/api/auth/login",
-    //   { email: email.current.value, password: password.current.value })
-    //   .then((res) => {
-    //     if (res.status !== 200) {
-    //       window.localStorage.setItem("token", JSON.stringify(res.data));
-    //       history.push("/")
-    //       window.location.reload(false);
-    //     } else {
-    //       alert("Wrong email or password");
-    //     }
-    //   })
+  const handleFacebookLogin = (data) => {
+    const user = {
+      firstname: data.first_name,
+      lastname: data.last_name,
+      username: data.name,
+      email: data.email,
+    }
+
+    ApiClient.fastLogin(user)
+      .then((res) => {
+        window.localStorage.setItem("token", JSON.stringify(res.data));
+        history.push("/")
+        window.location.reload(false);
+      })
+      .catch(error => console.error(error));
+  }
+
+  const handleGoogleLogin = (data) => {
+    const user = {
+      firstname: data.given_name,
+      lastname: data.family_name,
+      username: data.name,
+      email: data.access_token,
+    }
+
+    ApiClient.fastLogin(user)
+      .then((res) => {
+        window.localStorage.setItem("token", JSON.stringify(res.data));
+        history.push("/")
+        window.location.reload(false);
+      })
+      .catch(error => console.error(error));
   }
 
   const [signIn, toggle] = useState(true);
@@ -59,7 +85,35 @@ export default function Login() {
           />
           <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
           <Components.Button type="submit">Login</Components.Button>
+          <br></br>
+
+          <LoginSocialFacebook
+            appId="240332511865369"
+            onResolve={(response) => {
+              handleFacebookLogin(response.data)
+              // console.log(response.data);
+            }}
+            onReject={(error) => {
+              console.log(error);
+            }}
+          >
+            <FacebookLoginButton style={{ fontSize: '15px' }} />
+          </LoginSocialFacebook>
+
+          <LoginSocialGoogle
+            client_id="240636526312-d704r4q492s3o79gc5br0fcl39taohgn.apps.googleusercontent.com"
+            onResolve={(response) => {
+              handleGoogleLogin(response.data)
+              // console.log(response);
+            }}
+            onReject={(error) => {
+              console.log(error);
+            }}
+          >
+            <GoogleLoginButton style={{ fontSize: '15px' }} />
+          </LoginSocialGoogle >
         </Components.Form>
+
       </Components.SignInContainer>
 
       <Components.OverlayContainer signinIn={signIn}>

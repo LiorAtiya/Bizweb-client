@@ -14,8 +14,6 @@ import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
 
 //Day marked
-// import TextField from '@mui/material/TextField';
-// import CheckIcon from '@mui/icons-material/Check';
 import Badge from '@mui/material/Badge';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 
@@ -260,7 +258,6 @@ const Calendar = ({ id, businessName }) => {
                     return <div className='btnHours' onClick={() => setTime(item.time)}>{item.time}</div>
                 })
                 setFilteredFreeEvents(oldArray => [...oldArray, FreeEvent])
-                // console.log(filteredFreeEvents);
             })
             .catch((err) => console.log(err));
 
@@ -353,8 +350,7 @@ const Calendar = ({ id, businessName }) => {
                                 const isSelected =
                                     !DayComponentProps.outsideCurrentMonth &&
                                     highlightedDays.includes(day.getDate()+'/'+(day.getMonth()+1)+"/"+day.getFullYear());
-                                    console.log(isSelected)
-                                    console.log(day.getDate()+'/'+(day.getMonth()-1)+"/"+day.getFullYear())
+                                    
                                 return (
                                     <Badge
                                         key={day.toString()}

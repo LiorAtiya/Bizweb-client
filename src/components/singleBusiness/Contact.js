@@ -17,13 +17,13 @@ export default function Googlemap({ business }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const styles = {
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-  }
+  // const styles = {
+  //   container: {
+  //     display: "flex",
+  //     flexDirection: "column",
+  //     alignItems: "center",
+  //   },
+  // }
 
   const pushPin = {
     center: {
