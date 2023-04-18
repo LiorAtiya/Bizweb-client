@@ -56,6 +56,8 @@ export default function Login() {
       email: data.access_token,
     }
 
+    console.log(user)
+
     ApiClient.fastLogin(user)
       .then((res) => {
         window.localStorage.setItem("token", JSON.stringify(res.data));
@@ -104,7 +106,7 @@ export default function Login() {
             client_id="240636526312-d704r4q492s3o79gc5br0fcl39taohgn.apps.googleusercontent.com"
             onResolve={(response) => {
               handleGoogleLogin(response.data)
-              // console.log(response);
+              console.log(response);
             }}
             onReject={(error) => {
               console.log(error);
