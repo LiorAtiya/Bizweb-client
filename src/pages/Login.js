@@ -61,8 +61,8 @@ export default function Login() {
     ApiClient.fastLogin(user)
       .then((res) => {
         window.localStorage.setItem("token", JSON.stringify(res.data));
-        history.push("/")
-        window.location.reload(false);
+        // history.push("/")
+        // window.location.reload(false);
       })
       .catch(error => console.error(error));
   }
