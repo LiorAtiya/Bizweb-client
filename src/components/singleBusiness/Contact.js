@@ -64,7 +64,7 @@ export default function Googlemap({ business }) {
           {
             flagMap ?
               <BingMapsReact
-                bingMapsKey="Am7ABZsl1hVs093AjZV82C3wxd-NCQ-KtBLpdtv4uB1UBvqIx7vcgN7Dw1A9RpQt"
+                bingMapsKey={process.env.REACT_APP_BING_MAPS_KEY}
                 height="300px"
                 mapOptions={{
                   navigationBarMode: "square",
