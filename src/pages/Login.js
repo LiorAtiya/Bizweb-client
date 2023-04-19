@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import * as Components from '../styles/StyledForm';
 import Register from "./Register";
 import { useHistory } from "react-router-dom";
-// import axious from 'axios'
 import ApiClient from "../api/ApiRoutes";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
@@ -90,7 +89,7 @@ export default function Login() {
           <br></br>
 
           <LoginSocialFacebook
-            appId="240332511865369"
+            appId={process.env.REACT_APP_FB_APP_ID}
             onResolve={(response) => {
               handleFacebookLogin(response.data)
             }}
@@ -102,10 +101,9 @@ export default function Login() {
           </LoginSocialFacebook>
 
           <LoginSocialGoogle
-            client_id="240636526312-d704r4q492s3o79gc5br0fcl39taohgn.apps.googleusercontent.com"
+            client_id={process.env.REACT_APP_GG_APP_ID}
             onResolve={(response) => {
               handleGoogleLogin(response.data)
-              // console.log(response.data)
             }}
             onReject={(error) => {
               console.log(error);
