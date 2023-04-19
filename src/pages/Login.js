@@ -53,16 +53,17 @@ export default function Login() {
       firstname: data.given_name,
       lastname: data.family_name,
       username: data.name,
-      email: data.access_token,
+      email: data.access_token.substring(0, 20),
     }
 
+    // console.log(user)
     ApiClient.fastLogin(user)
       .then((res) => {
         console.log('testt ')
         console.log(res.data)
         window.localStorage.setItem("token", JSON.stringify(res.data));
-        history.push("/")
-        window.location.reload(false);
+        // history.push("/")
+        // window.location.reload(false);
       })
       .catch(error => console.error(error));
   }
