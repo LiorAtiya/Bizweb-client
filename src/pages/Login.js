@@ -35,7 +35,7 @@ export default function Login() {
     const user = {
       firstname: data.first_name,
       lastname: data.last_name,
-      username: data.name,
+      username: "user"+ Math.floor(Date.now() + Math.random()),
       email: data.email,
     }
 
@@ -53,12 +53,13 @@ export default function Login() {
     const user = {
       firstname: data.given_name,
       lastname: data.family_name,
-      username: data.name,
+      username: "user"+ Math.floor(Date.now() + Math.random()),
       email: data.picture,
     }
 
     ApiClient.fastLogin(user)
       .then((res) => {
+        console.log(res)
         window.localStorage.setItem("token", JSON.stringify(res.data));
         history.push("/")
         window.location.reload(false);
@@ -104,6 +105,7 @@ export default function Login() {
             client_id="240636526312-d704r4q492s3o79gc5br0fcl39taohgn.apps.googleusercontent.com"
             onResolve={(response) => {
               handleGoogleLogin(response.data)
+              // console.log(response.data)
             }}
             onReject={(error) => {
               console.log(error);
