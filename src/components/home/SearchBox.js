@@ -1,7 +1,11 @@
 import React from 'react';
 import '../../styles/SearchBox.css'
+import { useTranslation } from 'react-i18next';
 
 const SearchBox = ({ searchChange }) => {
+    
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="input-container">
@@ -9,7 +13,7 @@ const SearchBox = ({ searchChange }) => {
                     className="search-input"
                     type="text"
                     id="search"
-                    placeholder='Quick search'
+                    placeholder={t("QuickSearch")}
                     onChange={searchChange}
                 />
                 <div className='search-btn'>

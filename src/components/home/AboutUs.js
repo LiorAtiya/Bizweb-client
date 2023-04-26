@@ -3,12 +3,16 @@ import Title from '../general/Title'
 import Facebook from '../../images/facebook.png'
 import Instagram from '../../images/instagram.png'
 import Linkedin from '../../images/LinkedIn.png'
+import { useTranslation } from 'react-i18next';
 
 export default function AboutUs() {
+
+    const { t } = useTranslation();
+
     return (
         <div>
             <section className='aboutus'>
-                <Title title="Look For Us" color="black" />
+                <Title title={t("LookForUs")} color="black" />
                 <div className='aboutus-images'>
                     <img src={Facebook} alt="Logo" style={{ height: '30px', width: '30px', marginRight: "25px" }}
                         onClick={() => {

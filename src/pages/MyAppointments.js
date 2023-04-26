@@ -5,11 +5,15 @@ import Button from 'react-bootstrap/Button';
 // import axios from 'axios';
 import '../styles/Form.css'
 import ApiClient from '../api/ApiRoutes';
+import { useTranslation } from 'react-i18next';
 
 export default function MyAppointments() {
 
     let { userID } = useParams();
     const [userData, setUserData] = useState();
+    const { t } = useTranslation();
+
+    const currentLanguage = localStorage.getItem('language')
 
     useEffect(() => {
         const getResult = async () => {
@@ -53,27 +57,45 @@ export default function MyAppointments() {
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
-                <h2>My Appointments</h2>
+                <h2>{t("MyAppointments")}</h2>
                 <hr></hr>
                 {
                     userData ?
                         userData.myAppointments.map(item => {
                             return (
                                 <>
-                                    <Card>
-                                        <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
-                                        <Card.Body>
-                                            <Card.Text>
-                                                <b>Date: </b>{item.date}
-                                                <br />
-                                                <b>Time: </b>{item.time}
-                                                <br />
-                                            </Card.Text>
-                                            <Button variant="btn btn-danger"
-                                                onClick={() => deleteEvent(item.businessID, item.time, item.name, item.phone, item.date)}
-                                            >Delete</Button>
-                                        </Card.Body>
-                                    </Card>
+                                    {
+                                        currentLanguage === 'he' ?
+                                            <Card>
+                                                <Card.Header>{item.name}<b> :שם העסק</b> </Card.Header>
+                                                <Card.Body>
+                                                    <Card.Text>
+                                                        {item.date}<b> :תאריך</b>
+                                                        <br />
+                                                        {item.time}<b> :שעה</b>
+                                                        <br />
+                                                    </Card.Text>
+                                                    <Button variant="btn btn-danger"
+                                                        onClick={() => deleteEvent(item.businessID, item.time, item.name, item.phone, item.date)}
+                                                    >מחק</Button>
+                                                </Card.Body>
+                                            </Card>
+                                            :
+                                            <Card>
+                                                <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
+                                                <Card.Body>
+                                                    <Card.Text>
+                                                        <b>Date: </b>{item.date}
+                                                        <br />
+                                                        <b>Time: </b>{item.time}
+                                                        <br />
+                                                    </Card.Text>
+                                                    <Button variant="btn btn-danger"
+                                                        onClick={() => deleteEvent(item.businessID, item.time, item.name, item.phone, item.date)}
+                                                    >Delete</Button>
+                                                </Card.Body>
+                                            </Card>
+                                    }
                                     <br />
                                 </>
                             )

@@ -4,8 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ApiClient from '../../api/ApiRoutes';
 import "../../styles/Gallery.css"
+import { useTranslation } from 'react-i18next';
 
 export const Gallery = ({ id, name }) => {
+
+  const { t } = useTranslation();
 
   //data of all images
   const [data, setData] = useState([]);
@@ -119,7 +122,7 @@ export const Gallery = ({ id, name }) => {
         isAdmin() ?
           <>
             <Button variant="btn btn-warning" onClick={handleShow}>
-              <b>Admin Permissions</b>
+              <b>{t("AdminPermissions")}</b>
             </Button>
             <hr></hr>
           </>
@@ -133,27 +136,27 @@ export const Gallery = ({ id, name }) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <h5>Admin Permissions</h5>
+          <h5>{t("AdminPermissions")}</h5>
         </Modal.Header>
         <Modal.Body>
           {/* <br></br> */}
           {/* <input type="file" filename="image"
             onChange={handleImage} /> */}
-          <h6>Select a photo to add to the gallery:</h6>
+          <h6>{t('SelectPhotoToAdd')}</h6>
           <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
-            Choose file
+            {t('ChooseBtn')}
           </div>
           <br /><br />
-          <h6>Update background photo:</h6>
+          <h6>{t('UpdateBackgroundPhoto')}</h6>
           <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidgetForBackground()}>
-            Choose file
+            {t('ChooseBtn')}
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t('Close')}
           </Button>
-          <Button variant="btn btn-success" onClick={uploadImage}>Upload</Button>
+          <Button variant="btn btn-success" onClick={uploadImage}>{t('Upload')}</Button>
         </Modal.Footer>
       </Modal>
 
@@ -164,13 +167,13 @@ export const Gallery = ({ id, name }) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <h5>Remove image?</h5>
+          <h5>{t('RemoveImage')}</h5>
         </Modal.Header>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose2}>
-            Close
+            {t('Close')}
           </Button>
-          <Button variant="btn btn-danger" onClick={handleRemoveImage}>Remove</Button>
+          <Button variant="btn btn-danger" onClick={handleRemoveImage}>{t('Remove')}</Button>
         </Modal.Footer>
       </Modal>
 

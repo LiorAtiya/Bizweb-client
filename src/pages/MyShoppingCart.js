@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import ApiClient from '../api/ApiRoutes';
 import '../styles/MyShoppingCart.css'
+import { useTranslation } from 'react-i18next';
 
 export default function MyShoppingCart() {
 
     let { userID } = useParams();
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         const getResult = async () => {
@@ -64,20 +67,20 @@ export default function MyShoppingCart() {
 
     return (
         <div className="cart-container">
-            <h2>Shopping Cart</h2>
+            <h2>{t("ShoppingCart")}</h2>
             {
                 cart.myShoppingCart?.length === 0 ? (
                     <div className="cart-empty">
-                        <p>Your cart is currently empty</p>
+                        <p>{t("EmptyCart")}</p>
                     </div>
                 ) : (
                     <div>
                         <div className="titles">
-                            <h3 className="product-title">Product</h3>
-                            <h3 className="shop">Shop</h3>
-                            <h3 className="price">price</h3>
-                            <h3 className="quantity">Quantity</h3>
-                            <h3 className="total">Total</h3>
+                            <h3 className="product-title">{t("Product")}</h3>
+                            <h3 className="shop">{t("Shop")}</h3>
+                            <h3 className="price">{t("Price")}</h3>
+                            <h3 className="quantity">{t("Quantity")}</h3>
+                            <h3 className="total">{t("Total")}</h3>
                         </div>
                         <div className="cart-items">
 
@@ -87,7 +90,7 @@ export default function MyShoppingCart() {
                                     <div>
                                         <h3>{cartItem.name}</h3>
                                         <p>{cartItem.description}</p>
-                                        <button onClick={() => handleRemoveFromCart(cartItem)}>Remove</button>
+                                        <button onClick={() => handleRemoveFromCart(cartItem)}>{t("Remove")}</button>
                                     </div>
                                 </div>
                                 <div className="cart-product-shop">{cartItem.businessName}</div>
@@ -103,14 +106,14 @@ export default function MyShoppingCart() {
                             </div>))}
                         </div>
                         <div className="cart-summary">
-                            <button className="clear-btn" onClick={() => handleClearCart()}>Clear Cart</button>
+                            <button className="clear-btn" onClick={() => handleClearCart()}>{t("ClearCart")}</button>
                             <div className="cart-checkout">
                                 <div className="subtotal">
-                                    <span>Subtotal</span>
+                                    <span>{t("Subtotal")}</span>
                                     <span className="amount">₪{totalPrice}</span>
                                 </div>
-                                <p>Taxes and shipping calculated at checkout</p>
-                                <button>Check out</button>
+                                <p>{t("Taxes")}</p>
+                                <button>{t("CheckOut")}</button>
                                 {/* <div className="continue-shopping">
                                     <Link>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">

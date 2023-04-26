@@ -3,7 +3,7 @@ import polishImg from '../images/polish.jpeg'
 import restaurantsImg from '../images/restaurants.jpeg'
 import renovationsImg from '../images/renovations.jpeg'
 import personalTrainersImg from '../images/personal-trainer.jpeg'
-import privateTeachersImg from'../images/private-teachers.jpeg'
+import privateTeachersImg from '../images/private-teachers.jpeg'
 
 const categories = [
     {

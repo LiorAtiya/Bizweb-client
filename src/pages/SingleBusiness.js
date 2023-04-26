@@ -15,11 +15,14 @@ import Contact from '../components/singleBusiness/Contact'
 import Shop from '../components/singleBusiness/Shop';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { BusinessContext } from '../context/BusinessContext'
+import { useTranslation } from 'react-i18next';
 
 export default function SingleBusiness() {
 
   let { name } = useParams();
   const context = useContext(BusinessContext)
+
+  const { t } = useTranslation();
 
   //get data of business
   const { getBusiness } = context;
@@ -49,19 +52,19 @@ export default function SingleBusiness() {
                         if (i === 0) {
                           return (
                             <Nav.Item key={i}>
-                              <Nav.Link eventKey={'tab-first'}>{tab}</Nav.Link>
+                              <Nav.Link eventKey={'tab-first'}>{t(tab)}</Nav.Link>
                             </Nav.Item>
                           )
                         } else if (i === business.tabs.length - 1) {
                           return (
                             <Nav.Item key={i}>
-                              <Nav.Link eventKey={'tab-last'}>{tab}</Nav.Link>
+                              <Nav.Link eventKey={'tab-last'}>{t(tab)}</Nav.Link>
                             </Nav.Item>
                           )
                         } else {
                           return (
                             <Nav.Item key={i}>
-                              <Nav.Link eventKey={'tab-' + tab}>{tab}</Nav.Link>
+                              <Nav.Link eventKey={'tab-' + tab}>{t(tab)}</Nav.Link>
                             </Nav.Item>
                           )
                         }

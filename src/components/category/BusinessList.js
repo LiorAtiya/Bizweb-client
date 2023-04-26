@@ -1,14 +1,17 @@
 import React from 'react'
 import Business from './Business'
+import { useTranslation } from 'react-i18next';
 
 export default function BusinessList({ business, type }) {
+
+  const { t } = useTranslation();
 
   let exist = business.filter(busi => busi.category.toLowerCase() === type);
   
   if (business.length === 0 || exist.length === 0) {
     return (
       <div className='empty-search'>
-        <h3>Unfortunately no business matched your search parameters</h3>
+        <h3>{t("Unfortunately")}</h3>
       </div>
     )
   }

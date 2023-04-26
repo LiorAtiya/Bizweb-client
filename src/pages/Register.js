@@ -4,6 +4,7 @@ import * as Components from '../styles/StyledForm';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 // import axios from "axios";
 import ApiClient from "../api/ApiRoutes";
+import { useTranslation } from 'react-i18next';
 
 const auth = getAuth(app)
 
@@ -14,6 +15,7 @@ export default function Register() {
   const email = useRef();
   const password = useRef();
 
+  const { t } = useTranslation();
 
   const otp = useRef();
   const [phone, setPhone] = useState("");
@@ -94,13 +96,6 @@ export default function Register() {
         window.location.reload(false);
       })
       .catch(error => console.error(error))
-
-      // try {
-      //   await axios.post("https://facework-server-production.up.railway.app/api/auth/register",user)
-      //   window.location.reload(false);
-      // }catch(err){
-      //   console.log(err);
-      // }
       
     } else {
       alert("Please Verify Mobile");
@@ -109,24 +104,24 @@ export default function Register() {
 
   return (
     <Components.Form onSubmit={handleClick}>
-      <Components.Title>Create Account</Components.Title>
+      <Components.Title>{t('CreateAccount')}</Components.Title>
       <div id="recaptcha-container"></div>
 
-      <Components.Input type='text' placeholder='First Name' 
+      <Components.Input type='text' placeholder={t('Firstname')} 
           required
           ref={firstname}
       />
-      <Components.Input type='text' placeholder='Last Name' 
+      <Components.Input type='text' placeholder={t('Lastname')} 
           required
           ref={lastname}
       />
-      <Components.Input type='text' placeholder='Username' 
+      <Components.Input type='text' placeholder={t('Username')} 
           required
           ref={username}
       />
 
 <div>
-      <Components.Input type='number' placeholder='Phone' 
+      <Components.Input type='number' placeholder={t('Phone')} 
           required
           onChange={(e) => changeMobile(e)}
       />
@@ -135,7 +130,7 @@ export default function Register() {
         type="button" 
         onClick={onSignInSubmit} 
         >
-         {verified? "Verified" : "Verify"} 
+         {verified? t('Verified') : t('Verify')} 
         </Components.Button>
         : null}
       </div>
@@ -144,7 +139,7 @@ export default function Register() {
       <>
         <Components.Input
           type="number"
-          placeholder="Enter OTP"
+          placeholder={t('EnterOTP')}
           ref={otp}
         />
         <Components.Button
@@ -158,16 +153,16 @@ export default function Register() {
         : 
         null}
 
-      <Components.Input type='email' placeholder='Email'
+      <Components.Input type='email' placeholder={t('Email')}
           required
           ref={email}
       />
-      <Components.Input type='password' placeholder='Password' 
+      <Components.Input type='password' placeholder={t('Password')} 
           required
           ref={password}
       />
 
-      <Components.Button type="submit">Register</Components.Button>
+      <Components.Button type="submit">{t('Register')}</Components.Button>
     </Components.Form>
   )
 }

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react'
-// import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
 import '../styles/NewBusiness.css'
 import ApiClient from '../api/ApiRoutes';
+import { useTranslation } from 'react-i18next';
 
 export default function NewBusiness() {
     const category = useRef("");
@@ -14,6 +14,8 @@ export default function NewBusiness() {
     const address = useRef("");
     const phone = useRef("");
     const history = useHistory();
+
+    const { t } = useTranslation();
 
     const [backgroundPicture, setBackgroundPicture] = useState("");
 
@@ -105,45 +107,45 @@ export default function NewBusiness() {
         <Components.NewBusinessContainer>
 
             <Components.NewBusinessForm>
-                <Components.Title>Open a new business</Components.Title>
+                <Components.Title>{t("OpenNewBussiness")}</Components.Title>
                 <br />
                 <div className="mb-3">
                     <label>
-                        <b>Category of your business:</b><br />
+                        <b>{t("Category")}</b><br />
                         <Components.Select ref={category}>
-                            <option value="Barbershop">Barbershop</option>
-                            <option value="Nail Polish">Nail Polish</option>
-                            <option value="Restaurants">Restaurants</option>
-                            <option value="Professionals">Professionals</option>
-                            <option value="Personal Trainers">Personal Trainers</option>
-                            <option value="Private Teachers">Private Teachers</option>
+                            <option value="Barbershop">{t("Barbershop")}</option>
+                            <option value="Nail Polish">{t("Nail Polish")}</option>
+                            <option value="Restaurants">{t("Restaurants")}</option>
+                            <option value="Professionals">{t("Professionals")}</option>
+                            <option value="Personal Trainers">{t("Personal Trainers")}</option>
+                            <option value="Private Teachers">{t("Private Teachers")}</option>
                         </Components.Select>
                     </label>
                 </div>
 
-                <Components.NewBusinessInput type='text' placeholder='Business Name'
+                <Components.NewBusinessInput type='text' placeholder={t("BusinessName")}
                     required ref={name} maxLength='15'
                 />
-                <Components.TextArea type='textarea' placeholder='Description'
+                <Components.TextArea type='textarea' placeholder={t("Description")}
                     required ref={description} maxLength='400'
                 />
 
-                <b>Choose what you want in your business:</b>
+                <b>{t("ChooseTabs")}</b>
                 <div className="mb-3 tabs-container">
                     <div className='checkbox-tab'>
-                        <input type="checkbox" value='gallery' onChange={handleGallery} /> Gallery
+                        <input type="checkbox" value='gallery' onChange={handleGallery} /> {t("Gallery")}
                     </div>
                     <div className='checkbox-tab'>
-                        <input type="checkbox" value='shop' onChange={handleShop} /> Shop
+                        <input type="checkbox" value='shop' onChange={handleShop} /> {t("Shop")}
                     </div>
                     <div className='checkbox-tab'>
-                        <input type="checkbox" value='calender' onChange={handleCalender} /> Callender
+                        <input type="checkbox" value='calender' onChange={handleCalender} /> {t("Calender")}
                     </div>
                     <div className='checkbox-tab'>
-                        <input type="checkbox" value='reviews' onChange={handleReviews} /> Reviews
+                        <input type="checkbox" value='reviews' onChange={handleReviews} /> {t("Reviews")}
                     </div>
                     <div className='checkbox-tab'>
-                        <input type="checkbox" value='contact' onChange={handleContact} /> Contact
+                        <input type="checkbox" value='contact' onChange={handleContact} /> {t("Contact")}
                     </div>
                 </div>
 
@@ -152,18 +154,18 @@ export default function NewBusiness() {
                         <>
                             <div className="mb-3">
                                 <label>
-                                    <b>City:</b><br></br>
+                                    <b>{t("City")}</b><br></br>
                                     <Components.Select ref={city}>
                                         {citiesMap}
                                     </Components.Select>
                                 </label>
                             </div>
 
-                            <Components.NewBusinessInput type='text' placeholder='Address'
+                            <Components.NewBusinessInput type='text' placeholder={t("Address")}
                                 required ref={address}
                             />
 
-                            <Components.NewBusinessInput type='number' placeholder='Phone'
+                            <Components.NewBusinessInput type='number' placeholder={t("Phone")}
                                 required ref={phone}
                             />
                         </>
@@ -172,7 +174,7 @@ export default function NewBusiness() {
 
                 <div className="mb-3">
                     <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={handleOpenWidget}>
-                        Choose background image
+                        {t("BackgroundImage")}
                     </Components.ButtonPic>
                     {
                         backgroundPicture !== "" ?
@@ -184,7 +186,7 @@ export default function NewBusiness() {
                     }
                 </div>
 
-                <Components.Button type="button" onClick={handleClick}>Create</Components.Button>
+                <Components.Button type="button" onClick={handleClick}>{t("Create")}</Components.Button>
             </Components.NewBusinessForm>
 
         </Components.NewBusinessContainer >

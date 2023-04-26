@@ -5,6 +5,7 @@ import * as Components from '../styles/StyledForm';
 import cities from '../database/cities'
 import ApiClient from '../api/ApiRoutes';
 import { useHistory } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function EditBusiness() {
     let { name } = useParams();
@@ -14,6 +15,8 @@ export default function EditBusiness() {
     const { getBusiness } = context;
     const business = getBusiness(name);
     let history = useHistory();
+
+    const { t } = useTranslation();
 
     const [nameBusiness, setNameBusiness] = useState(name);
     const [description, setDescription] = useState("")
@@ -116,49 +119,49 @@ export default function EditBusiness() {
             {
                 business ?
                     <Components.NewBusinessForm>
-                        <Components.Title>Edit business details </Components.Title>
+                        <Components.Title>{t("EditBusiness")}</Components.Title>
                         <br />
-                        <b>Category of your business:</b>
+                        <b>{t("Category")}</b>
                         <Components.Select ref={category}>
-                            <option value="Barbershop">Barbershop</option>
-                            <option value="Nail Polish">Nail Polish</option>
-                            <option value="Restaurants">Restaurants</option>
-                            <option value="Professionals">Professionals</option>
-                            <option value="Personal Trainers">Personal Trainers</option>
-                            <option value="Private Teachers">Private Teachers</option>
+                            <option value="Barbershop">{t("Barbershop")}</option>
+                            <option value="Nail Polish">{t("Nail Polish")}</option>
+                            <option value="Restaurants">{t("Restaurants")}</option>
+                            <option value="Professionals">{t("Professionals")}</option>
+                            <option value="Personal Trainers">{t("Personal Trainers")}</option>
+                            <option value="Private Teachers">{t("Private Teachers")}</option>
                         </Components.Select>
                         <br />
 
-                        <b>Business Name</b>
+                        <b>{t("BusinessName")}</b>
                         <Components.Input type='text' value={nameBusiness} onChange={onChangeName} />
                         <br />
 
-                        <b>Description</b>
+                        <b>{t("Description")}</b>
                         <Components.TextArea type='textarea' value={description} onChange={onChangeDescription} />
                         <br />
 
                         <div className="mb-3">
                             <label>
-                                <b>City:</b><br></br>
+                                <b>{t("City")}</b><br></br>
                                 <Components.Select ref={city}>
                                     {citiesMap}
                                 </Components.Select>
                             </label>
                         </div>
 
-                        <b>Address</b>
+                        <b>{t("Address")}</b>
                         <Components.Input type='text' value={address} onChange={onChangeAddress}
                         />
                         <br />
 
-                        <b>Phone</b>
+                        <b>{t("Phone")}</b>
                         <Components.Input type='number' value={phone} onChange={onChangePhone}
                         />
 
 
                         <br />
                         <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={handleOpenWidget}>
-                            Change background image
+                            {t("BackgroundImage")}
                         </Components.ButtonPic>
                         {
                             <Components.Pic>
@@ -167,7 +170,7 @@ export default function EditBusiness() {
                         }
 
 
-                        <Components.Button type="button" onClick={updateDetails}>Confirm</Components.Button>
+                        <Components.Button type="button" onClick={updateDetails}>{t("Confirm")}</Components.Button>
                     </Components.NewBusinessForm>
                     :
                     null

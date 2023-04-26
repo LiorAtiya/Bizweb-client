@@ -6,14 +6,18 @@ import { BusinessContext } from '../context/BusinessContext'
 import Modal from 'react-bootstrap/Modal';
 import ApiClient from '../api/ApiRoutes';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function MyBusiness() {
 
     const context = useContext(BusinessContext)
     const { getAllBusinessOfUser } = context;
+    const { t } = useTranslation();
 
     const getUserData = JSON.parse(localStorage.getItem('token'));
     const allBusiness = getAllBusinessOfUser(getUserData.business);
+
+    const currentLanguage = localStorage.getItem('language')
 
     const [businessToDelete, setBusinessToDelete] = useState("");
 
@@ -36,24 +40,39 @@ export default function MyBusiness() {
         <>
             <div className="auth-wrapper">
                 <div className="auth-inner">
-                    <h2>My Business</h2>
+                    <h2>{t("MyBusiness")}</h2>
                     <hr></hr>
                     {
-                        allBusiness.map((item,i) => {
+                        allBusiness.map((item, i) => {
                             return (
-                                <div key={i}>
-                                    <Card>
-                                        <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
-                                        <Card.Body>
-                                            <Button variant="btn btn-warning" style={{ margin: "10px" } } as={Link} to={`/editbusiness/${item.name}`}
-                                            >Edit</Button>
-                                            <Button variant="btn btn-danger"
-                                                onClick={() => handleShow(item._id)}
-                                            >Delete</Button>
-                                        </Card.Body>
-                                    </Card>
-                                    <br />
-                                </div>
+                                currentLanguage === 'he' ?
+                                    <div key={i}>
+                                        <Card>
+                                            <Card.Header>{item.name} <b> :שם העסק</b></Card.Header>
+                                            <Card.Body>
+                                                <Button variant="btn btn-warning" style={{ margin: "10px" }} as={Link} to={`/editbusiness/${item.name}`}
+                                                >עריכה</Button>
+                                                <Button variant="btn btn-danger"
+                                                    onClick={() => handleShow(item._id)}
+                                                >מחיקה</Button>
+                                            </Card.Body>
+                                        </Card>
+                                        <br />
+                                    </div>
+                                    :
+                                    <div key={i}>
+                                        <Card>
+                                            <Card.Header><b>Business Name:</b> {item.name}</Card.Header>
+                                            <Card.Body>
+                                                <Button variant="btn btn-warning" style={{ margin: "10px" }} as={Link} to={`/editbusiness/${item.name}`}
+                                                >Edit</Button>
+                                                <Button variant="btn btn-danger"
+                                                    onClick={() => handleShow(item._id)}
+                                                >Delete</Button>
+                                            </Card.Body>
+                                        </Card>
+                                        <br />
+                                    </div>
                             )
                         })
                     }

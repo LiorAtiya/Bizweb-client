@@ -7,12 +7,15 @@ import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
 
   let history = useHistory();
+
+  const { t } = useTranslation();
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -34,7 +37,7 @@ export default function Login() {
     const user = {
       firstname: data.first_name,
       lastname: data.last_name,
-      username: "user"+ Math.floor(Date.now() + Math.random()),
+      username: "user" + Math.floor(Date.now() + Math.random()),
       email: data.email,
     }
 
@@ -52,7 +55,7 @@ export default function Login() {
     const user = {
       firstname: data.given_name,
       lastname: data.family_name,
-      username: "user"+ Math.floor(Date.now() + Math.random()),
+      username: "user" + Math.floor(Date.now() + Math.random()),
       email: data.picture,
     }
 
@@ -75,17 +78,17 @@ export default function Login() {
 
       <Components.SignInContainer signinIn={signIn}>
         <Components.Form onSubmit={handleClick}>
-          <Components.Title>Login</Components.Title>
-          <Components.Input type='email' placeholder='Email'
+          <Components.Title>{t('Login')}</Components.Title>
+          <Components.Input type='email' placeholder={t('Email')}
             required
             ref={email}
           />
-          <Components.Input type='password' placeholder='Password'
+          <Components.Input type='password' placeholder={t('Password')}
             required
             ref={password}
           />
-          <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-          <Components.Button type="submit">Login</Components.Button>
+          <Components.Anchor href='#'>{t('ForgotPassword')}</Components.Anchor>
+          <Components.Button type="submit">{t('Login')}</Components.Button>
           <br></br>
 
           <LoginSocialFacebook
@@ -119,22 +122,22 @@ export default function Login() {
         <Components.Overlay signinIn={signIn}>
 
           <Components.LeftOverlayPanel signinIn={signIn}>
-            <Components.Title>Welcome Back!</Components.Title>
+            <Components.Title>{t('WelcomeBack')}</Components.Title>
             <Components.Paragraph>
               To keep connected with us please login with your personal info
             </Components.Paragraph>
             <Components.GhostButton onClick={() => toggle(true)}>
-              Login
+              {t('Login')}
             </Components.GhostButton>
           </Components.LeftOverlayPanel>
 
           <Components.RightOverlayPanel signinIn={signIn}>
-            <Components.Title>Hello, Friend!</Components.Title>
+            <Components.Title>{t('HelloFriend')}</Components.Title>
             <Components.Paragraph>
               Enter Your personal details and start journey with us
             </Components.Paragraph>
             <Components.GhostButton onClick={() => toggle(false)}>
-              Register
+            {t('Register')}
             </Components.GhostButton>
           </Components.RightOverlayPanel>
 

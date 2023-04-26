@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { BusinessContext } from '../../context/BusinessContext'
 // import Title from "../components/Title"
+import { useTranslation } from 'react-i18next';
 
 //Get all uniqe values
 const getUnique = (item, value) => {
@@ -10,6 +11,8 @@ const getUnique = (item, value) => {
 
 export default function BusinessFilter({ business }) {
   const context = useContext(BusinessContext)
+
+  const { t } = useTranslation();
 
   const {
     handleChange,
@@ -45,19 +48,19 @@ export default function BusinessFilter({ business }) {
       <form className='filter-form'>
 
         <div className='form-group'>
-          <label htmlFor='type'><b>Filter by city</b></label>
+          <label htmlFor='type'><b>{t("FilterCity")}</b></label>
           <select name='city' id='city' value={city} className='form-control' onChange={handleChange}>
             {types}
           </select>
         </div>
 
         <div className='form-group'>
-            <label htmlFor='type'><b>Filter by name</b></label>
+            <label htmlFor='type'><b>{t("FilterName")}</b></label>
             <input 
                 name='businessName'
                 type='search'
                 className='form-control'
-                placeholder='Search by business name'
+                placeholder={t("FieldName")}
                 onChange={handleChange}
             />
         </div>
