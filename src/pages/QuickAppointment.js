@@ -3,10 +3,13 @@ import cities from '../database/cities'
 import * as Components from '../styles/StyledForm';
 import Business from '../components/category/Business';
 import ApiRoutes from '../api/ApiRoutes';
+import { useTranslation } from 'react-i18next';
 
 export default function QuickAppointment() {
     const category = useRef("");
     const city = useRef();
+
+    const { t } = useTranslation();
 
     const [availables, setAvailables] = useState([]);
     const [appointmentFlag, setAppointmentFlag] = useState(false);
@@ -38,11 +41,11 @@ export default function QuickAppointment() {
         <Components.QuickAppointContainer>
 
             <Components.NewBusinessForm>
-                <Components.Title>Find the nearest available appointment</Components.Title>
+                <Components.Title>{t("FindNearest")}</Components.Title>
                 <br />
                 <div className="mb-3">
                     <label>
-                        <b>Category of business:</b><br />
+                        <b>{t("Category")}</b><br />
                         <Components.Select ref={category}>
                             <option value="Barbershop">Barbershop</option>
                             <option value="Nail Polish">Nail Polish</option>
@@ -56,7 +59,7 @@ export default function QuickAppointment() {
 
                 <div className="mb-3">
                     <label>
-                        <b>City:</b><br></br>
+                        <b>{t("City")}</b><br></br>
                         <Components.Select ref={city}>
                             {citiesMap}
                         </Components.Select>
@@ -68,10 +71,10 @@ export default function QuickAppointment() {
                         <>
                             {
                                 availables.length === 0 ?
-                                    <h1>No appointment available in the near future</h1>
+                                    <h1>{t("NoAppointmentAvailable")}</h1>
                                     :
                                     <>
-                                        <h5>Nearest Available: {availables[1].date} , at {availables[1].time}</h5><br />
+                                        <h5>{t("NearestAvailable")} <br/>{availables[1].date} , at {availables[1].time}</h5><br />
                                         <Components.AvailableContainer>
                                             <Business key={availables[0]._id} business={availables[0]} /><br />
                                         </Components.AvailableContainer>
@@ -82,7 +85,7 @@ export default function QuickAppointment() {
                         null
                 }
 
-                <Components.Button type="button" onClick={handleClick}>Find</Components.Button>
+                <Components.Button type="button" onClick={handleClick}>{t('Find')}</Components.Button>
             </Components.NewBusinessForm>
 
         </Components.QuickAppointContainer>

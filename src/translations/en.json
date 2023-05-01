@@ -58,6 +58,11 @@
   "EditBusiness":"Edit business details",
   "Confirm":"Confirm",
 
+  "FindNearest":"Find the nearest available appointment",
+  "Find":"Find",
+  "NoAppointmentAvailable":"No appointment available in the near future",
+  "NearestAvailable":"Nearest Available:",
+
   "QuickSearch": "Quick Search",
   "interest": "Maybe you are interested in",
   "Barbershop": "Barbershop",
@@ -83,4 +88,5 @@
   "Upload":"Upload",
   "Close":"Close",
   "RemoveImage":"Remove image?"
+  
 }

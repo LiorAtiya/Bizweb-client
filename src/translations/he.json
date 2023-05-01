@@ -58,6 +58,11 @@
     "EditBusiness":"עריכת דף עסק",
     "Confirm":"אישור",
 
+    "FindNearest":"מציאת תור מהיר",
+    "Find":"חפש",
+    "NoAppointmentAvailable":"אין תורים זמינים בזמן הקרוב",
+    "NearestAvailable":":תורים בזמן הקרוב",
+
     "QuickSearch": "חיפוש מהיר",
     "interest": "?עלול לעניין אותך",
     "Barbershop": "מספרות",
