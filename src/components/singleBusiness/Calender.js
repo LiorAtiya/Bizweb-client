@@ -12,6 +12,7 @@ import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
 import * as Components from '../../styles/StyledForm'
+import { useTranslation } from 'react-i18next';
 
 //Day marked
 import Badge from '@mui/material/Badge';
@@ -34,6 +35,8 @@ const Calendar = ({ id, businessName }) => {
     const [Flag, setFlag] = useState(false);
     const [events, setEvents] = useState([]);
     const [filteredFreeEvents, setFilteredFreeEvents] = useState([]);
+
+    const { t, i18n } = useTranslation();
 
     //Details of client
     const [time, setTime] = useState("");
@@ -194,7 +197,7 @@ const Calendar = ({ id, businessName }) => {
                     .then((res) => {
                         if (res.status !== 500) {
                             window.localStorage.setItem("token", JSON.stringify(res.data));
-                            // console.log("Added new appointment to list of user");
+                            
                         }
                     })
                     .catch((err) => console.log(err));
@@ -209,11 +212,11 @@ const Calendar = ({ id, businessName }) => {
             // comments.current.value = ""
             // setTime("")
             // setPhone("")
-            alert('A new appointment is scheduled, you will be notified about the appointment details');
+            alert(t('ConfirmAppointment'));
             window.location.reload(false);
 
         } else {
-            alert("Please Verify Mobile");
+            alert(t("PleaseVerifyMobile"));
         }
     }
 
@@ -281,7 +284,6 @@ const Calendar = ({ id, businessName }) => {
                 //Delete from list of appointment of user
                 ApiClient.deleteEventFromMyAppointments(appointment)
                     .then((res) => {
-                        console.log("Delete appointment from list of user")
                         window.location.reload(false);
                     })
                     .catch((err) => console.log(err));
@@ -349,8 +351,8 @@ const Calendar = ({ id, businessName }) => {
                             (day, _value, DayComponentProps) => {
                                 const isSelected =
                                     !DayComponentProps.outsideCurrentMonth &&
-                                    highlightedDays.includes(day.getDate()+'/'+(day.getMonth()+1)+"/"+day.getFullYear());
-                                    
+                                    highlightedDays.includes(day.getDate() + '/' + (day.getMonth() + 1) + "/" + day.getFullYear());
+
                                 return (
                                     <Badge
                                         key={day.toString()}
@@ -376,11 +378,11 @@ const Calendar = ({ id, businessName }) => {
                                         <>
                                             <div className='admin-container'>
                                                 <Button className='btn-admin' variant="btn btn-warning" onClick={handleShow}>
-                                                    <b>Add available hours</b>
+                                                    <b>{t('AddHours')}</b>
                                                 </Button>
                                                 <br></br>
                                                 <Button variant="btn btn-warning" onClick={handleShow2}>
-                                                    <b>List of appointments</b>
+                                                    <b>{t('ListAppointments')}</b>
                                                 </Button>
                                             </div>
                                             <hr></hr>
@@ -395,8 +397,8 @@ const Calendar = ({ id, businessName }) => {
                                     backdrop="static"
                                     keyboard={false}
                                 >
-                                    <Modal.Header closeButton>
-                                        <h5>Select hours to make appointments</h5>
+                                    <Modal.Header className='m-auto'>
+                                        <h5>{t('AddHours')}</h5>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -419,9 +421,9 @@ const Calendar = ({ id, businessName }) => {
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose}>
-                                            Close
+                                            {t('Close')}
                                         </Button>
-                                        <Button variant="btn btn-success" onClick={addHours}>Confirm</Button>
+                                        <Button variant="btn btn-success" onClick={addHours}>{t('Confirm')}</Button>
                                     </Modal.Footer>
                                 </Modal>
 
@@ -431,30 +433,55 @@ const Calendar = ({ id, businessName }) => {
                                     backdrop="static"
                                     keyboard={false}
                                 >
-                                    <Modal.Header closeButton>
-                                        <h5>List of appointments</h5>
+                                    <Modal.Header className='m-auto'>
+                                        <h5 className={'m-auto'}>{t('ListAppointments')}</h5>
                                     </Modal.Header>
                                     <Modal.Body>
                                         {
                                             dateAppoimentsFiltered().map(item => {
                                                 return (
                                                     <>
-                                                        <Card>
-                                                            <Card.Header><b>Time:</b> {item.time}</Card.Header>
-                                                            <Card.Body>
-                                                                {/* <Card.Title>Special title treatment</Card.Title> */}
-                                                                <Card.Text>
-                                                                    <b>Name: </b>{item.name}
-                                                                    <br />
-                                                                    <b>Phone: </b>{item.phone}
-                                                                    <br />
-                                                                    <b>Comments: </b>{item.comments}
-                                                                    <br />
-                                                                </Card.Text>
-                                                                <Button variant="btn btn-danger"
-                                                                    onClick={() => deleteEvent(item.userID, item.time, item.name, item.phone, value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear())}>Delete</Button>
-                                                            </Card.Body>
-                                                        </Card>
+                                                        {
+                                                            i18n.language === 'he' ?
+                                                                <Card>
+                                                                    <Card.Header className='text-right'>{item.time} <b>{t('Time')}</b></Card.Header>
+                                                                    <Card.Body className='flex justify-between'>
+                                                                        <div className='flex items-center'>
+                                                                            <Button variant="btn btn-danger" className='h-[50%]'
+                                                                                onClick={() => deleteEvent(item.userID, item.time, item.name, item.phone, value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear())}>Delete</Button>
+                                                                        </div>
+
+                                                                        <Card.Text className='text-right'>
+                                                                            <b>{t('ClientName')}: </b>{item.name}
+                                                                            <br />
+                                                                            <b>{t('Phone')}:</b> {item.phone}
+                                                                            <br />
+                                                                            <b>{t('Comments')}:</b> {item.comments}
+                                                                            <br />
+                                                                        </Card.Text>
+
+                                                                    </Card.Body>
+                                                                </Card>
+                                                                :
+                                                                <Card>
+                                                                    <Card.Header><b>Time:</b> {item.time}</Card.Header>
+                                                                    <Card.Body className='flex justify-between'>
+                                                                        <Card.Text>
+                                                                            <b>Name: </b>{item.name}
+                                                                            <br />
+                                                                            <b>Phone: </b>{item.phone}
+                                                                            <br />
+                                                                            <b>Comments: </b>{item.comments}
+                                                                            <br />
+                                                                        </Card.Text>
+                                                                        <div className='flex items-center'>
+                                                                            <Button variant="btn btn-danger" className='h-[50%]'
+                                                                                onClick={() => deleteEvent(item.userID, item.time, item.name, item.phone, value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear())}>Delete</Button>
+                                                                        </div>
+
+                                                                    </Card.Body>
+                                                                </Card>
+                                                        }
                                                         <br />
                                                     </>
                                                 )
@@ -463,7 +490,7 @@ const Calendar = ({ id, businessName }) => {
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose2}>
-                                            Close
+                                            {t('Close')}
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
@@ -473,27 +500,34 @@ const Calendar = ({ id, businessName }) => {
                                 {filteredFreeEvents.length !== 0 ?
                                     <form>
                                         <div id="recaptcha-container"></div>
-                                        <h4 className='header-appointment'><b>Make appointment</b></h4>
+                                        <h4 className='header-appointment'><b>{t('MakeAppointment')}</b></h4>
                                         <div>
                                             <Card.Subtitle className="mb-2 text-muted">{value.getDate() + "/" + (value.getMonth() + 1) + "/" + value.getFullYear()}</Card.Subtitle>
                                             <label>
-                                                <b>Choose an available time:</b><br />
+                                                <b>{t('ChooseTime')}</b><br />
                                                 <div className='grid-container'>
                                                     {filteredFreeEvents}
                                                 </div>
                                                 {/* <Components.SelectOfTime ref={time}> */}
-                                                <h6>{time ? "Chosen: " + time : null}</h6>
+                                                <h6>{time ?
+                                                    i18n.language === 'he' ?
+                                                        time + t('Chosen')
+                                                        :
+                                                        t('Chosen') + time
+                                                    :
+                                                    null
+                                                }</h6>
                                                 {/* </Components.SelectOfTime> */}
                                             </label>
                                         </div>
 
-                                        <Components.AppointmentInput type='text' placeholder='Client name'
+                                        <Components.AppointmentInput type='text' className={i18n.language? 'text-right': null} placeholder={t('ClientName')}
                                             required ref={name}
 
                                         />
 
                                         <div>
-                                            <Components.AppointmentInput type='number' placeholder='Phone'
+                                            <Components.AppointmentInput type='number' className={i18n.language? 'text-right': null} placeholder={t('Phone')}
                                                 required
                                                 onChange={(e) => changeMobile(e)}
                                             // style={{ width: '350px', marginLeft: '-57px' }}
@@ -503,7 +537,7 @@ const Calendar = ({ id, businessName }) => {
                                                     type="button"
                                                     onClick={onSignInSubmit}
                                                 >
-                                                    {verified ? "Verified" : "Verify"}
+                                                    {verified ? t('Verified') : t('Verify')}
                                                 </Components.Button>
                                                 : null}
                                         </div>
@@ -512,7 +546,7 @@ const Calendar = ({ id, businessName }) => {
                                             <>
                                                 <Components.AppointmentInput
                                                     type="number"
-                                                    placeholder="Enter OTP"
+                                                    placeholder={t('EnterOTP')}
                                                     ref={otp}
                                                 />
                                                 <Components.Button
@@ -520,21 +554,21 @@ const Calendar = ({ id, businessName }) => {
                                                     value="OTP"
                                                     onClick={verifyCode}
                                                 >
-                                                    Confirm
+                                                    {t('Confirm')}
                                                 </Components.Button>
                                             </>
                                             :
                                             null}
 
-                                        <Components.AppointmentTextArea type='textarea' placeholder='Additional Comments'
+                                        <Components.AppointmentTextArea type='textarea' className={i18n.language? 'text-right': null} placeholder={t('AdditionalComments')}
                                             required ref={comments}
                                         />
 
-                                        <Components.Button onClick={handleClick}>Submit</Components.Button>
+                                        <Components.Button onClick={handleClick}>{t('Submit')}</Components.Button>
 
                                     </form>
                                     :
-                                    <h3>No available hours on this day</h3>
+                                    <h3>{t('NoAvailable')}</h3>
                                 }
                             </Card.Text>
                         </Card.Body>

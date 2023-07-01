@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 export const Gallery = ({ id, name }) => {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   //data of all images
   const [data, setData] = useState([]);
@@ -105,8 +105,6 @@ export const Gallery = ({ id, name }) => {
   const handleRemoveImage = async () => {
 
     ApiClient.removeImageFromGallery(id, removeImage)
-      // await axios.delete(`https://facework-server-production.up.railway.app/api/business/${id}/gallery`,
-      //   { data: { id: removeImage } })
       .then((res) => {
         const newArray = data.filter(obj => obj.id !== removeImage);
         setData(newArray)
@@ -135,13 +133,10 @@ export const Gallery = ({ id, name }) => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header className='m-auto'>
           <h5>{t("AdminPermissions")}</h5>
         </Modal.Header>
-        <Modal.Body>
-          {/* <br></br> */}
-          {/* <input type="file" filename="image"
-            onChange={handleImage} /> */}
+        <Modal.Body className={i18n.language === 'he' ? 'text-right' : null}>
           <h6>{t('SelectPhotoToAdd')}</h6>
           <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
             {t('ChooseBtn')}

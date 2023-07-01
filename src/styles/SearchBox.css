@@ -16,7 +16,7 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.search-input {
+/* .search-input {
   border-radius: 50px;
   background-color: #fff;
   padding: 1em;
@@ -26,7 +26,7 @@
 
 .search-input:focus {
   outline: none !important;
-}
+} */
 
 .search-btn {
   padding: 12px;

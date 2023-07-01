@@ -12,7 +12,7 @@ const getUnique = (item, value) => {
 export default function BusinessFilter({ business }) {
   const context = useContext(BusinessContext)
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const {
     handleChange,
@@ -45,24 +45,24 @@ export default function BusinessFilter({ business }) {
 
   return (
     <section className='filter-container'>
-      <form className='filter-form'>
+      <form className={`filter-form ${i18n.language === 'he' ? 'text-right' : null}`}>
 
-        <div className='form-group'>
+        <div className={`form-group`}>
           <label htmlFor='type'><b>{t("FilterCity")}</b></label>
-          <select name='city' id='city' value={city} className='form-control' onChange={handleChange}>
+          <select name='city' id='city' value={city} className={`form-control ${i18n.language === 'he' ? 'text-right' : null}`} onChange={handleChange}>
             {types}
           </select>
         </div>
 
         <div className='form-group'>
-            <label htmlFor='type'><b>{t("FilterName")}</b></label>
-            <input 
-                name='businessName'
-                type='search'
-                className='form-control'
-                placeholder={t("FieldName")}
-                onChange={handleChange}
-            />
+          <label htmlFor='type'><b>{t("FilterName")}</b></label>
+          <input
+            name='businessName'
+            type='search'
+            className={`form-control ${i18n.language === 'he' ? 'text-right' : null}`}
+            placeholder={t("FieldName")}
+            onChange={handleChange}
+          />
         </div>
 
         {/* guest */}

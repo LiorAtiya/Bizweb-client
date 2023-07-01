@@ -11,7 +11,7 @@ export default function MyShoppingCart() {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    const { t } = useTranslation();
+    const { t,i18n} = useTranslation();
 
     useEffect(() => {
         const getResult = async () => {
@@ -112,7 +112,7 @@ export default function MyShoppingCart() {
                                     <span>{t("Subtotal")}</span>
                                     <span className="amount">₪{totalPrice}</span>
                                 </div>
-                                <p>{t("Taxes")}</p>
+                                <p className={i18n.language === 'he'? 'text-right': null}>{t("Taxes")}</p>
                                 <button>{t("CheckOut")}</button>
                                 {/* <div className="continue-shopping">
                                     <Link>

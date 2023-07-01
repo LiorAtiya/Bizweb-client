@@ -9,8 +9,8 @@ export default function QuickAppointment() {
     const category = useRef("");
     const city = useRef();
 
-    const { t } = useTranslation();
-
+    const { t, i18n } = useTranslation();
+    console.log(i18n.language)
     const [availables, setAvailables] = useState([]);
     const [appointmentFlag, setAppointmentFlag] = useState(false);
 
@@ -46,13 +46,13 @@ export default function QuickAppointment() {
                 <div className="mb-3">
                     <label>
                         <b>{t("Category")}</b><br />
-                        <Components.Select ref={category}>
-                            <option value="Barbershop">Barbershop</option>
-                            <option value="Nail Polish">Nail Polish</option>
-                            <option value="Restaurants">Restaurants</option>
-                            <option value="Professionals">Professionals</option>
-                            <option value="Personal Trainers">Personal Trainers</option>
-                            <option value="Private Teachers">Private Teachers</option>
+                        <Components.Select ref={category} className={i18n.language === 'he'? 'text-right' : null}>
+                            <option value="Barbershop">{t("Barbershop")}</option>
+                            <option value="Nail Polish">{t("Nail Polish")}</option>
+                            <option value="Restaurants">{t("Restaurants")}</option>
+                            <option value="Professionals">{t("Professionals")}</option>
+                            <option value="Personal Trainers">{t("Personal Trainers")}</option>
+                            <option value="Private Teachers">{t("Private Teachers")}</option>
                         </Components.Select>
                     </label>
                 </div>
@@ -60,7 +60,7 @@ export default function QuickAppointment() {
                 <div className="mb-3">
                     <label>
                         <b>{t("City")}</b><br></br>
-                        <Components.Select ref={city}>
+                        <Components.Select ref={city} className={i18n.language === 'he'? 'text-right' : null}>
                             {citiesMap}
                         </Components.Select>
                     </label>

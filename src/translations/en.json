@@ -87,6 +87,34 @@
   "UpdateBackgroundPhoto":"Update background photo:",
   "Upload":"Upload",
   "Close":"Close",
-  "RemoveImage":"Remove image?"
-  
+  "RemoveImage":"Remove image?",
+
+  "NoAvailable": "No available hours on this day",
+  "Submit": "Submit",
+  "AddHours": "Add available hours",
+  "ListAppointments": "List of appointments",
+  "SelectHours":"Select hours to make appointments",
+  "Time": "Time",
+  "Comments": "Comments",
+  "MakeAppointment": "Make appointment",
+  "ChooseTime": "Choose an available time:",
+  "Chosen": "Chosen: ",
+  "ClientName": "Client name",
+  "AdditionalComments": "Additional Comments",
+  "PleaseVerifyMobile": "Please Verify Mobile",
+  "ConfirmAppointment":"A new appointment is scheduled, you will be notified about the appointment details",
+
+  "SelectPhotoToProduct": "Select photo to product",
+  "AddProductToShop": "Add product to shop",
+  "Add": "Add",
+  "ProductName": "Product Name",
+  "RemoveProduct": "Remove product?",
+  "AddToCart":"Add To Cart",
+  "AddedToCart": "Added to cart",
+
+  "StarRating": "Star Rating",
+  "Feedbacks": "Feedbacks:",
+  "WantToDelete": "Are you sure you want to delete?",
+  "YourName": "Your name",
+  "YourFeedback": "What's your feedback"
 }

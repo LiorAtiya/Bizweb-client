@@ -5,10 +5,12 @@ import waze from '../../images/waze.svg'
 import googlemaps from '../../images/googlemaps.png'
 import moovit from '../../images/moovit.webp'
 import '../../styles/Contact.css'
+import { useTranslation } from 'react-i18next';
 
 export default function Googlemap({ business }) {
 
   const [flagMap, setFlagMap] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,17 +43,27 @@ export default function Googlemap({ business }) {
     <>
       <div className="contact-container">
         <Card body className="contact-card">
-          <Card.Header>
-            <b>City:</b> {business.city}<br />
-            <b>Address:</b> {business.address}<br />
-            <b>Phone:</b> {'0' + business.phone}<br />
-          </Card.Header>
-          <Card.Header>
-            <img src={waze} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "30px" }}
+          {
+            i18n.language === 'he' ?
+              <Card.Header>
+                <b>עיר:</b> {business.city}<br />
+                <b>כתובת:</b> {business.address}<br />
+                <b>פלאפון:</b> {'0' + business.phone}<br />
+              </Card.Header>
+              :
+              <Card.Header>
+                <b>City:</b> {business.city}<br />
+                <b>Address:</b> {business.address}<br />
+                <b>Phone:</b> {'0' + business.phone}<br />
+              </Card.Header>
+          }
+          
+          <div className="flex justify-between w-[50%] m-auto">
+            <img src={waze} alt="Logo" style={{ height: '60px', width: '60px'}} className="mt-2"
               onClick={() => {
                 window.open(`https://waze.com/ul?ll=${business.coordination.location.y},${business.coordination.location.x}&navigate=yes`, '_blank');
               }} />
-            <img src={googlemaps} alt="Logo" style={{ height: '60px', width: '60px', marginRight: "20px" }}
+            <img src={googlemaps} alt="Logo" style={{ height: '60px', width: '60px'}} className="mt-2"
               onClick={() => {
                 window.open(`https://maps.google.com?q=${business.coordination.location.y},${business.coordination.location.x}`, '_blank');
               }} />
@@ -59,7 +71,7 @@ export default function Googlemap({ business }) {
               onClick={() => {
                 window.open(`https://moovitapp.com/israel-1/poi/${business.city} ${business.address}/t/en?tll=${business.coordination.location.y}_${business.coordination.location.x}`, '_blank');
               }} />
-          </Card.Header>
+          </div>
           <br />
           {
             flagMap ?

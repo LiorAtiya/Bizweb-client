@@ -15,7 +15,7 @@ export default function NavbarComp() {
   // const {user} = useContext(AuthContext)
   // let history = useHistory();
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const getUserData = JSON.parse(localStorage.getItem('token'));
 
@@ -45,7 +45,15 @@ export default function NavbarComp() {
               <Nav.Link className='QuichAppointment' as={Link} to={"/quickappointment"}><b>{t("QuickAppointment")}</b></Nav.Link>
               <div className='hello-user'>
                 <i className='fa-solid fa fa-user'></i>
-                <NavDropdown title={getUserData ? `${t("Hello")} ${getUserData.firstname}` : t("HelloGuest")} id="collasible-nav-dropdown">
+                <NavDropdown
+                  title={
+                    getUserData ?
+                      i18n.language === 'he' ?
+                        `${getUserData.firstname} ${t("Hello")} `
+                        :
+                        `${t("Hello")} ${getUserData.firstname}`
+                      :
+                      t("HelloGuest")} id="collasible-nav-dropdown">
                   {
                     getUserData ? (
                       <>
@@ -76,7 +84,7 @@ export default function NavbarComp() {
                   }
                 </NavDropdown>
               </div>
-              <Nav.Link><b><LanguageSwitcher/></b></Nav.Link>
+              <Nav.Link><b><LanguageSwitcher /></b></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

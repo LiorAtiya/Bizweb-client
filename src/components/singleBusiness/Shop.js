@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ApiClient from '../../api/ApiRoutes';
 import defaultImg from '../../images/defaultImg.png'
+import { useTranslation } from 'react-i18next';
 
 // import { toast } from "react-toastify";
 
 export default function Shop({ id, businessName }) {
 
   const [productsList, setProductsList] = useState([]);
+  const { t, i18n } = useTranslation();
 
   const getUserData = JSON.parse(localStorage.getItem('token'));
 
@@ -104,7 +106,7 @@ export default function Shop({ id, businessName }) {
       ApiClient.increaseQuantity(getUserData._id, product)
         .then((res) => {
           console.log(res);
-          alert('Added to cart');
+          alert(t('AddedToCart'));
           // toast.success(`${product.name} added to cart`, {
           //   position: "bottom-left",
           // });
@@ -122,7 +124,7 @@ export default function Shop({ id, businessName }) {
         isAdmin() ?
           <>
             <Button variant="btn btn-warning" onClick={handleShow}>
-              <b>Admin Permissions</b>
+              <b>{t("AdminPermissions")}</b>
             </Button>
           </>
           :
@@ -135,33 +137,52 @@ export default function Shop({ id, businessName }) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <h5><b>Add product to shop</b></h5>
+        <Modal.Header className='m-auto'>
+          <h5><b>{t('AddProductToShop')}</b></h5>
         </Modal.Header>
         <Modal.Body>
           <div className='body-admin-container'>
-            <input className='input-style' type='text' placeholder='Product Name'
-              required ref={name} maxLength='14'
+            <input
+              className={`input-style ${i18n.language === 'he' ? 'text-right' : null}`}
+              type='text'
+              placeholder={t('ProductName')}
+              required
+              ref={name}
+              maxLength='14'
             />
             <br></br>
-            <textarea className='textarea-style' type='textarea' placeholder='Description'
-              required ref={description} maxLength='45'
+            <textarea
+              className={`textarea-style ${i18n.language === 'he' ? 'text-right' : null}`}
+              type='textarea'
+              placeholder={t('Description')}
+              required
+              ref={description}
+              maxLength='45'
             />
             <br></br>
-            <input className='input-style' type='number' placeholder='Price'
-              required ref={price} min='1' max='6'
+            <input
+              className={`input-style ${i18n.language === 'he' ? 'text-right' : null}`}
+              type='number'
+              placeholder={t('Price')}
+              required
+              ref={price}
+              min='1'
+              max='6'
             />
-            {/* <h6>Select photo to product</h6> */}
-            <div id='upload-widget' className='cloudinary-button' onClick={() => handleOpenWidget()}>
-              Select photo to product
+
+            <div
+              id='upload-widget'
+              className='cloudinary-button'
+              onClick={() => handleOpenWidget()}>
+              {t('SelectPhotoToProduct')}
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t('Close')}
           </Button>
-          <Button variant="btn btn-success" onClick={addProduct}>Add</Button>
+          <Button variant="btn btn-success" onClick={addProduct}>{t('Add')}</Button>
         </Modal.Footer>
       </Modal>
 
@@ -171,14 +192,14 @@ export default function Shop({ id, businessName }) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <h5>Remove product?</h5>
+        <Modal.Header className='m-auto'>
+          <h5>{t('RemoveProduct')}</h5>
         </Modal.Header>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose2}>
-            Close
+            {t('Close')}
           </Button>
-          <Button variant="btn btn-danger" onClick={handleRemoveProduct}>Remove</Button>
+          <Button variant="btn btn-danger" onClick={handleRemoveProduct}>{t('Remove')}</Button>
         </Modal.Footer>
       </Modal>
 
@@ -192,7 +213,7 @@ export default function Shop({ id, businessName }) {
               <span>{product.description}</span>
               <span className="price">₪{product.price}</span>
             </div>
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+            <button onClick={() => handleAddToCart(product)}>{t('AddToCart')}</button>
             {
               isAdmin() ?
                 <button className="btn btn-danger btn-delete" onClick={() => handleShow2(product.id)}>X</button>

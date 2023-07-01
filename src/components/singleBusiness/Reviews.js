@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import '../../styles/Reviews.css'
 import * as Components from '../../styles/StyledForm'
 import ApiClient from '../../api/ApiRoutes';
+import { useTranslation } from 'react-i18next';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -34,6 +35,7 @@ export default function Reviews({ id }) {
     const name = useRef(getUserData ? { value: getUserData.username + "" } : "");
     const review = useRef();
 
+    const { t, i18n } = useTranslation();
 
     const isAdmin = () => {
         if (getUserData) {
@@ -107,9 +109,9 @@ export default function Reviews({ id }) {
     return (
         <div className="reviews-container">
             <Card className='card-container'>
-                <Card.Header><h2>Star Rating</h2></Card.Header>
+                <Card.Header><h2>{t('StarRating')}</h2></Card.Header>
                 <Card.Header>
-                    <div>
+                    <div className='flex justify-center'>
                         {stars.map((_, index) => {
                             return (
                                 <FaStar
@@ -134,15 +136,19 @@ export default function Reviews({ id }) {
                     {
                         getUserData ? <></>
                             :
-                            <Components.NewBusinessInput type='text' placeholder='Your name'
+                            <Components.NewBusinessInput type='text' placeholder={t('YourName')}
                                 required ref={name}
                             />
                     }
-                    <Components.TextArea type='textarea' placeholder="What's your feedback"
-                        required ref={review}
+                    <Components.TextArea 
+                    className={i18n.language === 'he'? 'text-right': null}
+                    type='textarea' 
+                    placeholder={t('YourFeedback')}
+                    required 
+                    ref={review}
                     />
 
-                    <Components.Button type='button' onClick={addReview}>Submit</Components.Button>
+                    <Components.Button type='button' onClick={addReview}>{t('Submit')}</Components.Button>
 
                 </Card.Text>
 
@@ -155,20 +161,20 @@ export default function Reviews({ id }) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <h5>Are you sure you want to delete?</h5>
+                    <h5>{t("WantToDelete")}</h5>
                 </Modal.Header>
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        No
+                        {t('No')}
                     </Button>
-                    <Button variant="btn btn-success" onClick={removeReview}>Yes</Button>
+                    <Button variant="btn btn-success" onClick={removeReview}>{t('Yes')}</Button>
                 </Modal.Footer>
             </Modal>
 
             <div>
                 <br></br>
-                <h3 style={{ textAlign: "center", color: "white" }}><b>Feedbacks:</b></h3>
+                <h3 style={{ textAlign: "center", color: "white" }}><b>{t('Feedbacks')}</b></h3>
                 {
                     reviewList.map((item, i) => {
                         return (

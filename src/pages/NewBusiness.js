@@ -15,7 +15,7 @@ export default function NewBusiness() {
     const phone = useRef("");
     const history = useHistory();
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [backgroundPicture, setBackgroundPicture] = useState("");
 
@@ -112,7 +112,7 @@ export default function NewBusiness() {
                 <div className="mb-3">
                     <label>
                         <b>{t("Category")}</b><br />
-                        <Components.Select ref={category}>
+                        <Components.Select className={i18n.language === 'he'? 'text-right': null} ref={category}>
                             <option value="Barbershop">{t("Barbershop")}</option>
                             <option value="Nail Polish">{t("Nail Polish")}</option>
                             <option value="Restaurants">{t("Restaurants")}</option>
@@ -123,11 +123,21 @@ export default function NewBusiness() {
                     </label>
                 </div>
 
-                <Components.NewBusinessInput type='text' placeholder={t("BusinessName")}
-                    required ref={name} maxLength='15'
+                <Components.NewBusinessInput
+                    type='text'
+                    placeholder={t("BusinessName")}
+                    required
+                    ref={name}
+                    maxLength='15'
+                    className={i18n.language === 'he' ? 'text-right' : null}
                 />
-                <Components.TextArea type='textarea' placeholder={t("Description")}
-                    required ref={description} maxLength='400'
+                <Components.TextArea
+                    type='textarea'
+                    placeholder={t("Description")}
+                    required
+                    ref={description}
+                    maxLength='400'
+                    className={i18n.language === 'he'? 'text-right': null}
                 />
 
                 <b>{t("ChooseTabs")}</b>
