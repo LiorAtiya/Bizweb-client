@@ -18,7 +18,19 @@ class ApiRoutes extends Component {
     }
 
     async fastLogin(user) {
-        return await axios.post(`${this.state.route}/api/auth/fast-login`,user)
+        return await axios.post(`${this.state.route}/api/auth/fast-login`, user)
+            .then(response => response);
+    }
+
+    // Forgot Password Page
+    async ForgotPassword(email) {
+        return await axios.post(`${this.state.route}/api/auth/forgot-password`, { email: email })
+            .then(response => response);
+    }
+
+    // Forgot Password Page
+    async ResetPassword(id, token, password) {
+        return await axios.post(`${this.state.route}/api/auth/reset-password/${id}/${token}`, { password: password })
             .then(response => response);
     }
 

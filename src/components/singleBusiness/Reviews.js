@@ -136,16 +136,20 @@ export default function Reviews({ id }) {
                     {
                         getUserData ? <></>
                             :
-                            <Components.NewBusinessInput type='text' placeholder={t('YourName')}
-                                required ref={name}
+                            <Components.NewBusinessInput
+                                type='text'
+                                placeholder={t('YourName')}
+                                required
+                                ref={name}
+                                className={i18n.language === 'he'? 'text-right': null}
                             />
                     }
-                    <Components.TextArea 
-                    className={i18n.language === 'he'? 'text-right': null}
-                    type='textarea' 
-                    placeholder={t('YourFeedback')}
-                    required 
-                    ref={review}
+                    <Components.TextArea
+                        className={i18n.language === 'he' ? 'text-right' : null}
+                        type='textarea'
+                        placeholder={t('YourFeedback')}
+                        required
+                        ref={review}
                     />
 
                     <Components.Button type='button' onClick={addReview}>{t('Submit')}</Components.Button>

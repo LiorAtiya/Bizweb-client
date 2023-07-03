@@ -15,6 +15,7 @@ import QuickAppointment from './pages/QuickAppointment';
 import MyBusiness from './pages/MyBusiness';
 import EditBusiness from './pages/EditBusiness';
 import MyShoppingCart from './pages/MyShoppingCart';
+import ResetPassword from './pages/ResetPassword';
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from './translations/i18n.js';
@@ -67,6 +68,9 @@ export default function App() {
                         </Route>
                         <Route path="/category/:category/:name">
                             <SingleBusiness />
+                        </Route>
+                        <Route path="/resetPassword/:id/:token">
+                            <ResetPassword />
                         </Route>
                         <Route path="*">
                             <Error />

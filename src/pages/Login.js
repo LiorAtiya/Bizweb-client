@@ -8,10 +8,12 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useTranslation } from 'react-i18next';
+import ForgotPassword from "./ForgotPassword";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
+  const [isFogot, setIsForgot] = useState(false);
 
   let history = useHistory();
 
@@ -76,47 +78,52 @@ export default function Login() {
         <Register />
       </Components.SignUpContainer>
 
-      <Components.SignInContainer signinIn={signIn}>
-        <Components.Form onSubmit={handleClick}>
-          <Components.Title>{t('Login')}</Components.Title>
-          <Components.Input type='email' placeholder={t('Email')}
-            required
-            ref={email}
-          />
-          <Components.Input type='password' placeholder={t('Password')}
-            required
-            ref={password}
-          />
-          <Components.Anchor href='#'>{t('ForgotPassword')}</Components.Anchor>
-          <Components.Button type="submit">{t('Login')}</Components.Button>
-          <br></br>
+      {
+        isFogot?
+          <ForgotPassword />
+          :
+          <Components.SignInContainer signinIn={signIn}>
+            <Components.Form onSubmit={handleClick}>
+              <Components.Title>{t('Login')}</Components.Title>
+              <Components.Input type='email' placeholder={t('Email')}
+                required
+                ref={email}
+              />
+              <Components.Input type='password' placeholder={t('Password')}
+                required
+                ref={password}
+              />
+              <Components.Anchor className="cursor-pointer" onClick={() => setIsForgot(true)}>{t('ForgotPassword')}</Components.Anchor>
+              <Components.Button type="submit">{t('Login')}</Components.Button>
+              <br></br>
 
-          <LoginSocialFacebook
-            appId={process.env.REACT_APP_FB_APP_ID}
-            onResolve={(response) => {
-              handleFacebookLogin(response.data)
-            }}
-            onReject={(error) => {
-              console.log(error);
-            }}
-          >
-            <FacebookLoginButton style={{ fontSize: '15px' }} />
-          </LoginSocialFacebook>
+              <LoginSocialFacebook
+                appId={process.env.REACT_APP_FB_APP_ID}
+                onResolve={(response) => {
+                  handleFacebookLogin(response.data)
+                }}
+                onReject={(error) => {
+                  console.log(error);
+                }}
+              >
+                <FacebookLoginButton style={{ fontSize: '15px' }} />
+              </LoginSocialFacebook>
 
-          <LoginSocialGoogle
-            client_id={process.env.REACT_APP_GG_APP_ID}
-            onResolve={(response) => {
-              handleGoogleLogin(response.data)
-            }}
-            onReject={(error) => {
-              console.log(error);
-            }}
-          >
-            <GoogleLoginButton style={{ fontSize: '15px' }} />
-          </LoginSocialGoogle >
-        </Components.Form>
+              <LoginSocialGoogle
+                client_id={process.env.REACT_APP_GG_APP_ID}
+                onResolve={(response) => {
+                  handleGoogleLogin(response.data)
+                }}
+                onReject={(error) => {
+                  console.log(error);
+                }}
+              >
+                <GoogleLoginButton style={{ fontSize: '15px' }} />
+              </LoginSocialGoogle >
+            </Components.Form>
 
-      </Components.SignInContainer>
+          </Components.SignInContainer>
+      }
 
       <Components.OverlayContainer signinIn={signIn}>
         <Components.Overlay signinIn={signIn}>
@@ -137,7 +144,7 @@ export default function Login() {
               Enter Your personal details and start journey with us
             </Components.Paragraph>
             <Components.GhostButton onClick={() => toggle(false)}>
-            {t('Register')}
+              {t('Register')}
             </Components.GhostButton>
           </Components.RightOverlayPanel>
 
