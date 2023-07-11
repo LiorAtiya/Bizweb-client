@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { BusinessContext } from '../context/BusinessContext'
 import { useTranslation } from 'react-i18next';
 
-export default function SingleBusiness() {
+export function SingleBusiness() {
 
   let { name } = useParams();
   const context = useContext(BusinessContext)

@@ -2,9 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import defaultImg from "../../images/defaultImg.png"
 import '../../styles/BusinessCard.css'
-// import Hero from '../components/Hero'
-// import Banner from '../components/Banner'
-// import PropTypes from "prop-types";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -25,7 +22,7 @@ export default function Business({ business }) {
   } = business;
 
   return (
-    <Link to={`/category/${category}/${name}`} className='business-card-container'>
+    <Link to={`/${category}/${name}`} className='business-card-container'>
       <Card sx={{ height: 330, textAlign: 'center', margin: '0px'}}>
         <CardMedia
           sx={{ height: 140 }}

@@ -1,83 +1,89 @@
-import React, { useEffect } from 'react';
-import './styles/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NavbarComp from './components/NavbarComp';
+import React, { useEffect, useContext } from "react";
+import "./styles/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import NavbarComp from "./components/NavbarComp";
 
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Error from './pages/Error';
-import Category from './pages/Category';
-import SingleBusiness from './pages/SingleBusiness'
-import NewBusiness from './pages/NewBusiness';
-import MyAppointments from './pages/MyAppointments';
-import QuickAppointment from './pages/QuickAppointment';
-import MyBusiness from './pages/MyBusiness';
-import EditBusiness from './pages/EditBusiness';
-import MyShoppingCart from './pages/MyShoppingCart';
-import ResetPassword from './pages/ResetPassword';
+import {
+  Home,
+  Login,
+  Error,
+  Category,
+  SingleBusiness,
+  NewBusiness,
+  MyAppointments,
+  QuickAppointment,
+  MyBusiness,
+  EditBusiness,
+  MyShoppingCart,
+  ResetPassword,
+} from "./pages";
 
-import { I18nextProvider } from 'react-i18next';
-import i18n from './translations/i18n.js';
-
-// import { AuthContext } from './context/AuthContext';
+import { I18nextProvider } from "react-i18next";
+import i18n from "./translations/i18n.js";
+import { BusinessContext } from "./context/BusinessContext";
 
 export default function App() {
-    // const { user } = useContext(AuthContext);
+  const context = useContext(BusinessContext);
+  const { getUserInfo } = context;
 
-    useEffect(() => {
-        const language = localStorage.getItem('language');
-        if (language) {
-            i18n.changeLanguage(language);
-        }
-    }, []);
+  useEffect(() => {
+    const language = localStorage.getItem("language");
+    if (language) {
+      i18n.changeLanguage(language);
+    }
+  }, []);
 
-    return (
-        <div>
-            <I18nextProvider i18n={i18n}>
-                <Router>
-                    <NavbarComp />
-                    <Switch>
-                        <Route exact path="/">
-                            <Home />
-                        </Route>
-                        <Route exact path="/login">
-                            {/* {user ? <Redirect to='/' /> : <Login />} */}
-                            <Login />
-                        </Route>
-                        <Route exact path="/newbusiness">
-                            <NewBusiness />
-                        </Route>
-                        <Route exact path="/quickappointment">
-                            <QuickAppointment />
-                        </Route>
-                        <Route exact path="/myappointments/:userID">
-                            <MyAppointments />
-                        </Route>
-                        <Route exact path="/myshoppingcart/:userID">
-                            <MyShoppingCart />
-                        </Route>
-                        <Route exact path="/mybusiness/:userID">
-                            <MyBusiness />
-                        </Route>
-                        <Route exact path="/editbusiness/:name">
-                            <EditBusiness />
-                        </Route>
-                        <Route exact path="/category/:type">
-                            <Category />
-                        </Route>
-                        <Route path="/category/:category/:name">
-                            <SingleBusiness />
-                        </Route>
-                        <Route path="/resetPassword/:id/:token">
-                            <ResetPassword />
-                        </Route>
-                        <Route path="*">
-                            <Error />
-                        </Route>
-                    </Switch>
-                </Router>
-            </I18nextProvider>
-        </div >
-    )
+  return (
+    <div>
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <NavbarComp />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/login">
+              {getUserInfo() ? <Redirect to="/" /> : <Login />}
+            </Route>
+            <Route exact path="/newbusiness">
+              {getUserInfo() ? <NewBusiness /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/quickappointment">
+              <QuickAppointment />
+            </Route>
+            <Route exact path="/myappointments/:userID">
+              {getUserInfo() ? <MyAppointments /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/myshoppingcart/:userID">
+              {getUserInfo() ? <MyShoppingCart /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/mybusiness/:userID">
+              {getUserInfo() ? <MyBusiness /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/editbusiness/:name">
+              {getUserInfo() ? <EditBusiness /> : <Redirect to="/" />}
+            </Route>
+            <Route exact path="/:type">
+              <Category />
+            </Route>
+            <Route path="/:category/:name">
+              <SingleBusiness />
+            </Route>
+            <Route path="/resetPassword/:id/:token">
+              <ResetPassword />
+            </Route>
+            <Route path="*">
+              <Error />
+            </Route>
+          </Switch>
+        </Router>
+      </I18nextProvider>
+    </div>
+  );
 }

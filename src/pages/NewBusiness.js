@@ -6,7 +6,7 @@ import '../styles/NewBusiness.css'
 import ApiClient from '../api/ApiRoutes';
 import { useTranslation } from 'react-i18next';
 
-export default function NewBusiness() {
+export function NewBusiness() {
     const category = useRef("");
     const name = useRef("");
     const description = useRef("");

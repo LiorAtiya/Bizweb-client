@@ -8,7 +8,7 @@ import ApiClient from '../api/ApiRoutes';
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-export default function MyBusiness() {
+export function MyBusiness() {
 
     const context = useContext(BusinessContext)
     const { getAllBusinessOfUser } = context;

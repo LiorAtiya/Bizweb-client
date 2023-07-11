@@ -7,7 +7,7 @@ import ApiClient from '../api/ApiRoutes';
 import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-export default function EditBusiness() {
+export function EditBusiness() {
     let { name } = useParams();
     const context = useContext(BusinessContext)
 

@@ -9,37 +9,37 @@ const categories = [
     {
         "id": 1,
         "name": "Barbershop",
-        "route": "/category/barbershop",
+        "route": "/barbershop",
         "image": barbershopImg
     },
     {
         "id": 2,
         "name": "Nail Polish",
-        "route": "/category/nail polish",
+        "route": "/nail polish",
         "image": polishImg
     },
     {
         "id": 3,
         "name": "Restaurants",
-        "route": "/category/restaurants",
+        "route": "/restaurants",
         "image": restaurantsImg
     },
     {
         "id": 4,
         "name": "Professionals",
-        "route": "/category/professionals",
+        "route": "/professionals",
         "image": renovationsImg
     },
     {
         "id": 5,
         "name": "Personal Trainers",
-        "route": "/category/personal trainers",
+        "route": "/personal trainers",
         "image": personalTrainersImg
     },
     {
         "id": 6,
         "name": "Private Teachers",
-        "route": "/category/private teachers",
+        "route": "/private teachers",
         "image": privateTeachersImg
     },
 ]

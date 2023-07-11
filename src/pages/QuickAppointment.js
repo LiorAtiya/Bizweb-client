@@ -5,7 +5,7 @@ import Business from '../components/category/Business';
 import ApiRoutes from '../api/ApiRoutes';
 import { useTranslation } from 'react-i18next';
 
-export default function QuickAppointment() {
+export function QuickAppointment() {
     const category = useRef("");
     const city = useRef();
 

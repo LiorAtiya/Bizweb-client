@@ -9,13 +9,13 @@ function BusinessContainer({ context }) {
 
   let { type } = useParams();
 
-  const { loading, sortedBusiness, business } = context;
+  const { loading, sortedBusiness } = context;
   if (loading) {
     return <Loading />
   }
   return (
     <>
-      <BusinessFilter business={business} />
+      <BusinessFilter />
       <BusinessList business={sortedBusiness} type={type}/>
     </>
   )

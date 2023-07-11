@@ -7,7 +7,7 @@ import '../styles/Form.css'
 import ApiClient from '../api/ApiRoutes';
 import { useTranslation } from 'react-i18next';
 
-export default function MyAppointments() {
+export function MyAppointments() {
 
     let { userID } = useParams();
     const [userData, setUserData] = useState();

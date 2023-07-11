@@ -10,7 +10,7 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { useTranslation } from 'react-i18next';
 import ForgotPassword from "./ForgotPassword";
 
-export default function Login() {
+export function Login() {
   const email = useRef();
   const password = useRef();
   const [isFogot, setIsForgot] = useState(false);

@@ -1,126 +1,76 @@
-import React from 'react'
-import { useContext } from 'react'
-import { BusinessContext } from '../../context/BusinessContext'
+import React from "react";
+import { useContext } from "react";
+import { BusinessContext } from "../../context/BusinessContext";
 // import Title from "../components/Title"
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 //Get all uniqe values
 const getUnique = (item, value) => {
-  return [...new Set(item.map(item => item[value]))]
-}
+  return [...new Set(item.map((item) => item[value]))];
+};
 
-export default function BusinessFilter({ business }) {
-  const context = useContext(BusinessContext)
+export default function BusinessFilter() {
+  const context = useContext(BusinessContext);
 
   const { t, i18n } = useTranslation();
 
-  const {
-    handleChange,
-    city,
-    // capacity,
-    // price,
-    // minPrice,
-    // maxPrice,
-    // minSize,
-    // maxSize,
-    // breakfast,
-    // pets
-  } = context;
+  const { handleChangeFilter, city, business } = context;
 
   //get uniqe types
-  let types = getUnique(business, "city")
+  let types = getUnique(business, "city");
 
   //add all
-  types = ['all', ...types];
+  types = ["all", ...types];
 
   //map to jsx
   types = types.map((item, index) => {
-    return <option value={item} key={index}>{item}</option>
-  })
-
-  // let people = getUnique(business, 'capacity');
-  // people = people.map((item, index) => {
-  //   return <option key={index} value={item}>{item}</option>
-  // })
+    return (
+      <option value={item} key={index}>
+        {item}
+      </option>
+    );
+  });
 
   return (
-    <section className='filter-container'>
-      <form className={`filter-form ${i18n.language === 'he' ? 'text-right' : null}`}>
-
+    <section className="filter-container">
+      <form
+        className={`filter-form ${
+          i18n.language === "he" ? "text-right" : null
+        }`}
+      >
         <div className={`form-group`}>
-          <label htmlFor='type'><b>{t("FilterCity")}</b></label>
-          <select name='city' id='city' value={city} className={`form-control ${i18n.language === 'he' ? 'text-right' : null}`} onChange={handleChange}>
+          <label htmlFor="type">
+            <b>{t("FilterCity")}</b>
+          </label>
+          <select
+            name="city"
+            id="city"
+            value={city}
+            className={`form-control ${
+              i18n.language === "he" ? "text-right" : null
+            }`}
+            onChange={handleChangeFilter}
+          >
             {types}
           </select>
         </div>
 
-        <div className='form-group'>
-          <label htmlFor='type'><b>{t("FilterName")}</b></label>
+        <div className="form-group">
+          <label htmlFor="type">
+            <b>{t("FilterName")}</b>
+          </label>
           <input
-            name='businessName'
-            type='search'
-            className={`form-control ${i18n.language === 'he' ? 'text-right' : null}`}
+            name="businessName"
+            type="search"
+            className={`form-control ${
+              i18n.language === "he" ? "text-right" : null
+            }`}
             placeholder={t("FieldName")}
-            onChange={handleChange}
+            onChange={handleChangeFilter}
           />
         </div>
 
-        {/* guest */}
-        {/* <div className='form-group'>
-          <label htmlFor='capacity'>Guest</label>
-          <select name='capacity' id='capacity' value={capacity} className='form-control' onChange={handleChange}>
-            {people}
-          </select>
-        </div> */}
-        {/* end guest */}
-        {/* business price */}
-        {/* <div className='form-group'>
-          <label htmlFor='price'>
-            Distance: {price}km
-          </label>
-          <input type='range' name='price' min={minPrice}
-            max={maxPrice} id='price' value={price} onChange={handleChange}
-            className='form-control' />
-        </div> */}
-        {/* end business price */}
-        {/* size */}
-        {/* <div className='form-group'>
-          <label htmlFor='size'>room size</label>
-          <div className='size-inputs'>
-            <input type='number' name='minSize' id='size'
-              value={minSize} onChange={handleChange}
-              className='size-input' />
-            <input type='number' name='maxSize' id='size'
-              value={maxSize} onChange={handleChange}
-              className='size-input' />
-          </div>
-        </div> */}
-        {/* end of size */}
-        {/* extras */}
-        {/* <div className='form-group'>
-          <div className='single-extra'>
-            <input
-              type="checkbox"
-              name='breakfast'
-              id='breakfast'
-              checked={breakfast}
-              onChange={handleChange}
-            />
-            <label htmlFor='breakfast'>breakfast</label>
-          </div>
-          <div className='single-extra'>
-            <input
-              type="checkbox"
-              name='pets'
-              id='pets'
-              checked={pets}
-              onChange={handleChange}
-            />
-            <label htmlFor='pets'>pets</label>
-          </div>
-        </div> */}
-        {/* end of extras */}
       </form>
     </section>
-  )
+  );
 }

@@ -6,22 +6,21 @@ export default function BusinessList({ business, type }) {
 
   const { t } = useTranslation();
 
-  let exist = business.filter(busi => busi.category.toLowerCase() === type);
+  //filter by name category
+  const businessPerType = business.filter(busi => busi.category.toLowerCase() === type);
   
-  if (business.length === 0 || exist.length === 0) {
+  if (business.length === 0 || businessPerType.length === 0) {
     return (
       <div className='empty-search'>
         <h3>{t("Unfortunately")}</h3>
       </div>
     )
   }
-  //filter by name category
-  const tempBusiness = business.filter(busi => busi.category.toLowerCase() === type);
 
   return <section className='roomslist'>
     <div className='roomslist-center'>
       {
-        tempBusiness.map(item => {
+        businessPerType.map(item => {
           return <Business key={item._id} business={item} />
         })
       }

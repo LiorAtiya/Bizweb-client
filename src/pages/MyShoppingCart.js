@@ -5,7 +5,7 @@ import ApiClient from '../api/ApiRoutes';
 import '../styles/MyShoppingCart.css'
 import { useTranslation } from 'react-i18next';
 
-export default function MyShoppingCart() {
+export function MyShoppingCart() {
 
     let { userID } = useParams();
     const [cart, setCart] = useState([]);
