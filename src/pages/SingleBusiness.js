@@ -88,19 +88,19 @@ export function SingleBusiness() {
                           if (i === 0) {
                             return (
                               <Tab.Pane eventKey="tab-first" key={i}>
-                                <Calender id={business._id} businessName={name} />
+                                <Calender businessId={business._id} businessName={name} />
                               </Tab.Pane>
                             )
                           } else if (i === business.tabs.length - 1) {
                             return (
                               <Tab.Pane eventKey="tab-last" key={i}>
-                                <Calender id={business._id} businessName={name} />
+                                <Calender businessId={business._id} businessName={name} />
                               </Tab.Pane>
                             )
                           } else {
                             return (
                               <Tab.Pane eventKey={'tab-' + tab} key={i}>
-                                <Calender id={business._id} businessName={name} />
+                                <Calender businessId={business._id} businessName={name} />
                               </Tab.Pane>
                             )
                           }

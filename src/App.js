@@ -57,13 +57,13 @@ export default function App() {
             <Route exact path="/quickappointment">
               <QuickAppointment />
             </Route>
-            <Route exact path="/myappointments/:userID">
+            <Route exact path="/myappointments">
               {getUserInfo() ? <MyAppointments /> : <Redirect to="/" />}
             </Route>
-            <Route exact path="/myshoppingcart/:userID">
+            <Route exact path="/myshoppingcart">
               {getUserInfo() ? <MyShoppingCart /> : <Redirect to="/" />}
             </Route>
-            <Route exact path="/mybusiness/:userID">
+            <Route exact path="/mybusiness">
               {getUserInfo() ? <MyBusiness /> : <Redirect to="/" />}
             </Route>
             <Route exact path="/editbusiness/:name">

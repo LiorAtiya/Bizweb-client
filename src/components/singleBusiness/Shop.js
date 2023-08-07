@@ -13,7 +13,7 @@ export default function Shop({ id, businessName }) {
   const [productsList, setProductsList] = useState([]);
   const { t, i18n } = useTranslation();
 
-  const getUserData = JSON.parse(localStorage.getItem('token'));
+  const getUserData = JSON.parse(localStorage.getItem('user-info'));
 
   const isAdmin = () => {
     if (getUserData) {

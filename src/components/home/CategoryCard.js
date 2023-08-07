@@ -1,27 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import axios from 'axios';
 import defaultImg from "../../images/defaultImg.png";
 import "../../styles/Categories.css";
 import ApiClient from "../../api/ApiRoutes";
 
-export default function CategoryCard({ name, route, image }) {
-  const getUserData = JSON.parse(localStorage.getItem("token"));
+export default function CategoryCard({type, name, route, image }) {
+  const token = localStorage.getItem("token");
 
   const handleClick = async () => {
-    if (getUserData) {
-      const record = {
-        firstname: getUserData.firstname,
-        lastname: getUserData.lastname,
-        username: getUserData.username,
-        email: getUserData.email,
-        category: name,
-      };
+    if (token) {
       // Add to records the category entry
-      ApiClient.addRecordEntry(getUserData._id, record)
-        .then((res) => {
-          console.log(res);
-        })
+      ApiClient.addRecordEntry(token, { category: type })
+        .then((res) => {})
         .catch((err) => console.log(err));
     }
   };

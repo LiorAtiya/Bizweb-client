@@ -76,7 +76,7 @@ export default class BusinessProvider extends Component {
   };
 
   getUserInfo = () => {
-    return JSON.parse(localStorage.getItem('token'))
+    return JSON.parse(localStorage.getItem('user-info'))
   }
 
   render() {

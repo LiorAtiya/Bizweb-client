@@ -4,8 +4,8 @@ import { BusinessContext } from '../context/BusinessContext'
 import * as Components from '../styles/StyledForm';
 import cities from '../database/cities'
 import ApiClient from '../api/ApiRoutes';
-import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { openWidgetUploadImage } from '../api/cloudinary';
 
 export function EditBusiness() {
     let { name } = useParams();
@@ -14,7 +14,6 @@ export function EditBusiness() {
     //get data of business
     const { getBusiness } = context;
     const business = getBusiness(name);
-    let history = useHistory();
 
     const { t } = useTranslation();
 
@@ -48,22 +47,6 @@ export function EditBusiness() {
     const onChangeAddress = e => setAddress(e.target.value)
     const onChangePhone = e => setPhone(e.target.value)
 
-    const handleOpenWidget = () => {
-        var myWidget = window.cloudinary.createUploadWidget({
-            cloudName: 'dk5mqzgcv',
-            uploadPreset: 'xw93prxe'
-        }, (error, result) => {
-            if (!error && result && result.event === "success") {
-                console.log('Done! Here is the image info: ', result.info);
-                setBackgroundPicture(result.info.url);
-            }
-        }
-        )
-
-        //open widget
-        myWidget.open();
-    }
-
     const updateDetails = async (e) => {
         e.preventDefault();
 
@@ -75,43 +58,15 @@ export function EditBusiness() {
             address: address,
             phone: phone,
             backgroundPicture: backgroundPicture,
+            prevBackgroundPicture: business.backgroundPicture
         }
-
-        console.log(business)
-
-        ApiClient.updateDetailsOfBusiness(business._id, updatedDetailsBusiness)
+        
+        const token = localStorage.getItem('token');
+        ApiClient.updateDetailsOfBusiness(business._id, updatedDetailsBusiness, token)
             .then(res => {
-                history.push(`/`)
                 window.location.reload(false);
             })
-            .catch((err) => console.log(err));
-
-        // //send request to server to add new business
-        // ApiClient.addNewBusiness(business)
-        //     // await axios.post("https://facework-server-production.up.railway.app/api/business/add", business)
-        //     .then((res) => {
-        //         console.log(res);
-        //         if (res.status === 200) {
-        //             //add id of business to list of business of user
-        //             const businessID = res.data._id;
-        //             const getUserData = JSON.parse(localStorage.getItem('token'));
-        //             const business = {
-        //                 userID: getUserData._id,
-        //                 business: businessID
-        //             }
-
-        //             ApiClient.addBusinessToUser(getUserData._id, business)
-        //                 // axios.put(`https://facework-server-production.up.railway.app/api/users/${getUserData._id}/business`, business)
-        //                 .then((res) => {
-        //                     window.localStorage.removeItem('token');
-        //                     window.localStorage.setItem("token", JSON.stringify(res.data));
-
-        //                     history.push('/');
-        //                     window.location.reload(false);
-        //                 }).catch((err) => console.log(err));
-
-        //         }
-        //     }).catch((err) => console.log(err));
+            .catch();
     }
 
     return (
@@ -150,22 +105,22 @@ export function EditBusiness() {
                         </div>
 
                         <b>{t("Address")}</b>
-                        <Components.Input type='text' value={address} onChange={onChangeAddress}
+                        <Components.Input type='text' value={address || undefined} onChange={onChangeAddress} placeholder='Empty'
                         />
                         <br />
 
                         <b>{t("Phone")}</b>
-                        <Components.Input type='number' value={phone} onChange={onChangePhone}
+                        <Components.Input type='number' value={phone || undefined} onChange={onChangePhone} placeholder='Empty'
                         />
 
 
                         <br />
-                        <Components.ButtonPic id='upload-widget' className='cloudinary-button' onClick={handleOpenWidget}>
+                        <Components.ButtonPic typeof='button' id='upload-widget' className='cloudinary-button' onClick={() => openWidgetUploadImage(setBackgroundPicture)}>
                             {t("BackgroundImage")}
                         </Components.ButtonPic>
                         {
                             <Components.Pic>
-                                <img src={backgroundPicture} alt="backPic" style={{ height: "170px", width: "200px" }} />
+                                <img src={backgroundPicture.url} alt="backPic" style={{ height: "170px", width: "200px" }} />
                             </Components.Pic>
                         }
 

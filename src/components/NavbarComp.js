@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
@@ -6,18 +6,14 @@ import Modal from 'react-bootstrap/Modal';
 import "../styles/Navbar.css";
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../translations/LanguageSwitcher'
-
-// import { useHistory } from "react-router-dom";
-// import { AuthContext } from '../context/AuthContext';
+import { BusinessContext } from "../context/BusinessContext";
 
 export default function NavbarComp() {
 
-  // const {user} = useContext(AuthContext)
-  // let history = useHistory();
-
+  const { getUserInfo } = useContext(BusinessContext);
+  const getUserData = getUserInfo()
+  
   const { t, i18n } = useTranslation();
-
-  const getUserData = JSON.parse(localStorage.getItem('token'));
 
   const [show, setShow] = useState(false);
 
@@ -26,6 +22,7 @@ export default function NavbarComp() {
 
   const logOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user-info');
     window.location.reload(false);
   }
 
@@ -57,14 +54,14 @@ export default function NavbarComp() {
                   {
                     getUserData ? (
                       <>
-                        <NavDropdown.Item as={Link} to={`/myappointments/${getUserData._id}`}>
+                        <NavDropdown.Item as={Link} to={`/myappointments`}>
                           {t("MyAppointments")}
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to={`/myshoppingcart/${getUserData._id}`}>
+                        <NavDropdown.Item as={Link} to={`/myshoppingcart`}>
                           {t("MyShoppingCart")}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item as={Link} to={`/mybusiness/${getUserData._id}`}>
+                        <NavDropdown.Item as={Link} to={`/mybusiness`}>
                           {t("MyBusiness")}
                         </NavDropdown.Item>
                         <NavDropdown.Item as={Link} to={"/newbusiness"}>

@@ -11,7 +11,7 @@ export function Category() {
   const { t } = useTranslation();
 
   let result = categories.find((item) => item.name.toLowerCase() === type);
-
+  
   return (
     <>
       <Components.StyledHero img={result.image}>

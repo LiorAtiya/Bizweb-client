@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 export default function Googlemap({ business }) {
 
   const [flagMap, setFlagMap] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,14 +18,6 @@ export default function Googlemap({ business }) {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
-
-  // const styles = {
-  //   container: {
-  //     display: "flex",
-  //     flexDirection: "column",
-  //     alignItems: "center",
-  //   },
-  // }
 
   const pushPin = {
     center: {

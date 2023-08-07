@@ -30,7 +30,7 @@ export default function Reviews({ id }) {
         setShow(true);
     }
 
-    const getUserData = JSON.parse(localStorage.getItem('token'));
+    const getUserData = JSON.parse(localStorage.getItem('user-info'));
 
     const name = useRef(getUserData ? { value: getUserData.username + "" } : "");
     const review = useRef();

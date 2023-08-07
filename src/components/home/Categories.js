@@ -12,6 +12,7 @@ export default function Categories({ categories }) {
     return (
       <CategoryCard
         key={i}
+        type={category.type}
         name={category.name}
         route={category.route}
         image={category.image}

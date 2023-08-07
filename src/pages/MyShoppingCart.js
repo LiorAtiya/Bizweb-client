@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
-// import { Link } from 'react-router-dom'
-import { useParams } from "react-router-dom";
 import ApiClient from '../api/ApiRoutes';
 import '../styles/MyShoppingCart.css'
 import { useTranslation } from 'react-i18next';
 
 export function MyShoppingCart() {
 
-    let { userID } = useParams();
+    const token = localStorage.getItem("token");
+    
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -16,60 +15,55 @@ export function MyShoppingCart() {
     useEffect(() => {
         const getResult = async () => {
             // gets details of user
-            ApiClient.getUserDetails(userID)
+            ApiClient.getUserInfo(token)
                 .then((res) => {
-                    localStorage.setItem("token", JSON.stringify(res.data));
-                    setCart(JSON.parse(localStorage.getItem('token')));
+                    localStorage.setItem("user-info", JSON.stringify(res.data));
+                    setCart(res.data.myShoppingCart);
                     const total = res.data.myShoppingCart.reduce((accumulator, currentValue) => accumulator + (currentValue.price * currentValue.quantity), 0)
                     setTotalPrice(total);
                 })
-                .catch((err) => console.log(err));
+                .catch();
         };
         getResult();
-    }, [userID]);
+    }, [token]);
 
     const handleRemoveFromCart = (cartItem) => {
-        ApiClient.RemoveProductFromCart(userID, cartItem.id)
+        ApiClient.RemoveProductFromCart(token, cartItem.id)
             .then((res) => {
                 window.location.reload(false);
             })
-            .catch((err) => console.log(err));
-
-            window.location.reload(false);
+            .catch();
     }
 
-    const handleDecreaseCart = (cartItem, index) => {
-        ApiClient.decreaseQuantity(userID, cartItem)
+    const handleDecreaseCart = (cartItem) => {
+        ApiClient.decreaseQuantity(token, cartItem)
             .then((res) => {
                 window.location.reload(false);
             })
-            .catch((err) => console.log(err));
+            .catch();
     }
 
-    const handleIncreaseCart = (cartItem, index) => {
-        ApiClient.increaseQuantity(userID, cartItem)
+    const handleIncreaseCart = (cartItem) => {
+        ApiClient.increaseQuantity(token, cartItem)
             .then((res) => {
                 window.location.reload(false);
             })
-            .catch((err) => console.log(err));
+            .catch();
     }
 
     const handleClearCart = () => {
-        ApiClient.clearCart(userID)
+        ApiClient.clearCart(token)
             .then((res) => {
-                console.log(res);
                 window.location.reload(false);
             })
-            .catch((err) => console.log(err));
-
-        window.location.reload(false);
+            .catch();
     }
 
     return (
         <div className="cart-container">
             <h2>{t("ShoppingCart")}</h2>
             {
-                cart.myShoppingCart?.length === 0 ? (
+                cart?.length === 0 ? (
                     <div className="cart-empty">
                         <p>{t("EmptyCart")}</p>
                     </div>
@@ -84,7 +78,8 @@ export function MyShoppingCart() {
                         </div>
                         <div className="cart-items">
 
-                            {cart.myShoppingCart && cart.myShoppingCart.map((cartItem, index) => (<div className="cart-item" key={cartItem.id}>
+                            {cart && cart.map((cartItem, index) => (
+                            <div className="cart-item" key={cartItem.id}>
                                 <div className="cart-product">
                                     <img src={cartItem.image.url} alt={cartItem.name} />
                                     <div>
@@ -96,9 +91,9 @@ export function MyShoppingCart() {
                                 <div className="cart-product-shop">{cartItem.businessName}</div>
                                 <div className="cart-product-price">₪{cartItem.price}</div>
                                 <div className="cart-product-quantity">
-                                    <button onClick={() => handleDecreaseCart(cartItem, index)}>-</button>
+                                    <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
                                     <div className="count">{cartItem.quantity}</div>
-                                    <button onClick={() => handleIncreaseCart(cartItem, index)}>+</button>
+                                    <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
                                 </div>
                                 <div className="cart-product-total-price">
                                     ₪{cartItem.price * cartItem.quantity}

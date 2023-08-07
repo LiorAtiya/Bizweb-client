@@ -37,7 +37,7 @@ export const Gallery = ({ id, name }) => {
     setRemoveImage(id);
     setShow2(true);
   }
-  const getUserData = JSON.parse(localStorage.getItem('token'));
+  const getUserData = JSON.parse(localStorage.getItem('user-info'));
 
   const isAdmin = () => {
     if (getUserData) {
