@@ -13,8 +13,6 @@ import Categories from "../components/home/Categories";
 import { SearchBox } from "../components/home/SearchBox";
 import ApiClient from "../api/ApiRoutes";
 
-
-
 export function Home() {
   const [user, setUser] = useState("");
   const [prediction, setPrediction] = useState("");
@@ -25,8 +23,13 @@ export function Home() {
   const { t } = useTranslation();
 
   useEffect(() => {
+    // const targetTitle = document.getElementById("about");
+    // if (targetTitle) {
+    //   targetTitle.scrollIntoView({ behavior: "smooth" });
+    // }
+
     const getResult = async () => {
-      const getUserData = getUserInfo()
+      const getUserData = getUserInfo();
 
       if (getUserData) {
         setUser(getUserData);
@@ -44,7 +47,7 @@ export function Home() {
       }
 
       const categoriesMaped = categories.map((category) => {
-        return { ...category, name: t(category.name) , type: category.name };
+        return { ...category, name: t(category.name), type: category.name };
       });
 
       setAllCategories(categoriesMaped);
@@ -84,10 +87,12 @@ export function Home() {
           </h6>
         ) : null
       ) : null}
-      
+
       <Categories categories={allCategories} />
       <Top5 />
-      <AboutUs />
+      <div id="about">
+        <AboutUs />
+      </div>
       <br />
     </>
   );

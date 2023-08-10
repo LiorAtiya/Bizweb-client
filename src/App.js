@@ -7,6 +7,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+
 import NavbarComp from "./components/NavbarComp";
 
 import {
@@ -24,9 +25,12 @@ import {
   ResetPassword,
 } from "./pages";
 
+import AboutUs from "./components/home/AboutUs";
+
 import { I18nextProvider } from "react-i18next";
 import i18n from "./translations/i18n.js";
 import { BusinessContext } from "./context/BusinessContext";
+import ComplexNavbar from "./components/ComplexNavbar";
 
 export default function App() {
   const context = useContext(BusinessContext);
@@ -43,7 +47,8 @@ export default function App() {
     <div>
       <I18nextProvider i18n={i18n}>
         <Router>
-          <NavbarComp />
+          <ComplexNavbar />
+          {/* <NavbarComp /> */}
           <Switch>
             <Route exact path="/">
               <Home />
@@ -56,6 +61,9 @@ export default function App() {
             </Route>
             <Route exact path="/quickappointment">
               <QuickAppointment />
+            </Route>
+            <Route exact path="/about">
+              <AboutUs />
             </Route>
             <Route exact path="/myappointments">
               {getUserInfo() ? <MyAppointments /> : <Redirect to="/" />}

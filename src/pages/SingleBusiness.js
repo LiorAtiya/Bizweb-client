@@ -7,7 +7,6 @@ import '../styles/SingleBusiness.css'
 //Gallery
 import { Gallery } from '../components/singleBusiness/Gallery'
 import { Tab, Nav } from "react-bootstrap";
-// import TrackVisibility from 'react-on-screen';
 
 import Calender from '../components/singleBusiness/Calender'
 import Reviews from '../components/singleBusiness/Reviews'

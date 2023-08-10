@@ -9,7 +9,7 @@
   "Logout": "Logout",
   "LoginOrRegister": "Login / Register",
   "Language": "עברית",
-  "AreUSure": "AreUSure",
+  "AreUSure": "Are you sure you want to logout?",
   "Yes": "Yes",
   "No": "No",
 
@@ -116,5 +116,7 @@
   "Feedbacks": "Feedbacks:",
   "WantToDelete": "Are you sure you want to delete?",
   "YourName": "Your name",
-  "YourFeedback": "What's your feedback"
+  "YourFeedback": "What's your feedback",
+  "About": "About",
+  "Home": "Home"
 }
