@@ -169,14 +169,14 @@ export default function ComplexNavbar() {
                                   i18n.language === "he" && "text-right"
                                 }`}
                               >
-                                <a
+                                <div
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "hover:bg-gray-500 hover:text-white no-underline block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
                                   Login / Register
-                                </a>
+                                </div>
                               </Link>
                             )}
                           </Menu.Item>
@@ -191,14 +191,14 @@ export default function ComplexNavbar() {
                                       i18n.language === "he" && "text-right"
                                     }`}
                                   >
-                                    <a
+                                    <div
                                       className={classNames(
                                         active ? "bg-gray-100 " : "",
                                         "hover:bg-gray-500 hover:text-white no-underline block px-4 py-2 text-sm text-gray-700"
                                       )}
                                     >
                                       {item.name}
-                                    </a>
+                                    </div>
                                   </Link>
                                 )}
                               </Menu.Item>
@@ -217,14 +217,14 @@ export default function ComplexNavbar() {
                                       i18n.language === "he" && "text-right"
                                     }`}
                                   >
-                                    <a
+                                    <div
                                       className={classNames(
                                         active ? "bg-gray-100" : "",
                                         "no-underline block px-4 py-2 text-sm text-red-500"
                                       )}
                                     >
                                       <b>{t("Logout")}</b>
-                                    </a>
+                                    </div>
                                   </button>
                                 )}
                               
