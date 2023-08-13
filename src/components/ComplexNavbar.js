@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import iconUser from "../images/user_icon.png";
@@ -71,7 +71,7 @@ export default function ComplexNavbar() {
 
                 <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                   {/* Logo button */}
-                  <Disclosure.Button as={Link} to={"/"}>
+                  <Link to="/">
                     <div className="flex items-center flex-shrink-0 cursor-pointer">
                       <img
                         className="w-auto h-8"
@@ -79,8 +79,8 @@ export default function ComplexNavbar() {
                         alt="Your Company"
                       />
                     </div>
-                  </Disclosure.Button>
-                      
+                  </Link>
+
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
@@ -94,7 +94,7 @@ export default function ComplexNavbar() {
                               : "text-gray-300 hover:bg-gray-700 hover:text-white",
                             "rounded-md px-3 py-2 text-sm font-medium no-underline"
                           )}
-                          aria-current={item.current ? "page" : undefined}
+                          aria-current={undefined}
                         >
                           {item.name}
                         </Disclosure.Button>
@@ -162,47 +162,45 @@ export default function ComplexNavbar() {
                         <div className="mt-2 border-t border-gray-300"></div>
                         {!userInfo ? (
                           <Menu.Item>
-                            <Disclosure.Button
-                              className={`no-underline ${
-                                i18n.language === "he" && "text-right"
-                              }`}
-                              as={Link}
-                              to="/login"
-                            >
-                              {({ active }) => (
-                                <div
+                            {({ active }) => (
+                              <Link
+                                to="/login"
+                                className={`no-underline ${
+                                  i18n.language === "he" && "text-right"
+                                }`}
+                              >
+                                <a
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "hover:bg-gray-500 hover:text-white no-underline block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
                                   Login / Register
-                                </div>
-                              )}
-                            </Disclosure.Button>
+                                </a>
+                              </Link>
+                            )}
                           </Menu.Item>
                         ) : (
                           <>
                             {userMenu.map((item, index) => (
                               <Menu.Item key={index}>
-                                <Disclosure.Button
-                                  className={`no-underline ${
-                                    i18n.language === "he" && "text-right"
-                                  }`}
-                                  as={Link}
-                                  to={item.href}
-                                >
-                                  {({ active }) => (
-                                    <div
+                                {({ active }) => (
+                                  <Link
+                                    to={item.href}
+                                    className={`no-underline ${
+                                      i18n.language === "he" && "text-right"
+                                    }`}
+                                  >
+                                    <a
                                       className={classNames(
                                         active ? "bg-gray-100 " : "",
                                         "hover:bg-gray-500 hover:text-white no-underline block px-4 py-2 text-sm text-gray-700"
                                       )}
                                     >
                                       {item.name}
-                                    </div>
-                                  )}
-                                </Disclosure.Button>
+                                    </a>
+                                  </Link>
+                                )}
                               </Menu.Item>
                             ))}
 
@@ -211,23 +209,25 @@ export default function ComplexNavbar() {
                                 i18n.language === "he" && "text-right"
                               }`}
                             >
-                              <Disclosure.Button
-                                className={`${
-                                  i18n.language === "he" && "text-right"
-                                }`}
-                                onClick={handleShow}
-                              >
+                             
                                 {({ active }) => (
-                                  <div
-                                    className={classNames(
-                                      active ? "bg-gray-100" : "",
-                                      "no-underline block px-4 py-2 text-sm text-red-500"
-                                    )}
+                                  <button
+                                    onClick={handleShow}
+                                    className={`no-underline ${
+                                      i18n.language === "he" && "text-right"
+                                    }`}
                                   >
-                                    <b>{t("Logout")}</b>
-                                  </div>
+                                    <a
+                                      className={classNames(
+                                        active ? "bg-gray-100" : "",
+                                        "no-underline block px-4 py-2 text-sm text-red-500"
+                                      )}
+                                    >
+                                      <b>{t("Logout")}</b>
+                                    </a>
+                                  </button>
                                 )}
-                              </Disclosure.Button>
+                              
                             </Menu.Item>
                           </>
                         )}
@@ -235,7 +235,7 @@ export default function ComplexNavbar() {
                     </Transition>
                   </Menu>
 
-                  <Disclosure.Button
+                  <button
                     className={classNames(
                       "text-white block rounded-md px-3 py-2 text-base font-medium no-underline"
                     )}
@@ -244,7 +244,7 @@ export default function ComplexNavbar() {
                     <b>
                       <LanguageSwitcher />
                     </b>
-                  </Disclosure.Button>
+                  </button>
                 </div>
               </div>
             </div>
