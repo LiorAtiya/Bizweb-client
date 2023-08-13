@@ -11,9 +11,9 @@ export default function AboutUs() {
 
     return (
         <div>
-            <section className='mt-3'>
+            <section className='w-full mt-4'>
                 <Title title={t("LookForUs")} color="black"/>
-                <div className='flex justify-between w-[10%] m-auto'>
+                <div className='flex justify-between w-1/2 m-auto mt-3 sm:w-1/2 md:w-[20%] lg:w-[10%]'>
                     <img src={Facebook} alt="Logo" style={{ height: '30px', width: '30px'}}
                         onClick={() => {
                             window.open(`https://www.facebook.com/`, '_blank');
