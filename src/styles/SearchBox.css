@@ -35,6 +35,9 @@
 } 
 
 @media (max-width: 1000px) {
+  .input-container {
+    width: 80%;
+  }
   .search-btn{
     margin-right: 4%;
     /* height: 100px; */
