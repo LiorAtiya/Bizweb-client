@@ -6,7 +6,7 @@ import * as Components from "../styles/StyledHero";
 import "../styles/BusinessList.css";
 import { useTranslation } from "react-i18next";
 
-export function Category() {
+export default function Category() {
   let { type } = useParams();
   const { t } = useTranslation();
 

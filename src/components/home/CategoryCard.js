@@ -21,9 +21,7 @@ export default function CategoryCard({type, name, route, image }) {
       <div className="card-category-container">
         <img src={image || defaultImg} alt="category" />
         <div className="text-on-image">
-          <h1>
             <b>{name}</b>
-          </h1>
         </div>
       </div>
     </Link>

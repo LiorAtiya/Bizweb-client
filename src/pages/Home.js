@@ -23,11 +23,6 @@ export function Home() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // const targetTitle = document.getElementById("about");
-    // if (targetTitle) {
-    //   targetTitle.scrollIntoView({ behavior: "smooth" });
-    // }
-
     const getResult = async () => {
       const getUserData = getUserInfo();
 
@@ -90,7 +85,7 @@ export function Home() {
 
       <Categories categories={allCategories} />
       <Top5 />
-      <div id="about">
+      <div id="contact">
         <AboutUs />
       </div>
       <br />

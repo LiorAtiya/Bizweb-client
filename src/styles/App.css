@@ -167,8 +167,6 @@ body {
   .banner {
     margin-top: 3rem;
     padding: 0.2rem 2rem;
-    /* margin-right: 5%;
-    margin-left: 5%; */
   }
 
   .banner h1 {
@@ -240,6 +238,17 @@ body {
 .services p {
   width: 80%;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 700px) {
+  /* .services-center {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  .service {
+    width: 170px;
+  } */
 }
 
 @media screen and (min-width: 992px) {

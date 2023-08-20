@@ -8,7 +8,7 @@ import ApiClient from "../api/ApiRoutes";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export function MyBusiness() {
+export default function MyBusiness() {
   const currentLanguage = localStorage.getItem("language");
   const token = localStorage.getItem("token");
 

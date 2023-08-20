@@ -7,7 +7,7 @@ import ApiClient from "../api/ApiRoutes";
 import { useTranslation } from "react-i18next";
 import { openWidgetUploadImage } from "../api/cloudinary";
 
-export function NewBusiness() {
+export default function NewBusiness() {
   const { t, i18n } = useTranslation();
   const token = localStorage.getItem("token");
 

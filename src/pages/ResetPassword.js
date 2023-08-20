@@ -3,7 +3,7 @@ import ApiClient from "../api/ApiRoutes";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from "react-router-dom";
 
-export function ResetPassword() {
+export default function ResetPassword() {
   const { id, token } = useParams()
   const password = useRef();
   const confirmPassword = useRef()

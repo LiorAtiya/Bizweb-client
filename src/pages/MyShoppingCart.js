@@ -3,7 +3,7 @@ import ApiClient from '../api/ApiRoutes';
 import '../styles/MyShoppingCart.css'
 import { useTranslation } from 'react-i18next';
 
-export function MyShoppingCart() {
+export default function MyShoppingCart() {
 
     const token = localStorage.getItem("token");
     

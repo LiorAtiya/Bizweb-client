@@ -7,7 +7,7 @@ import ApiClient from '../api/ApiRoutes';
 import { useTranslation } from 'react-i18next';
 import { openWidgetUploadImage } from '../api/cloudinary';
 
-export function EditBusiness() {
+export default function EditBusiness() {
     let { name } = useParams();
     const context = useContext(BusinessContext)
 
