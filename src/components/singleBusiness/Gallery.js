@@ -85,11 +85,10 @@ export const Gallery = ({ id, name }) => {
     if (newImage.length !== 0) {
       ApiClient.addNewImage(id, newImage)
         .then((res) => {
-          console.log(res.data);
           setData((oldArray) => [...oldArray, newImage]);
           handleClose();
         })
-        .catch((err) => console.log(err));
+        .catch();
     }
 
     //update background image
@@ -99,7 +98,7 @@ export const Gallery = ({ id, name }) => {
           console.log(res.data);
           window.location.reload(false);
         })
-        .catch((err) => console.log(err));
+        .catch();
     }
   };
 

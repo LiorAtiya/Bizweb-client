@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import * as Components from "../../styles/StyledForm";
 import { useTranslation } from "react-i18next";
+import "../../styles/Calender.css";
 
 //Day marked
 import Badge from "@mui/material/Badge";
@@ -21,8 +22,6 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
-import "../../styles/Calender.css";
 
 const Calendar = ({ businessId, businessName }) => {
   const [highlightedDays, setHighlightedDays] = useState([]);
@@ -60,6 +59,8 @@ const Calendar = ({ businessId, businessName }) => {
       //Remove expired event
       ApiClient.removeExpiredEvents(businessId).then().catch();
 
+      //***NEED TO DELETE EXPIRED EVENTS FROM MY APPOINTMENT */
+
       //gets all events of business
       ApiClient.getAllEventsOfCalender(businessId)
         .then((res) => {
@@ -85,6 +86,7 @@ const Calendar = ({ businessId, businessName }) => {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   const getUserData = JSON.parse(localStorage.getItem("user-info"));
+  const token = localStorage.getItem("token");
 
   const isAdmin = () => {
     if (getUserData) {
@@ -110,63 +112,59 @@ const Calendar = ({ businessId, businessName }) => {
   const addNewEvent = async (e) => {
     e.preventDefault();
 
-    if (verified) {
-      const date =
-        value.getDate() +
-        "/" +
-        (value.getMonth() + 1) +
-        "/" +
-        value.getFullYear();
-      const expiredDate = parseInt(
-        date.split("/").reduce(function (first, second) {
-          return second + first;
-        }, "")
-      );
+    // if (!verified) return alert(t("PleaseVerifyMobile"));
 
-      //Parse time to int
-      const expiredTime =
-        time.split(":").reduce(function (seconds, v) {
-          return +v + seconds * 60;
-        }, 0) / 60;
+    const date =
+      value.getDate() +
+      "/" +
+      (value.getMonth() + 1) +
+      "/" +
+      value.getFullYear();
+    const expiredDate = parseInt(
+      date.split("/").reduce(function (first, second) {
+        return second + first;
+      }, "")
+    );
 
-      const appointment = {
-        id: "id" + new Date().getTime(),
-        businessID: businessId,
-        date: date,
-        time: time,
-        name: name.current.value,
-        phone: phone,
-        comments: comments.current.value,
-        expiredTime: expiredTime,
-        expiredDate: expiredDate,
-      };
+    //Parse time to int
+    const expiredTime =
+      time.split(":").reduce(function (seconds, v) {
+        return +v + seconds * 60;
+      }, 0) / 60;
 
-      //Add user ID to appointment
-      if (getUserData) {
-        appointment.userID = getUserData._id;
-      }
+    const appointment = {
+      eventID: "id" + new Date().getTime(),
+      businessID: businessId,
+      businessName: businessName,
+      date: date,
+      time: time,
+      name: name.current.value,
+      phone: phone,
+      comments: comments.current.value,
+      expiredTime: expiredTime,
+      expiredDate: expiredDate,
+    };
 
-      ApiClient.addNewEvent(appointment)
-        .then((res) => {
-          //if user login => Update in the personal profile the appointment
-          if (getUserData) {
-            ApiClient.updateEventInMyAppointment(getUserData._id, appointment)
-              .then((res) => {
-                window.localStorage.setItem(
-                  "user-info",
-                  JSON.stringify(res.data)
-                );
-              })
-              .catch();
-          }
-
-          alert(t("ConfirmAppointment"));
-          window.location.reload(false);
-        })
-        .catch();
-    } else {
-      alert(t("PleaseVerifyMobile"));
+    //Add user ID to appointment
+    if (getUserData) {
+      appointment.userID = getUserData._id;
     }
+
+    ApiClient.addNewEvent(appointment)
+      .then((res) => {
+        //if user login => Update in the personal profile the appointment
+        if (token) {
+          ApiClient.updateEventInMyAppointment(token, appointment)
+            .then((res) => {
+              window.localStorage.setItem("user-info", JSON.stringify(res));
+            })
+            .catch();
+        }
+
+        alert(t("ConfirmAppointment"));
+        window.location.reload(false);
+      })
+      .catch();
   };
 
   const addHours = async () => {
@@ -210,7 +208,7 @@ const Calendar = ({ businessId, businessName }) => {
       expiredDate: expiredDate,
     };
 
-    ApiClient.addAvailableHour(appointment)
+    ApiClient.addAvailableHour(token, appointment)
       .then((res) => {
         alert("Added new hour to appointment");
         let FreeEvent = [appointment].map((item) => {
@@ -225,27 +223,24 @@ const Calendar = ({ businessId, businessName }) => {
       .catch();
   };
 
-  const deleteEvent = async (userID, t, name, phone, date) => {
-    const appointment = {
-      businessID: businessId,
-      date: date,
-      time: t,
-      name: name,
-      phone: phone,
-      userID: userID,
-    };
+  const deleteEvent = async (eventID) => {
 
     //Delete from calender
-    ApiClient.deleteEventFromCalender(appointment)
+    ApiClient.deleteEventFromCalender(token, {
+      businessID: businessId,
+      eventID: eventID,
+    })
       .then((res) => {
         //Delete from list of appointment of user
-        ApiClient.deleteEventFromMyAppointments(appointment)
-          .then((res) => {
-            window.location.reload(false);
-          })
-          .catch((err) => console.log(err));
+        if (token) {
+          ApiClient.deleteEventFromMyAppointments(token, { eventID: eventID })
+            .then((res) => {
+              window.location.reload(false);
+            })
+            .catch();
+        }
       })
-      .catch((err) => console.log(err));
+      .catch();
   };
 
   return (
@@ -424,19 +419,7 @@ const Calendar = ({ businessId, businessName }) => {
                                   <Button
                                     variant="btn btn-danger"
                                     className="h-[50%]"
-                                    onClick={() =>
-                                      deleteEvent(
-                                        item.userID,
-                                        item.time,
-                                        item.name,
-                                        item.phone,
-                                        value.getDate() +
-                                          "/" +
-                                          (value.getMonth() + 1) +
-                                          "/" +
-                                          value.getFullYear()
-                                      )
-                                    }
+                                    onClick={() => deleteEvent(item.eventID)}
                                   >
                                     Delete
                                   </Button>
@@ -474,19 +457,7 @@ const Calendar = ({ businessId, businessName }) => {
                                   <Button
                                     variant="btn btn-danger"
                                     className="h-[50%]"
-                                    onClick={() =>
-                                      deleteEvent(
-                                        item.userID,
-                                        item.time,
-                                        item.name,
-                                        item.phone,
-                                        value.getDate() +
-                                          "/" +
-                                          (value.getMonth() + 1) +
-                                          "/" +
-                                          value.getFullYear()
-                                      )
-                                    }
+                                    onClick={() => deleteEvent(item.eventID)}
                                   >
                                     Delete
                                   </Button>
@@ -547,7 +518,7 @@ const Calendar = ({ businessId, businessName }) => {
                       ref={name}
                     />
 
-                    <div>
+                    {/* <div>
                       <Components.AppointmentInput
                         type="number"
                         className={i18n.language ? "text-right" : null}
@@ -564,9 +535,9 @@ const Calendar = ({ businessId, businessName }) => {
                           {verified ? t("Verified") : t("Verify")}
                         </Components.Button>
                       ) : null}
-                    </div>
+                    </div> */}
 
-                    {verifyOtp ? (
+                    {/* {verifyOtp ? (
                       <>
                         <Components.AppointmentInput
                           type="number"
@@ -583,7 +554,7 @@ const Calendar = ({ businessId, businessName }) => {
                           {t("Confirm")}
                         </Components.Button>
                       </>
-                    ) : null}
+                    ) : null} */}
 
                     <Components.AppointmentTextArea
                       type="textarea"

@@ -11,18 +11,20 @@ export default function MyAppointments() {
   const [userData, setUserData] = useState();
   const { t } = useTranslation();
   const currentLanguage = localStorage.getItem("language");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const getResult = async () => {
       // gets all appintments of user
-      const token = localStorage.getItem("token");
 
-      ApiClient.getUserInfo(token)
-        .then((res) => {
-          localStorage.setItem("user-info", JSON.stringify(res.data));
-          setUserData(JSON.parse(localStorage.getItem("user-info")));
-        })
-        .catch((err) => console.log(err));
+      if (token) {
+        ApiClient.getUserInfo(token)
+          .then((res) => {
+            localStorage.setItem("user-info", JSON.stringify(res.data));
+            setUserData(JSON.parse(localStorage.getItem("user-info")));
+          })
+          .catch((err) => console.log(err));
+      }
     };
     getResult();
   }, [userID]);
@@ -32,7 +34,7 @@ export default function MyAppointments() {
       businessID: businessID,
       eventID: eventID,
     };
-
+    
     ApiClient.deleteEventFromCalender(appointment)
       .then((res) => {
         //Delete from my appointments
@@ -59,7 +61,7 @@ export default function MyAppointments() {
                   {currentLanguage === "he" ? (
                     <Card>
                       <Card.Header>
-                        {item.name}
+                        {item.businessName}
                         <b> :שם העסק</b>{" "}
                       </Card.Header>
                       <Card.Body>
@@ -82,7 +84,7 @@ export default function MyAppointments() {
                   ) : (
                     <Card>
                       <Card.Header>
-                        <b>Business Name:</b> {item.name}
+                        <b>Business Name:</b> {item.businessName}
                       </Card.Header>
                       <Card.Body>
                         <Card.Text>

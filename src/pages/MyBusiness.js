@@ -23,14 +23,15 @@ export default function MyBusiness() {
     const getResult = async () => {
       // gets all appintments of user
       const token = localStorage.getItem("token");
+      if (token) {
+        ApiClient.getUserInfo(token)
+          .then((res) => {
+            localStorage.setItem("user-info", JSON.stringify(res.data));
 
-      ApiClient.getUserInfo(token)
-        .then((res) => {
-          localStorage.setItem("user-info", JSON.stringify(res.data));
-
-          setAllBusiness(getAllBusinessOfUser(res.data.business));
-        })
-        .catch((err) => console.log(err));
+            setAllBusiness(getAllBusinessOfUser(res.data.business));
+          })
+          .catch();
+      }
     };
     getResult();
   }, [getAllBusinessOfUser]);

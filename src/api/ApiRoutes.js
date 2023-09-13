@@ -5,9 +5,9 @@ class ApiRoutes extends Component {
   constructor() {
     super();
     this.state = {
-      // route: "http://localhost:3010", //localhost
+      route: "http://localhost:3010", //localhost
       // route: 'https://bizweb-israel.up.railway.app' //server
-      route: 'https://bizweb-server.onrender.com' //server
+      // route: 'https://bizweb-server.onrender.com' //server
     };
   }
 
@@ -62,32 +62,29 @@ class ApiRoutes extends Component {
 
   //MyApointment & MyShoppingCart & Calender Page
 
-  // async getMyAppointments(userID) {
-  //   return await axios
-  //     .get(`${this.state.route}/api/users/${userID}`)
-  //     .then((response) => response);
-  // }
-
-  async deleteEventFromCalender(appointment) {
+  async deleteEventFromCalender(token, appointment) {
     return await axios
       .delete(`${this.state.route}/api/calender/delete-event`, {
+        headers: { Authorization: token },
         data: appointment,
       })
       .then((response) => response);
   }
 
-  async deleteEventFromMyAppointments(appointment) {
+  async deleteEventFromMyAppointments(token, eventID) {
     return axios
-      .delete(
-        `${this.state.route}/api/users/${appointment.userID}/delete-appointment`,
-        { data: appointment }
-      )
+      .delete(`${this.state.route}/api/users/delete-appointment`, {
+        headers: { Authorization: token },
+        data: eventID,
+      })
       .then((response) => response);
   }
 
-  async addAvailableHour(appointment) {
+  async addAvailableHour(token, appointment) {
     return await axios
-      .post(`${this.state.route}/api/calender/add-hours`, appointment)
+      .post(`${this.state.route}/api/calender/add-hours`, appointment, {
+        headers: { Authorization: token },
+      })
       .then((response) => response);
   }
 
@@ -175,10 +172,13 @@ class ApiRoutes extends Component {
       .then((response) => response);
   }
 
-  async updateEventInMyAppointment(id, appointment) {
+  async updateEventInMyAppointment(token, appointment) {
     return await axios
-      .put(`${this.state.route}/api/users/${id}/newappointment`, appointment)
-      .then((response) => response);
+      //**FIX TEST ROUTE */
+      .put(`${this.state.route}/api/users/test/new-appointment`, appointment, {
+        headers: { Authorization: token },
+      })
+      .then((response) => response.data);
   }
 
   // BigML - Home Page
