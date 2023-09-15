@@ -8,9 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-// import CardActions from '@mui/material/CardActions';
-// import Button from '@mui/material/Button';
-
 //Card of business from some category
 export default function Business({ business }) {
   const {
@@ -23,10 +20,11 @@ export default function Business({ business }) {
 
   return (
     <Link to={`/${category}/${name}`} className='business-card-container'>
+      {console.log(backgroundPicture)}
       <Card sx={{ height: 330, textAlign: 'center', margin: '0px'}}>
         <CardMedia
           sx={{ height: 140 }}
-          image={backgroundPicture || defaultImg}
+          image={backgroundPicture.url || defaultImg}
           title={name}
         />
         <CardContent className='business-card-content'>

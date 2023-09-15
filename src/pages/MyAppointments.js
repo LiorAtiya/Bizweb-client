@@ -23,7 +23,7 @@ export default function MyAppointments() {
             localStorage.setItem("user-info", JSON.stringify(res.data));
             setUserData(JSON.parse(localStorage.getItem("user-info")));
           })
-          .catch((err) => console.log(err));
+          .catch();
       }
     };
     getResult();
@@ -35,12 +35,10 @@ export default function MyAppointments() {
       eventID: eventID,
     };
     
-    ApiClient.deleteEventFromCalender(appointment)
+    ApiClient.deleteEventFromCalender(token, appointment)
       .then((res) => {
         //Delete from my appointments
-        const infoUser = JSON.parse(localStorage.getItem("user-info"));
-        appointment.userID = infoUser._id;
-        ApiClient.deleteEventFromMyAppointments(appointment)
+        ApiClient.deleteEventFromMyAppointments(token, appointment)
           .then((res) => {
             window.localStorage.setItem("user-info", JSON.stringify(res.data));
             window.location.reload(false);
@@ -75,7 +73,7 @@ export default function MyAppointments() {
                         </Card.Text>
                         <Button
                           variant="btn btn-danger"
-                          onClick={() => deleteEvent(item.businessID, item.id)}
+                          onClick={() => deleteEvent(item.businessID, item.eventID)}
                         >
                           מחק
                         </Button>
@@ -97,7 +95,7 @@ export default function MyAppointments() {
                         </Card.Text>
                         <Button
                           variant="btn btn-danger"
-                          onClick={() => deleteEvent(item.businessID, item.id)}
+                          onClick={() => deleteEvent(item.businessID, item.eventID)}
                         >
                           Delete
                         </Button>

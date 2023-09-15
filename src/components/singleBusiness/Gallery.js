@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-// import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ApiClient from "../../api/ApiRoutes";
 import "../../styles/Gallery.css";
 import { useTranslation } from "react-i18next";
+import { openWidgetUploadImage } from "../../api/cloudinary";
 
-export const Gallery = ({ id, name }) => {
+const Gallery = ({ id }) => {
   const { t, i18n } = useTranslation();
 
   //data of all images
@@ -45,43 +45,7 @@ export const Gallery = ({ id, name }) => {
     return false;
   };
 
-  const handleOpenWidget = async () => {
-    var myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: "dk5mqzgcv",
-        uploadPreset: "xw93prxe",
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
-          setNewImage({ id: result.info.public_id, url: result.info.url });
-        }
-      }
-    );
-    //open widget
-    myWidget.open();
-  };
-
-  const handleOpenWidgetForBackground = async () => {
-    var myWidget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: "dk5mqzgcv",
-        uploadPreset: "xw93prxe",
-      },
-      (error, result) => {
-        if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info);
-          setUpdatedBackgroundImage(result.info.url);
-        }
-      }
-    );
-
-    //open widget
-    myWidget.open();
-  };
-
   const uploadImage = async () => {
-    //send request to server for upload new image
     if (newImage.length !== 0) {
       ApiClient.addNewImage(id, newImage)
         .then((res) => {
@@ -95,7 +59,6 @@ export const Gallery = ({ id, name }) => {
     if (updatedBackgroundImage !== "") {
       ApiClient.updateBackgroundImage(id, updatedBackgroundImage)
         .then((res) => {
-          console.log(res.data);
           window.location.reload(false);
         })
         .catch();
@@ -109,7 +72,7 @@ export const Gallery = ({ id, name }) => {
         setData(newArray);
         handleClose2();
       })
-      .catch((err) => console.log(err));
+      .catch();
   };
 
   return (
@@ -136,7 +99,7 @@ export const Gallery = ({ id, name }) => {
           <div
             id="upload-widget"
             className="cloudinary-button"
-            onClick={() => handleOpenWidget()}
+            onClick={() => openWidgetUploadImage(setNewImage)}
           >
             {t("ChooseBtn")}
           </div>
@@ -146,7 +109,7 @@ export const Gallery = ({ id, name }) => {
           <div
             id="upload-widget"
             className="cloudinary-button"
-            onClick={() => handleOpenWidgetForBackground()}
+            onClick={() => openWidgetUploadImage(setUpdatedBackgroundImage)}
           >
             {t("ChooseBtn")}
           </div>
@@ -180,31 +143,34 @@ export const Gallery = ({ id, name }) => {
         </Modal.Footer>
       </Modal>
 
-      {/* <div className="gallery-container"> */}
       <div className="flex flex-wrap w-[95%] mx-auto">
-        {/* <Row> */}
-          {data.map((singleData, i) => {
-            return (
-              // <Col size={12} sm={6} md={4} key={i}>
-              // <div className="proj-imgbx">
-              <div key={singleData.id} className="p-4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3">
-                <div className="overflow-hidden h-60 w-100">
-                <img src={singleData.url} className="object-cover w-full h-full border border-white rounded-md border-1" alt={i} />
-                </div>
-                {isAdmin() ? (
-                  <button
-                    className="btn btn-danger btn-delete"
-                    onClick={() => handleShow2(singleData.id)}
-                  >
-                    X
-                  </button>
-                ) : null}
+        {data.map((singleData, i) => {
+          return (
+            <div
+              key={singleData.id}
+              className="p-4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3"
+            >
+              <div className="overflow-hidden h-60 w-100">
+                <img
+                  src={singleData.url}
+                  className="object-cover w-full h-full border border-white rounded-md border-1"
+                  alt={i}
+                />
               </div>
-              // </Col>
-            );
-          })}
-        {/* </Row> */}
+              {isAdmin() ? (
+                <button
+                  className="btn btn-danger btn-delete"
+                  onClick={() => handleShow2(singleData.id)}
+                >
+                  X
+                </button>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </>
   );
 };
+
+export default Gallery;
