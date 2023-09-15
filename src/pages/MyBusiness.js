@@ -43,6 +43,7 @@ export default function MyBusiness() {
     setBusinessToDelete(businessID);
   };
   const deleteBusiness = () => {
+    console.log(businessToDelete)
     ApiClient.deleteBusiness(token, businessToDelete)
       .then((res) => {
         window.location.reload(false);

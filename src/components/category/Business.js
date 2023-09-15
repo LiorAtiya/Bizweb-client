@@ -20,7 +20,6 @@ export default function Business({ business }) {
 
   return (
     <Link to={`/${category}/${name}`} className='business-card-container'>
-      {console.log(backgroundPicture)}
       <Card sx={{ height: 330, textAlign: 'center', margin: '0px'}}>
         <CardMedia
           sx={{ height: 140 }}
