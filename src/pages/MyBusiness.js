@@ -27,8 +27,7 @@ export default function MyBusiness() {
         ApiClient.getUserInfo(token)
           .then((res) => {
             localStorage.setItem("user-info", JSON.stringify(res.data));
-
-            setAllBusiness(getAllBusinessOfUser(res.data.business));
+            setAllBusiness(JSON.parse(localStorage.getItem("my-business")));
           })
           .catch();
       }
@@ -43,7 +42,6 @@ export default function MyBusiness() {
     setBusinessToDelete(businessID);
   };
   const deleteBusiness = () => {
-    console.log(businessToDelete)
     ApiClient.deleteBusiness(token, businessToDelete)
       .then((res) => {
         window.location.reload(false);
@@ -57,7 +55,8 @@ export default function MyBusiness() {
         <div className="auth-inner">
           <h2>{t("MyBusiness")}</h2>
           <hr></hr>
-          {allBusiness?.map((item, i) => {
+          {console.log("check after: ", allBusiness)}
+          {allBusiness.map((item, i) => {
             return currentLanguage === "he" ? (
               <div key={i}>
                 <Card>
