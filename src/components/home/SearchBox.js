@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export function SearchBox() {
   const context = useContext(BusinessContext);
-  const { handleChangeFilter, sortedBusiness } = context;
+  const { handleChangeFilter, quickSearchFiltered } = context;
   const quickSearch = useRef();
   const { t } = useTranslation();
   const [language] = useState(localStorage.getItem("language"));
@@ -33,7 +33,7 @@ export function SearchBox() {
       {quickSearch.current !== undefined &&
       quickSearch.current.value.length !== 0 ? (
         <div className="absolute inset-x-0 z-50 w-4/5 m-auto text-sm font-medium text-gray-900 bg-white border border-gray-400 rounded-lg cursor-pointer top-30 z-5">
-          {sortedBusiness?.slice(0, 5).map((business, i) => {
+          {quickSearchFiltered?.slice(0, 5).map((business, i) => {
             return (
               <Link
                 key={business._id}
@@ -42,7 +42,7 @@ export function SearchBox() {
               >
                 <div
                   className={`w-full px-4 py-2 ${
-                    sortedBusiness.slice(0, 5).length - 1 !== i
+                    quickSearchFiltered.slice(0, 5).length - 1 !== i
                       ? "border-b"
                       : null
                   } border-gray-500`}

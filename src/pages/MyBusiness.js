@@ -55,7 +55,6 @@ export default function MyBusiness() {
         <div className="auth-inner">
           <h2>{t("MyBusiness")}</h2>
           <hr></hr>
-          {console.log("check after: ", allBusiness)}
           {allBusiness.map((item, i) => {
             return currentLanguage === "he" ? (
               <div key={i}>

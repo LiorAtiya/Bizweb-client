@@ -7,6 +7,7 @@ export default class BusinessProvider extends Component {
   state = {
     business: [],
     sortedBusiness: [],
+    quickSearchFiltered: [],
     loading: false,
     city: "all",
     businessName: "",
@@ -38,7 +39,6 @@ export default class BusinessProvider extends Component {
       }
     });
     localStorage.setItem("my-business", JSON.stringify(allBusiness));
-
     return allBusiness;
   };
 
@@ -58,19 +58,22 @@ export default class BusinessProvider extends Component {
 
     //filter by city
     if (city !== "all") {
-      tempBusiness = tempBusiness.filter((busi) => busi.city === city);
+      const filterCity = tempBusiness.filter((busi) => busi.city === city);
+      this.setState({
+        sortedBusiness: filterCity,
+      });
     }
 
     if (businessName !== "") {
       //filter by business name
-      tempBusiness = tempBusiness.filter((busi) =>
+      const filterQuickSeack = tempBusiness.filter((busi) =>
         busi.name.toLowerCase().includes(businessName.toLowerCase())
       );
+      this.setState({
+        quickSearchFiltered: filterQuickSeack
+      });
     }
 
-    this.setState({
-      sortedBusiness: tempBusiness,
-    });
   };
 
   getUserInfo = () => {
