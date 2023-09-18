@@ -56,10 +56,6 @@ const Calendar = ({ businessId, businessName }) => {
 
   useEffect(() => {
     const getResult = async () => {
-      //Remove expired event
-      ApiClient.removeExpiredEvents(businessId).then().catch();
-
-      //***NEED TO DELETE EXPIRED EVENTS FROM MY APPOINTMENT */
 
       //gets all events of business
       ApiClient.getAllEventsOfCalender(businessId)

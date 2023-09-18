@@ -19,6 +19,12 @@ export default class BusinessProvider extends Component {
     ApiClient.getAllBusiness()
       .then((res) => {
         this.setState({ business: res.data, sortedBusiness: res.data });
+
+        console.log(res.data)
+        res.data.forEach(async (business) => {
+          //Remove expired events
+          await ApiClient.removeExpiredEvents(business._id).then().catch();
+        });
       })
       .catch();
   }
@@ -70,10 +76,9 @@ export default class BusinessProvider extends Component {
         busi.name.toLowerCase().includes(businessName.toLowerCase())
       );
       this.setState({
-        quickSearchFiltered: filterQuickSeack
+        quickSearchFiltered: filterQuickSeack,
       });
     }
-
   };
 
   getUserInfo = () => {

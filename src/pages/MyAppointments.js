@@ -15,8 +15,8 @@ export default function MyAppointments() {
 
   useEffect(() => {
     const getResult = async () => {
+      
       // gets all appintments of user
-
       if (token) {
         ApiClient.getUserInfo(token)
           .then((res) => {
