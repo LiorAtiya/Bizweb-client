@@ -5,9 +5,9 @@ class ApiRoutes extends Component {
   constructor() {
     super();
     this.state = {
-      route: "http://localhost:3010", //localhost
+      // route: "http://localhost:3010", //localhost
       // route: 'https://bizweb-israel.up.railway.app' //server
-      // route: 'https://bizweb-server.onrender.com' //server
+      route: 'https://bizweb-server.onrender.com' //server
     };
   }
 
@@ -109,6 +109,14 @@ class ApiRoutes extends Component {
   async updateDetailsOfBusiness(id, updatedDetails, token) {
     return await axios
       .put(`${this.state.route}/api/business/${id}`, updatedDetails, {
+        headers: { Authorization: token },
+      })
+      .then((response) => response);
+  }
+
+  async getMyBusiness(token) {
+    return await axios
+      .get(`${this.state.route}/api/users/my-business`, {
         headers: { Authorization: token },
       })
       .then((response) => response);

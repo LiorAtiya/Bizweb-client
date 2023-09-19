@@ -23,7 +23,7 @@ export default function Business({ business }) {
       <Card sx={{ height: 330, textAlign: 'center', margin: '0px'}}>
         <CardMedia
           sx={{ height: 140 }}
-          image={backgroundPicture.url || defaultImg}
+          image={backgroundPicture.url || backgroundPicture || defaultImg}
           title={name}
         />
         <CardContent className='business-card-content'>

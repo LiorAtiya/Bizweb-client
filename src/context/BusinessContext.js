@@ -20,7 +20,6 @@ export default class BusinessProvider extends Component {
       .then((res) => {
         this.setState({ business: res.data, sortedBusiness: res.data });
 
-        console.log(res.data)
         res.data.forEach(async (business) => {
           //Remove expired events
           await ApiClient.removeExpiredEvents(business._id).then().catch();
@@ -44,7 +43,9 @@ export default class BusinessProvider extends Component {
         allBusiness.push(business);
       }
     });
+    
     localStorage.setItem("my-business", JSON.stringify(allBusiness));
+
     return allBusiness;
   };
 

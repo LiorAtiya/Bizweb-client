@@ -12,28 +12,24 @@ export default function MyBusiness() {
   const currentLanguage = localStorage.getItem("language");
   const token = localStorage.getItem("token");
 
-  const context = useContext(BusinessContext);
-  const { getAllBusinessOfUser } = context;
+  // const context = useContext(BusinessContext);
+  // const { getAllBusinessOfUser } = context;
   const { t } = useTranslation();
 
   const [allBusiness, setAllBusiness] = useState([]);
   const [businessToDelete, setBusinessToDelete] = useState("");
 
   useEffect(() => {
-    const getResult = async () => {
       // gets all appintments of user
       const token = localStorage.getItem("token");
       if (token) {
-        ApiClient.getUserInfo(token)
+        ApiClient.getMyBusiness(token)
           .then((res) => {
-            localStorage.setItem("user-info", JSON.stringify(res.data));
-            setAllBusiness(JSON.parse(localStorage.getItem("my-business")));
+            setAllBusiness(res.data);
           })
           .catch();
       }
-    };
-    getResult();
-  }, [getAllBusinessOfUser]);
+  }, [setAllBusiness]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -55,9 +51,9 @@ export default function MyBusiness() {
         <div className="auth-inner">
           <h2>{t("MyBusiness")}</h2>
           <hr></hr>
-          {allBusiness.map((item, i) => {
+          {allBusiness?.map((item, i) => {
             return currentLanguage === "he" ? (
-              <div key={i}>
+              <div>
                 <Card>
                   <Link
                     to={`/${item.category}/${item.name}`}
@@ -87,7 +83,7 @@ export default function MyBusiness() {
                 <br />
               </div>
             ) : (
-              <div key={i}>
+              <div>
                 <Card>
                   <Link
                     to={`/${item.category}/${item.name}`}

@@ -71,6 +71,13 @@ export default function NewBusiness() {
     ApiClient.addNewBusiness(token, business)
       .then((res) => {
         alert("New business created");
+
+        ApiClient.getUserInfo(token)
+          .then((res) => {
+            localStorage.setItem("user-info", JSON.stringify(res.data));
+          })
+          .catch();
+
         history.push("/");
         window.location.reload(false);
       })
@@ -203,7 +210,6 @@ export default function NewBusiness() {
               <img src={backgroundPicture.url} alt="backPic" />
             </Components.Pic>
           ) : null}
-          
         </div>
 
         <Components.Button type="button" onClick={handleCreateNewBusiness}>

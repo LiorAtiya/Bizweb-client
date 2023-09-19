@@ -38,7 +38,7 @@ export default function SingleBusiness() {
       ) : (
         <>
           <Suspense fallback={<div>Loading...</div>}>
-            <Components.StyledHero img={business.backgroundPicture.url}>
+            <Components.StyledHero img={business.backgroundPicture.url || business.backgroundPicture}>
               <Components.StyledBanner>
                 <Components.StyledTitle>
                   <b>{business.name}</b>

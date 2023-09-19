@@ -52,9 +52,7 @@ export function Home() {
 
   const handleClickPredict = async () => {
     // Train & Create new model in bigML
-    ApiClient.trainModel()
-      .then((res) => {})
-      .catch((error) => console.error(error));
+    ApiClient.trainModel().then().catch();
   };
 
   return (
