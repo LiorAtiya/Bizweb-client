@@ -183,7 +183,7 @@ class ApiRoutes extends Component {
   async updateEventInMyAppointment(token, appointment) {
     return await axios
       //**FIX TEST ROUTE */
-      .put(`${this.state.route}/api/users/test/new-appointment`, appointment, {
+      .put(`${this.state.route}/api/users/new-appointment`, appointment, {
         headers: { Authorization: token },
       })
       .then((response) => response.data);
@@ -252,15 +252,18 @@ class ApiRoutes extends Component {
   }
 
   //Shop & MyShoppingCart Page
-  async addNewProduct(id, newProduct) {
+  async addNewProduct(token, id, newProduct) {
     return await axios
-      .put(`${this.state.route}/api/business/${id}/shop`, newProduct)
+      .put(`${this.state.route}/api/business/${id}/shop`, newProduct, {
+        headers: { Authorization: token },
+      })
       .then((response) => response.data);
   }
 
-  async removeProductFromShop(id, productID) {
+  async removeProductFromShop(token, id, productID) {
     return await axios
       .delete(`${this.state.route}/api/business/${id}/shop`, {
+        headers: { Authorization: token },
         data: { productID: productID },
       })
       .then((response) => response.data);
