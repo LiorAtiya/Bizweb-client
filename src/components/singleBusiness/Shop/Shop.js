@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-import "../../styles/Shop.css";
+import "../../../styles/Shop.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import ApiClient from "../../api/ApiRoutes";
-import defaultImg from "../../images/defaultImg.png";
+import ApiClient from "../../../api/ApiRoutes";
+import defaultImg from "../../../images/defaultImg.png";
 import { useTranslation } from "react-i18next";
-import { openWidgetUploadImage } from "../../api/cloudinary";
+import { openWidgetUploadImage } from "../../../api/cloudinary";
 
 // import { toast } from "react-toastify";
 

@@ -11,7 +11,7 @@ import { Tab, Nav } from "react-bootstrap";
 // import Contact from '../components/singleBusiness/Contact'
 // import Shop from '../components/singleBusiness/Shop';
 
-const Shop = lazy(() => import("../components/singleBusiness/Shop"));
+const Shop = lazy(() => import("../components/singleBusiness/Shop/Shop"));
 const Reviews = lazy(() => import("../components/singleBusiness/Reviews"));
 const Contact = lazy(() => import("../components/singleBusiness/Contact"));
 const Calender = lazy(() => import("../components/singleBusiness/Calender"));

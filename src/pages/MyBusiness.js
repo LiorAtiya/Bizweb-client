@@ -53,7 +53,7 @@ export default function MyBusiness() {
           <hr></hr>
           {allBusiness?.map((item, i) => {
             return currentLanguage === "he" ? (
-              <div>
+              <div key={i}>
                 <Card>
                   <Link
                     to={`/${item.category}/${item.name}`}
@@ -83,7 +83,7 @@ export default function MyBusiness() {
                 <br />
               </div>
             ) : (
-              <div>
+              <div key={i}>
                 <Card>
                   <Link
                     to={`/${item.category}/${item.name}`}

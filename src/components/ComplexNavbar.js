@@ -84,10 +84,11 @@ export default function ComplexNavbar() {
 
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
+                      {navigation.map((item, i) => (
                         <>
                           {item.name === t("Contact") ? (
                             <HashLink
+                              key={item.name}
                               className={classNames(
                                 item.current
                                   ? "bg-gray-900 text-white no-underline"
@@ -191,7 +192,7 @@ export default function ComplexNavbar() {
                         ) : (
                           <>
                             {userMenu.map((item, index) => (
-                              <Menu.Item key={index}>
+                              <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <Link
                                     to={item.href}
@@ -265,6 +266,7 @@ export default function ComplexNavbar() {
                   <>
                     {item.name === t("Contact") ? (
                       <HashLink
+                        key={item.name}
                         className={classNames(
                           "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "block rounded-md px-3 py-2 text-base font-medium no-underline"
