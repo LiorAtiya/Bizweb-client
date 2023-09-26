@@ -2,7 +2,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"
 import ApiClient from "../../../api/ApiRoutes";
 
 const PaypalPayment = (cart) => {
-  console.log(cart.cart);
+  
   const createOrder = async (data) => {
     // Order is created on the server and the order id is returned
     return fetch("http://localhost:3010/api/payment/orders", {
